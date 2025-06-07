@@ -13,6 +13,10 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     const userId = 1; // Cambiar esto luego por el ID desde login/token
+
+    
+    //Perfil de usuario simulado
+    //Perfil de usuario simulado
       this.user = {
     nombre: 'Juan',
     apellidoPaterno: 'Pérez',
@@ -23,6 +27,10 @@ export class UserProfileComponent implements OnInit {
       { descripcion: 'Departamento céntrico', ubicacion: 'CDMX', precio: 12000 }
     ]
   };
+  //Perfil de usuario simulado
+  //Perfil de usuario simulado
+
+
     this.userService.getUserProfile(userId).subscribe({
       next: data => this.user = data,
       error: err => console.error('Error al cargar perfil', err)
