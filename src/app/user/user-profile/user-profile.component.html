@@ -1,1 +1,14 @@
-<p>user-profile works!</p>
+<div *ngIf="user" class="card">
+  <h2>{{ user.nombre }} {{ user.apellidoPaterno }} {{ user.apellidoMaterno }}</h2>
+  <p><strong>Correo:</strong> {{ user.correo }}</p>
+  <p><strong>Rol:</strong> {{ user.rol }}</p>
+
+  <div *ngIf="user.locaciones?.length > 0">
+    <h3>Propiedades publicadas</h3>
+    <ul>
+      <li *ngFor="let loc of user.locaciones">
+        {{ loc.descripcion }} - {{ loc.ubicacion }} - ${{ loc.precio }} /mes
+      </li>
+    </ul>
+  </div>
+</div>
