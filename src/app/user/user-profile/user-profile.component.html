@@ -7,7 +7,9 @@
     <h3>Propiedades publicadas</h3>
     <ul>
       <li *ngFor="let loc of user.locaciones">
-        {{ loc.descripcion }} - {{ loc.ubicacion }} - ${{ loc.precio }} /mes
+        <span class="descripcion">{{ loc.descripcion }}</span> - 
+        {{ loc.ubicacion }} - 
+        <span class="price">${{ loc.precio }}</span> /mes
       </li>
     </ul>
   </div>

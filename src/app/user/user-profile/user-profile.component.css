@@ -1,8 +1,50 @@
 .card {
-  background: #f8f9fa;
+  background: #eaf4fb; /* azul muy claro */
   padding: 1.5rem;
   border-radius: 10px;
   max-width: 600px;
   margin: auto;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #d0e7f8;
+  color: #0d3c61;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card h2 {
+  margin-top: 0;
+  font-size: 1.8rem;
+  color: #0a2e50;
+}
+
+.card p {
+  margin: 0.5rem 0;
+  color: #244f70;
+}
+
+.card strong {
+  color: #0a3e6d;
+}
+
+.card h3 {
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  color: #0c4f80;
+  border-bottom: 1px solid #b0d6f1;
+  padding-bottom: 0.3rem;
+}
+
+.card ul {
+  list-style: disc;
+  padding-left: 1.2rem;
+  margin-top: 0.5rem;
+  color: #245d80;
+}
+
+.card li {
+  margin-bottom: 0.5rem;
+}
+
+.card span.price {
+  color: #1c7ed6;
+  font-weight: bold;
 }
