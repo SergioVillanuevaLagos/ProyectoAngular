@@ -1,0 +1,24 @@
+<!-- location-card-list.component.html -->
+<div class="card-list-vertical">
+  <div *ngFor="let locacion of displayLocaciones" class="card-rect">
+    <img
+      [src]="getImageUrl(locacion.Imagen)"
+      alt="Imagen Locación"
+      class="card-rect-image"
+    />
+    <div class="card-rect-content">
+      <h2 class="card-rect-title">{{ locacion.Ubicacion }}</h2>
+      <p class="card-rect-description">{{ locacion.Descripcion }}</p>
+      <div class="card-rect-info">
+        <span>🏠 {{ locacion.Habitaciones }} hab</span>
+        <span>📐 {{ locacion.Area }} m²</span>
+      </div>
+      <div class="card-rect-bottom">
+        <span class="precio">
+          ${{ locacion.PrecioMensual | number: '1.0-0' }} CLP/mes
+        </span>
+        <span class="puntaje">⭐ {{ locacion.Puntaje }}</span>
+      </div>
+    </div>
+  </div>
+</div>

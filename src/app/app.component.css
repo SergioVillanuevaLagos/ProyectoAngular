@@ -1,0 +1,16 @@
+.page-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px; /* espacio entre sidebar y listado */
+  padding: 10px;
+}
+
+.sidebar {
+  flex: 0 0 280px; /* ancho fijo para el sidebar */
+  border-right: 1px solid #ddd;
+  padding-right: 10px;
+}
+
+.content {
+  flex: 1; /* ocupa todo el espacio restante */
+}
