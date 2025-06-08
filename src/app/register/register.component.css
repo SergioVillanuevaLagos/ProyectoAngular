@@ -78,20 +78,3 @@ container {
     border-color: #C23B33;
     color: #ffffff;
 }
-
-.btn-register-outline {
-  color: #1976d2; 
-  background: #fff;
-  border: 1.5px solid #1976d2;
-  box-shadow: 0 2px 4px rgba(25, 118, 210, 0.08);
-  font-weight: 500;
-  width: 100%;
-  margin-top: 10px;
-  transition: background 0.2s, color 0.2s;
-}
-
-.btn-register-outline:hover {
-  background: #e3f0fd;
-  color: #1565c0;
-  border-color: #1565c0;
-}

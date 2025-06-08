@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { HttpClientModule } from '@angular/common/http';
 import { OAuthModule } from 'angular-oauth2-oidc';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { OAuthModule } from 'angular-oauth2-oidc';
     HomeComponent,
     LoginComponent,
     MainComponent,
+    RegisterComponent,
 
   ],
   imports: [
