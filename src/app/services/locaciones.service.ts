@@ -43,7 +43,18 @@ export class LocacionesService {
       IDAdmin: 4,
       TipoLocacion: 1,
       Puntaje: 4.8
-    }
+    }, {
+      IDLocacion: 4,
+      Area: 250,
+      Habitaciones: 15,
+      Imagen: 1,
+      Ubicacion: 'Las mariposas, Chillán',
+      Descripcion: 'Casa abitación con amplio jardín.',
+      PrecioMensual: 100000,
+      IDAdmin: 15,
+      TipoLocacion: 1,
+      Puntaje: 5
+    },
   ];
 
   constructor() {}
