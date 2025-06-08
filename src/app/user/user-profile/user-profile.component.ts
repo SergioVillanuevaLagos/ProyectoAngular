@@ -22,9 +22,9 @@ export class UserProfileComponent implements OnInit {
     apellidoPaterno: 'Pérez',
     apellidoMaterno: 'García',
     correo: 'juan.perez@example.com',
-    rol: 'Administrador',
+    rol: 'Arrendador',
     locaciones: [
-      { descripcion: 'Departamento céntrico', ubicacion: 'CDMX', precio: 12000 }
+      { descripcion: 'Departamento céntrico', ubicacion: 'Chillan', precio: 120000 }
     ]
   };
   //Perfil de usuario simulado

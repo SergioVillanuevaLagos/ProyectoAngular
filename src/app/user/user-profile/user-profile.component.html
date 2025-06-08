@@ -1,16 +1,48 @@
-<div *ngIf="user" class="card">
-  <h2>{{ user.nombre }} {{ user.apellidoPaterno }} {{ user.apellidoMaterno }}</h2>
-  <p><strong>Correo:</strong> {{ user.correo }}</p>
-  <p><strong>Rol:</strong> {{ user.rol }}</p>
+<div *ngIf="user" class="profile-container">
+  <!-- Información del usuario -->
+  <div class="profile-left">
+    <h2><i class="fas fa-id-card"></i> Información del Usuario</h2>
 
-  <div *ngIf="user.locaciones?.length > 0">
-    <h3>Propiedades publicadas</h3>
-    <ul>
-      <li *ngFor="let loc of user.locaciones">
-        <span class="descripcion">{{ loc.descripcion }}</span> - 
-        {{ loc.ubicacion }} - 
-        <span class="price">${{ loc.precio }}</span> /mes
-      </li>
-    </ul>
+    <!-- Nombre completo -->
+    <div class="info-item">
+      <i class="fas fa-user"></i>
+      <strong>Nombre completo:</strong> {{ user.nombre }} {{ user.apellidoPaterno }} {{ user.apellidoMaterno }}
+    </div>
+
+    <!-- Datos individuales (sin íconos) -->
+    <div class="info-item">
+      <strong>Nombre:</strong> {{ user.nombre }}
+    </div>
+    <div class="info-item">
+      <strong>Apellido paterno:</strong> {{ user.apellidoPaterno }}
+    </div>
+    <div class="info-item">
+      <strong>Apellido materno:</strong> {{ user.apellidoMaterno }}
+    </div>
+    <div class="info-item">
+      <i class="fas fa-envelope"></i>
+      <strong>Correo:</strong> {{ user.correo }}
+    </div>
+    <div class="info-item">
+      <i class="fas fa-user-shield"></i>
+      <strong>Rol:</strong> {{ user.rol }}
+    </div>
+  </div>
+
+  <!-- Propiedades -->
+  <div class="profile-right">
+    <div class="box" *ngIf="user.locaciones?.length > 0">
+      <h3><i class="fas fa-house-user"></i> Propiedades Publicadas ({{ user.locaciones.length }})</h3>
+      <ul class="property-list">
+        <li *ngFor="let loc of user.locaciones">
+          <div><strong>Descripción:</strong> {{ loc.descripcion }}</div>
+          <div><strong>Ubicación:</strong> {{ loc.ubicacion }}</div>
+          <div><strong>Precio:</strong> ${{ loc.precio }} / mes</div>
+        </li>
+      </ul>
+    </div>
+    <div class="box" *ngIf="!user.locaciones?.length">
+      <h3><i class="fas fa-exclamation-circle"></i> Sin propiedades publicadas</h3>
+    </div>
   </div>
 </div>
