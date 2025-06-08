@@ -1,6 +1,10 @@
-<!-- location-card-list.component.html -->
 <div class="card-list-vertical">
-  <div *ngFor="let locacion of displayLocaciones" class="card-rect">
+  <div
+    *ngFor="let locacion of displayLocaciones"
+    class="card-rect"
+    (click)="goToDetalle(locacion.IDLocacion)"
+    style="cursor: pointer;"
+  >
     <img
       [src]="getImageUrl(locacion.Imagen)"
       alt="Imagen Locación"

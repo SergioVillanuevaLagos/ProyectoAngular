@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Locacion } from '../../../models/locacion.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listar-locaciones',
@@ -7,18 +8,15 @@ import { Locacion } from '../../../models/locacion.model';
   styleUrls: ['./listar-locaciones.component.css']
 })
 export class ListarLocacionesComponent implements OnInit {
-  @Input() filteredLocaciones: Locacion[] | null = null; 
+  @Input() filteredLocaciones: Locacion[] | null = null;
 
   locaciones: Locacion[] = [];
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-    // Si prefieres, podrías eliminar la carga interna aquí, ya que el padre pasa las locaciones
-    // Pero si quieres tener un fallback:
     if (!this.filteredLocaciones) {
-      // Por ejemplo, cargar algo por defecto
-      // O dejar vacío
+
       this.locaciones = [];
     }
   }
@@ -30,5 +28,9 @@ export class ListarLocacionesComponent implements OnInit {
 
   getImageUrl(imagenId: number): string {
     return `https://picsum.photos/seed/${imagenId}/200/140`;
+  }
+
+  goToDetalle(id: number) {
+    this.router.navigate(['/detalle-locacion', id]);
   }
 }

@@ -1,0 +1,67 @@
+<div class="detalle-locacion-container" *ngIf="locacion; else noLocacion">
+  <h1>{{ locacion.Ubicacion }}</h1>
+
+  <img [src]="getImageUrl(locacion.Imagen)" alt="Imagen Locación" class="detalle-imagen" />
+
+  <!-- Descripción justo después de la imagen -->
+  <p class="descripcion">{{ locacion.Descripcion }}</p>
+
+  <div class="detalle-info">
+    <div class="detalle-container">
+      <h2 class="titulo">Departamentos en {{ locacion.Ubicacion }}</h2>
+
+      <div class="info-cards">
+        <div class="info-card">
+          <div class="icono">💰</div>
+          <div class="texto">
+            <p class="titulo-card">Precio</p>
+            <p class="dato-card">${{ locacion.PrecioMensual | number:'1.0-0' }}</p>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="icono">🛏️</div>
+          <div class="texto">
+            <p class="titulo-card">Dormitorios</p>
+            <p class="dato-card">{{ locacion.Habitaciones }}</p>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="icono">🛁</div>
+          <div class="texto">
+            <p class="titulo-card">Baños</p>
+            <p class="dato-card">2</p> <!-- Cambiar por dato real si tienes -->
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="icono">📐</div>
+          <div class="texto">
+            <p class="titulo-card">M² de construcción</p>
+            <p class="dato-card">{{ locacion.Area }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="user-rating">
+      <p><strong>Califica esta locación:</strong></p>
+      <div class="stars">
+        <ng-container *ngFor="let star of [1,2,3,4,5]">
+          <span
+            class="star"
+            [class.filled]="star <= userRating"
+            (click)="setUserRating(star)"
+            >&#9733;</span
+          >
+        </ng-container>
+      </div>
+      <button (click)="submitRating()" [disabled]="userRating === 0">Enviar Calificación</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #noLocacion>
+  <p>Locación no encontrada o cargando...</p>
+</ng-template>
