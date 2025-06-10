@@ -13,6 +13,7 @@ export class DetalleLocacionComponent implements OnInit {
   locacionId: number = 0;
   locacion: Locacion | undefined;
   userRating: number = 0;
+  hoverRating: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,6 +41,14 @@ export class DetalleLocacionComponent implements OnInit {
 
 setUserRating(rating: number) {
   this.userRating = rating;
+}
+
+setHoverRating(rating: number) {
+  this.hoverRating = rating;
+}
+
+clearHoverRating() {
+  this.hoverRating = 0;
 }
 
 submitRating() {

@@ -1,7 +1,11 @@
 <div class="detalle-locacion-container" *ngIf="locacion; else noLocacion">
   <h1>{{ locacion.Ubicacion }}</h1>
 
-  <img [src]="getImageUrl(locacion.Imagen)" alt="Imagen Locación" class="detalle-imagen" />
+  <img
+    [src]="getImageUrl(locacion.Imagen)"
+    alt="Imagen Locación"
+    class="detalle-imagen"
+  />
 
   <!-- Descripción justo después de la imagen -->
   <p class="descripcion">{{ locacion.Descripcion }}</p>
@@ -15,7 +19,9 @@
           <div class="icono">💰</div>
           <div class="texto">
             <p class="titulo-card">Precio</p>
-            <p class="dato-card">${{ locacion.PrecioMensual | number:'1.0-0' }}</p>
+            <p class="dato-card">
+              ${{ locacion.PrecioMensual | number : "1.0-0" }}
+            </p>
           </div>
         </div>
 
@@ -31,7 +37,8 @@
           <div class="icono">🛁</div>
           <div class="texto">
             <p class="titulo-card">Baños</p>
-            <p class="dato-card">2</p> <!-- Cambiar por dato real si tienes -->
+            <p class="dato-card">2</p>
+            <!-- Cambiar por dato real si tienes -->
           </div>
         </div>
 
@@ -48,16 +55,20 @@
     <div class="user-rating">
       <p><strong>Califica esta locación:</strong></p>
       <div class="stars">
-        <ng-container *ngFor="let star of [1,2,3,4,5]">
+        <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
           <span
             class="star"
-            [class.filled]="star <= userRating"
+            [class.filled]="star <= (hoverRating || userRating)"
             (click)="setUserRating(star)"
+            (mouseenter)="setHoverRating(star)"
+            (mouseleave)="clearHoverRating()"
             >&#9733;</span
           >
         </ng-container>
       </div>
-      <button (click)="submitRating()" [disabled]="userRating === 0">Enviar Calificación</button>
+      <button (click)="submitRating()" [disabled]="userRating === 0">
+        Enviar Calificación
+      </button>
     </div>
   </div>
 </div>
