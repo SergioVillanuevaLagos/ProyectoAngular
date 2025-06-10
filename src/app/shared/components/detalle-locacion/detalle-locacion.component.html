@@ -38,7 +38,7 @@
           <div class="texto">
             <p class="titulo-card">Baños</p>
             <p class="dato-card">2</p>
-            <!-- Cambiar por dato real si tienes -->
+            <!-- Usa dato real si existe, por defecto 2 -->
           </div>
         </div>
 
@@ -70,6 +70,11 @@
         Enviar Calificación
       </button>
     </div>
+  </div>
+
+  <!-- Mapa solo si la locación tiene lat y lng -->
+  <div *ngIf="locacion.lat && locacion.lng" class="mapa-container">
+    <app-mapas [lat]="locacion.lat" [lng]="locacion.lng"></app-mapas>
   </div>
 </div>
 

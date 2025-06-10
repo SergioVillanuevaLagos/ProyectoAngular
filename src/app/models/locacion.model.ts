@@ -9,4 +9,8 @@ export interface Locacion {
   IDAdmin: number;
   TipoLocacion: number;
   Puntaje: number;
+
+  // Nuevas propiedades para el mapa
+  lat: number; 
+  lng: number;
 }

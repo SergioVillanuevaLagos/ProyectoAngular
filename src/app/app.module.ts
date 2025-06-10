@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { DetalleLocacionComponent } from './shared/components/detalle-locacion/detalle-locacion.component';
 import { DetalleProductoComponent } from './views/detalle-producto/detalle-producto.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { MapasComponent } from './shared/components/mapas/mapas.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   declarations: [
@@ -19,12 +21,14 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
     LocationFilterSidebarComponent,
     DetalleLocacionComponent,
     DetalleProductoComponent,
-    NavbarComponent
+    NavbarComponent,
+    MapasComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    GoogleMapsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
