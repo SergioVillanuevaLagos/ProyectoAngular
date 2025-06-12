@@ -4,11 +4,14 @@ import { LocacionesService } from '../../../services/locaciones.service';
 import { Locacion } from '../../../models/locacion.model';
 import { switchMap, catchError, finalize } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { ReportModalComponent } from '../report-modal/report-modal.component'; // <-- IMPORTA EL COMPONENTE
 
 @Component({
   selector: 'app-detalle-locacion',
   templateUrl: './detalle-locacion.component.html',
-  styleUrls: ['./detalle-locacion.component.css']
+  styleUrls: ['./detalle-locacion.component.css'],
+  imports: [ReportModalComponent], 
+  standalone: true 
 })
 export class DetalleLocacionComponent implements OnInit {
   isLoading: boolean = true;
