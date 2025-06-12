@@ -18,6 +18,10 @@ const routes: Routes = [
   { path: 'navbar', component: NavbarComponent },
   { path: 'agendar-visita', component: AgendaVisitaComponent },
   { path: 'pagina-principal', component: HomeComponent }
+import { PublicacionPropiedadComponent } from './publicacion-propiedad/publicacion-propiedad.component'; 
+
+const routes: Routes = [
+  { path: 'publicar', component: PublicacionPropiedadComponent }, 
 ];
 
 @NgModule({
