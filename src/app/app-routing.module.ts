@@ -8,6 +8,7 @@ import { DetalleLocacionComponent } from './shared/components/detalle-locacion/d
 import { HomeComponent } from './views/home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AgendaVisitaComponent } from './agenda-visita/agenda-visita.component';
+import { PublicacionPropiedadComponent } from './publicacion-propiedad/publicacion-propiedad.component'; 
 
 const routes: Routes = [
   { path: '', component: ListarLocacionesComponent }, 
@@ -17,11 +18,8 @@ const routes: Routes = [
   { path: 'detalle-locacion/:id', component: DetalleLocacionComponent },
   { path: 'navbar', component: NavbarComponent },
   { path: 'agendar-visita', component: AgendaVisitaComponent },
-  { path: 'pagina-principal', component: HomeComponent }
-import { PublicacionPropiedadComponent } from './publicacion-propiedad/publicacion-propiedad.component'; 
-
-const routes: Routes = [
-  { path: 'publicar', component: PublicacionPropiedadComponent }, 
+  { path: 'pagina-principal', component: HomeComponent },
+  { path: 'publicar-propiedad', component: PublicacionPropiedadComponent }
 ];
 
 @NgModule({

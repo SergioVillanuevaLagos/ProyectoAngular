@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-publicacion-propiedad',
   templateUrl: './publicacion-propiedad.component.html',
-  styleUrl: './publicacion-propiedad.component.css'
+  styleUrls: ['./publicacion-propiedad.component.css']
 })
 export class PublicacionPropiedadComponent implements OnInit {
   formularioPropiedad: FormGroup;
