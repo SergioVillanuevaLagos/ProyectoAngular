@@ -1,0 +1,13 @@
+<div class="sidebar">
+  <h3>🔍 Filtros</h3>
+
+  <label>Buscar ubicación o descripción:</label>
+  <input type="text" [(ngModel)]="searchTerm" (input)="onFilterChange()" placeholder="Ej: Santiago..." />
+
+  <label>Precio mensual (CLP):</label>
+  <input type="number" [(ngModel)]="minPrice" (input)="onFilterChange()" placeholder="Mínimo" />
+  <input type="number" [(ngModel)]="maxPrice" (input)="onFilterChange()" placeholder="Máximo" />
+
+  <label>Habitaciones:</label>
+  <input type="number" [(ngModel)]="habitaciones" (input)="onFilterChange()" placeholder="Ej: 2" />
+</div>

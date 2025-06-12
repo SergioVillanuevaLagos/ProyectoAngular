@@ -4,13 +4,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './views/home/home.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { LoginComponent } from './login/login.component';
-import { MainComponent } from './main/main.component';
-import { HttpClientModule } from '@angular/common/http';
-import { OAuthModule } from 'angular-oauth2-oidc';
-import { RegisterComponent } from './register/register.component';
-
+import { ListarLocacionesComponent } from './shared/components/listar-locaciones/listar-locaciones.component';
+import { LocationFilterSidebarComponent } from './shared/components/location-filter-sidebar/location-filter-sidebar.component';
+import { FormsModule } from '@angular/forms';
+import { DetalleLocacionComponent } from './shared/components/detalle-locacion/detalle-locacion.component';
+import { DetalleProductoComponent } from './views/detalle-producto/detalle-producto.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { MapasComponent } from './shared/components/mapas/mapas.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   declarations: [
@@ -20,13 +21,19 @@ import { RegisterComponent } from './register/register.component';
     LoginComponent,
     MainComponent,
     RegisterComponent,
-
+    ListarLocacionesComponent,
+    LocationFilterSidebarComponent,
+    DetalleLocacionComponent,
+    DetalleProductoComponent,
+    MapasComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     OAuthModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    GoogleMapsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
