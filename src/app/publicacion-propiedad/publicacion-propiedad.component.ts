@@ -7,13 +7,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrl: './publicacion-propiedad.component.css'
 })
 export class PublicacionPropiedadComponent implements OnInit {
-  propiedadForm: FormGroup;
-  fotos: File[] = [];
-  fotosPreview: string[] = [];
-  fotosError: boolean = false;
+  formularioPropiedad: FormGroup;
+  imagenes: File[] = [];
+  imagenesPreview: string[] = [];
+  errorImagenes: boolean = false;
 
   constructor(private fb: FormBuilder) {
-    this.propiedadForm = this.fb.group({
+    this.formularioPropiedad = this.fb.group({
       titulo: ['', Validators.required],
       descripcion: ['', Validators.required],
       direccion: ['', Validators.required],
@@ -26,38 +26,43 @@ export class PublicacionPropiedadComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onFileChange(event: any): void {
-    const files = event.target.files;
-    this.fotos = [];
-    this.fotosPreview = [];
-    if (files && files.length > 0) {
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        this.fotos.push(file);
+  alCambiarArchivo(evento: any): void {
+    const archivos = evento.target.files;
+    if (archivos && archivos.length > 0) {
+      for (let i = 0; i < archivos.length; i++) {
+        const archivo = archivos[i];
+        this.imagenes.push(archivo);
 
-        // Crear vista previa
-        const reader = new FileReader();
-        reader.onload = (e: any) => {
-          this.fotosPreview.push(e.target.result);
+        const lector = new FileReader();
+        lector.onload = (e: any) => {
+          this.imagenesPreview.push(e.target.result);
         };
-        reader.readAsDataURL(file);
+        lector.readAsDataURL(archivo);
       }
-      this.fotosError = false;
-    } else {
-      this.fotosError = true;
+      this.errorImagenes = false;
+    } else if (this.imagenes.length === 0) {
+      this.errorImagenes = true;
     }
   }
 
-  onSubmit(): void {
-    if (this.fotos.length === 0) {
-      this.fotosError = true;
+  eliminarImagen(indice: number): void {
+    this.imagenes.splice(indice, 1);
+    this.imagenesPreview.splice(indice, 1);
+    if (this.imagenes.length === 0) {
+      this.errorImagenes = true;
+    }
+  }
+
+  alEnviar(): void {
+    if (this.imagenes.length === 0) {
+      this.errorImagenes = true;
       return;
     }
-    if (this.propiedadForm.invalid) {
-      this.propiedadForm.markAllAsTouched();
+    if (this.formularioPropiedad.invalid) {
+      this.formularioPropiedad.markAllAsTouched();
       return;
     }
-    // Aquí puedes manejar el envío del formulario y las fotos
-    console.log(this.propiedadForm.value, this.fotos);
+    // Aquí puedes manejar el envío del formulario y las imágenes
+    console.log(this.formularioPropiedad.value, this.imagenes);
   }
 }

@@ -1,31 +1,34 @@
 <div class="container">
   <h1>Publicar Propiedad</h1>
-  <form [formGroup]="propiedadForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="formularioPropiedad" (ngSubmit)="alEnviar()">
     <div class="form-group">
       <label for="fotos">Fotos</label>
       <div class="fotos-container">
-        <div class="foto-cuadro" (click)="fotoInput.click()">
+        <div class="foto-cuadro" (click)="inputImagenes.click()">
           <span class="plus-icon">+</span>
           <input
-            #fotoInput
+            #inputImagenes
             id="fotos"
             type="file"
-            (change)="onFileChange($event)"
+            (change)="alCambiarArchivo($event)"
             multiple
             accept="image/*"
             style="display: none"
           />
         </div>
         <div class="miniaturas">
-          <img
-            *ngFor="let preview of fotosPreview"
-            [src]="preview"
-            class="miniatura"
-            alt="foto seleccionada"
-          />
+          <div
+            class="miniatura-wrapper"
+            *ngFor="let preview of imagenesPreview; let i = index"
+          >
+            <img [src]="preview" class="miniatura" alt="foto seleccionada" />
+            <span class="eliminar-x" (click)="eliminarImagen(i)">×</span>
+          </div>
         </div>
       </div>
-      <div class="error" *ngIf="fotosError">Debes subir al menos una foto.</div>
+      <div class="error" *ngIf="errorImagenes">
+        Debes subir al menos una foto.
+      </div>
     </div>
     <div class="form-group">
       <label for="descripcion">Descripción</label>
@@ -37,8 +40,8 @@
       <div
         class="error"
         *ngIf="
-          propiedadForm.get('descripcion')?.invalid &&
-          propiedadForm.get('descripcion')?.touched
+          formularioPropiedad.get('descripcion')?.invalid &&
+          formularioPropiedad.get('descripcion')?.touched
         "
       >
         La descripción es obligatoria.
@@ -55,8 +58,8 @@
       <div
         class="error"
         *ngIf="
-          propiedadForm.get('precio')?.invalid &&
-          propiedadForm.get('precio')?.touched
+          formularioPropiedad.get('precio')?.invalid &&
+          formularioPropiedad.get('precio')?.touched
         "
       >
         El precio es obligatorio y debe ser mayor o igual a 0.
@@ -72,8 +75,8 @@
       <div
         class="error"
         *ngIf="
-          propiedadForm.get('reglas')?.invalid &&
-          propiedadForm.get('reglas')?.touched
+          formularioPropiedad.get('reglas')?.invalid &&
+          formularioPropiedad.get('reglas')?.touched
         "
       >
         Las reglas de la casa son obligatorias.
@@ -90,8 +93,8 @@
       <div
         class="error"
         *ngIf="
-          propiedadForm.get('contacto')?.invalid &&
-          propiedadForm.get('contacto')?.touched
+          formularioPropiedad.get('contacto')?.invalid &&
+          formularioPropiedad.get('contacto')?.touched
         "
       >
         El contacto es obligatorio.
@@ -107,8 +110,8 @@
       <div
         class="error"
         *ngIf="
-          propiedadForm.get('servicios')?.invalid &&
-          propiedadForm.get('servicios')?.touched
+          formularioPropiedad.get('servicios')?.invalid &&
+          formularioPropiedad.get('servicios')?.touched
         "
       >
         Los servicios incluidos son obligatorios.
@@ -117,7 +120,7 @@
     <button
       class="full-width btn-blue"
       type="submit"
-      [disabled]="propiedadForm.invalid || fotosError"
+      [disabled]="formularioPropiedad.invalid || errorImagenes"
     >
       Publicar
     </button>
