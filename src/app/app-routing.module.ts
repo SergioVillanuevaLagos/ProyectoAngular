@@ -10,13 +10,14 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AgendaVisitaComponent } from './agenda-visita/agenda-visita.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: ListarLocacionesComponent }, 
   { path: 'login', component: LoginComponent },
   { path: 'main', component: MainComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'detalle-locacion/:id', component: DetalleLocacionComponent },
   { path: 'navbar', component: NavbarComponent },
-  { path: 'agendar-visita', component: AgendaVisitaComponent }
+  { path: 'agendar-visita', component: AgendaVisitaComponent },
+  { path: 'pagina-principal', component: HomeComponent }
 ];
 
 @NgModule({
