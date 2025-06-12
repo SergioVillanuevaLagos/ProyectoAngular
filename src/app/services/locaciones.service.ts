@@ -75,4 +75,14 @@ export class LocacionesService {
   getLocaciones(): Observable<Locacion[]> {
     return of(this.locaciones);
   }
+
+  getAll(): Observable<Locacion[]> {
+    // Aquí podrías hacer un HTTP GET real si tienes una API
+    return of(this.locaciones);
+  }
+
+  deleteById(id: number): Observable<boolean> {
+    this.locaciones = this.locaciones.filter(l => l.IDLocacion !== id);
+    return of(true);
+  }
 }

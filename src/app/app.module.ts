@@ -16,6 +16,9 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { ReportModalComponent } from "./shared/components/report-modal/report-modal.component";
 import { AdminReportesComponent } from './shared/components/admin-reportes/admin-reportes.component';
+import { AdminSidebardComponent } from './shared/components/admin-sidebard/admin-sidebard.component';
+import { AdminPanelComponent } from './shared/components/admin-panel/admin-panel.component';
+import { AdminLocacionesComponent } from './shared/components/admin-locaciones/admin-locaciones.component';
 
 
 
@@ -30,6 +33,9 @@ import { AdminReportesComponent } from './shared/components/admin-reportes/admin
     NavbarComponent,
     MapasComponent,
     AdminReportesComponent,
+    AdminSidebardComponent,
+    AdminPanelComponent,
+    AdminLocacionesComponent,
 
 
 

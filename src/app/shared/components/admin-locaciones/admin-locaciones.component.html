@@ -1,0 +1,57 @@
+<h2>Administrar Locaciones</h2>
+
+<div *ngIf="locaciones.length > 0; else noLocaciones">
+  <table class="tabla-locaciones">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Ubicación</th>
+        <th>Habitaciones</th>
+        <th>Baños</th>
+        <th>Área (m²)</th>
+        <th>Precio mensual</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let locacion of locaciones">
+        <td>{{ locacion.IDLocacion }}</td>
+        <td>{{ locacion.Ubicacion }}</td>
+        <td>{{ locacion.Habitaciones }}</td>
+        <td>{{ locacion.Banos }}</td>
+        <td>{{ locacion.Area }}</td>
+        <td>{{ locacion.PrecioMensual | currency:'USD' }}</td>
+        <td>
+          <button (click)="verImagen(locacion.Imagen)">Ver Imagen</button>
+          <button (click)="verDetalle(locacion.IDLocacion)">Ver</button>
+          <button (click)="editarLocacion(locacion.IDLocacion)">Editar</button>
+          <button (click)="eliminarLocacion(locacion.IDLocacion)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #noLocaciones>
+  <p>No hay locaciones registradas.</p>
+</ng-template>
+
+<!-- Modal de imagen -->
+<div class="modal" *ngIf="mostrarModalImagen" (click)="cerrarModal()">
+  <div class="modal-contenido" (click)="$event.stopPropagation()">
+
+    <div *ngIf="cargandoImagen" class="spinner-container">
+      <div class="spinner"></div>
+      <p>Cargando imagen...</p>
+    </div>
+
+    <img
+      [src]="getImageUrl(idImagenActual!)"
+      (load)="imagenCargada()"
+      [hidden]="cargandoImagen"
+      alt="Imagen de la locación"
+    />
+
+    <button (click)="cerrarModal()">Cerrar</button>
+  </div>
+</div>
