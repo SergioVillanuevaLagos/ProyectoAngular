@@ -1,9 +1,21 @@
+<!-- Navbar bonito azul -->
 <nav class="navbar">
-  <ul>
-    <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Inicio</a></li>
-    <li><a routerLink="/detalle-locacion/1" routerLinkActive="active">Detalle Locación 1</a></li>
-    <li><a routerLink="/detalle-locacion/2" routerLinkActive="active">Detalle Locación 2</a></li>
-    <li><a routerLink="/admin-locacion" routerLinkActive="active">Admin Locaciones</a></li>
-    <li><a routerLink="/admin-reportes" routerLinkActive="active">Reportes</a></li>
-  </ul>
+  <div class="navbar-left">
+    <img
+      src="assets/logo.png"
+      alt="Home"
+      class="navbar-icon"
+    />
+    <span class="navbar-title">Hakoroom</span>
+  </div>
+  <div class="navbar-right">
+    <div class="navbar-links">
+      <a href="#" class="navbar-link">Inicio</a>
+      <a href="locaciones" class="navbar-link">Publicaciones</a>
+      <a href="#" class="navbar-link">Favoritos</a>
+    </div>
+    <div class="navbar-profile">
+      <a href="#" class="navbar-link">Perfil</a>
+    </div>
+  </div>
 </nav>

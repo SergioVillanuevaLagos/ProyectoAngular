@@ -1,22 +1,73 @@
 .navbar {
-  background-color: #007bff;
-  padding: 10px 20px;
+  width: 100%;
+  background-color: #1976d2;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height:  60px;       
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  margin: 0;
+  border-radius: 0;
+  position: relative;
 }
 
-.navbar ul {
-  list-style: none;
+.navbar-left {
   display: flex;
-  gap: 20px;
+  align-items: center;
+  position: absolute; 
+  left: 0;
+  margin-left: 16px;
+}
+
+.navbar-icon {
+  width: 48px;
+  height: 48px;
+  margin-right: 10px;
+}
+
+.navbar-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 24px;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.navbar-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s, border-bottom 0.2s;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+}
+
+.navbar-link:hover {
+  color: #ffeb3b;
+  border-bottom: 2px solid #ffeb3b;
+}
+
+.navbar-profile {
+  margin-left: auto;
+  margin-right: 32px;
+
+}
+
+:host {
+  display: block;
   margin: 0;
   padding: 0;
 }
 
-.navbar li a {
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.navbar li a.active {
-  border-bottom: 2px solid white;
-}

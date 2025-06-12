@@ -8,6 +8,7 @@ import { AdminLocacionesComponent } from './shared/components/admin-locaciones/a
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'locaciones', component: HomeComponent },
   { path: 'detalle-locacion/:id', component: DetalleLocacionComponent },
   { path: 'admin-reportes', component: AdminReportesComponent },
   {path: 'admin-locacion', component: AdminLocacionesComponent}
