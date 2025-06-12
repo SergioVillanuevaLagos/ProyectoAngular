@@ -3,13 +3,28 @@
   <form [formGroup]="propiedadForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="fotos">Fotos</label>
-      <input
-        id="fotos"
-        type="file"
-        (change)="onFileChange($event)"
-        multiple
-        accept="image/*"
-      />
+      <div class="fotos-container">
+        <div class="foto-cuadro" (click)="fotoInput.click()">
+          <span class="plus-icon">+</span>
+          <input
+            #fotoInput
+            id="fotos"
+            type="file"
+            (change)="onFileChange($event)"
+            multiple
+            accept="image/*"
+            style="display: none"
+          />
+        </div>
+        <div class="miniaturas">
+          <img
+            *ngFor="let preview of fotosPreview"
+            [src]="preview"
+            class="miniatura"
+            alt="foto seleccionada"
+          />
+        </div>
+      </div>
       <div class="error" *ngIf="fotosError">Debes subir al menos una foto.</div>
     </div>
     <div class="form-group">
@@ -70,7 +85,7 @@
         id="contacto"
         type="text"
         formControlName="contacto"
-        placeholder="Teléfono o email"
+        placeholder="Teléfono"
       />
       <div
         class="error"

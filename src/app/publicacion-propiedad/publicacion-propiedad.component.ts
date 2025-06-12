@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class PublicacionPropiedadComponent implements OnInit {
   propiedadForm: FormGroup;
   fotos: File[] = [];
+  fotosPreview: string[] = [];
   fotosError: boolean = false;
 
   constructor(private fb: FormBuilder) {
@@ -28,9 +29,18 @@ export class PublicacionPropiedadComponent implements OnInit {
   onFileChange(event: any): void {
     const files = event.target.files;
     this.fotos = [];
+    this.fotosPreview = [];
     if (files && files.length > 0) {
       for (let i = 0; i < files.length; i++) {
-        this.fotos.push(files[i]);
+        const file = files[i];
+        this.fotos.push(file);
+
+        // Crear vista previa
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.fotosPreview.push(e.target.result);
+        };
+        reader.readAsDataURL(file);
       }
       this.fotosError = false;
     } else {
