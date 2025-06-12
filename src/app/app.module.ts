@@ -22,6 +22,7 @@ import localeEs from '@angular/common/locales/es';
 import { AgendaVisitaComponent } from './agenda-visita/agenda-visita.component'; 
 
 registerLocaleData(localeEs);
+import { NavbarComponentComponent } from './shared/components/navbar-component/navbar-component.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ registerLocaleData(localeEs);
     DetalleLocacionComponent,
     DetalleProductoComponent,
     MapasComponent,
-    AgendaVisitaComponent
+    AgendaVisitaComponent,
+    NavbarComponentComponent
   ],
   imports: [
     BrowserModule,
