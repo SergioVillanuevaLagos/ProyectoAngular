@@ -1,20 +1,6 @@
-<div *ngIf="user" class="profile-container" [ngClass]="{'sidebar-open': sidebarOpen}">
+<div *ngIf="user" class="profile-container" >
 
-    <!-- Botón para mostrar/ocultar sidebar -->
-  <button class="sidebar-toggle" (click)="sidebarOpen = !sidebarOpen">
-    <i class="fas" [ngClass]="sidebarOpen ? 'fa-times' : 'fa-bars'"></i>
-  </button>
 
-  <!-- Sidebar fuera de profile-left y profile-right -->
-  <div class="sidebar" [class.closed]="!sidebarOpen">
-    <h3>Menú</h3>
-    <ul>
-      <li><a href="#">Inicio</a></li>
-      <li><a href="#">Publicaciones</a></li>
-      <li><a href="#">Favoritos</a></li>
-      <li><a href="#">Perfil</a></li>
-    </ul>
-  </div>
 
   <!-- Contenido principal -->
   <div class="profile-left">
