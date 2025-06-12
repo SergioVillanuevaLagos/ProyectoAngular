@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './views/home/home.component';
 import { ListarLocacionesComponent } from './shared/components/listar-locaciones/listar-locaciones.component';
 import { LocationFilterSidebarComponent } from './shared/components/location-filter-sidebar/location-filter-sidebar.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetalleLocacionComponent } from './shared/components/detalle-locacion/detalle-locacion.component';
 import { DetalleProductoComponent } from './views/detalle-producto/detalle-producto.component';
 import { NavbarComponent } from './navbar/navbar.component'; 
@@ -24,6 +24,12 @@ import { AgendaVisitaComponent } from './agenda-visita/agenda-visita.component';
 registerLocaleData(localeEs);
 import { NavbarComponentComponent } from './shared/components/navbar-component/navbar-component.component';
 import { PublicacionPropiedadComponent } from './publicacion-propiedad/publicacion-propiedad.component';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+import { ReportModalComponent } from "./shared/components/report-modal/report-modal.component";
+import { AdminReportesComponent } from './shared/components/admin-reportes/admin-reportes.component';
+
+
 
 @NgModule({
   declarations: [
@@ -40,7 +46,10 @@ import { PublicacionPropiedadComponent } from './publicacion-propiedad/publicaci
     MapasComponent,
     AgendaVisitaComponent,
     NavbarComponentComponent,
-    PublicacionPropiedadComponent
+    PublicacionPropiedadComponent,
+    NavbarComponent,
+    MapasComponent,
+    AdminReportesComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +62,12 @@ import { PublicacionPropiedadComponent } from './publicacion-propiedad/publicaci
   providers: [
     { provide: LOCALE_ID, useValue: 'es' }
   ],
+    CommonModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    ReportModalComponent
+],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

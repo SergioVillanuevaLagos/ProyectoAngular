@@ -20,6 +20,13 @@ const routes: Routes = [
   { path: 'agendar-visita', component: AgendaVisitaComponent },
   { path: 'pagina-principal', component: HomeComponent },
   { path: 'publicar-propiedad', component: PublicacionPropiedadComponent }
+import { AdminReportesComponent } from './shared/components/admin-reportes/admin-reportes.component';
+
+const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'detalle-locacion/:id', component: DetalleLocacionComponent },
+  { path: 'admin-reportes', component: AdminReportesComponent }
+
 ];
 
 @NgModule({
