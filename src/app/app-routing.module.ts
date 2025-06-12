@@ -12,6 +12,9 @@ const routes: Routes = [
   { path: 'admin-reportes', component: AdminReportesComponent },
   {path: 'admin-locacion', component: AdminLocacionesComponent}
 
+
+
+
 ];
 
 @NgModule({
