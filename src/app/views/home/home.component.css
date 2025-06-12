@@ -1,18 +1,81 @@
-.page-container {
+/* Asegura que html y body ocupen toda la pantalla */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Contenedor principal */
+.empresa-container {
+  width: 100%;
+  padding: 40px 60px;
+  box-sizing: border-box;
+  color: #333;
+}
+
+/* Encabezado */
+.empresa-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.empresa-header h1 {
+  font-size: 2.8rem;
+  margin-bottom: 8px;
+  color: #005a87;
+}
+
+.empresa-slogan {
+  font-style: italic;
+  color: #007bbd;
+  font-size: 1.3rem;
+}
+
+/* Secciones generales */
+.empresa-about,
+.empresa-mision-vision,
+.empresa-contacto {
+  margin-bottom: 32px;
+}
+
+/* Misión y visión en columnas */
+.empresa-mision-vision {
   display: flex;
-  flex-direction: row; /* Lado a lado */
-  height: 100vh;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
 }
 
-/* Sidebar fijo de 250px */
-app-location-filter-sidebar {
-  width: 250px;
-  flex-shrink: 0;
+.mision,
+.vision {
+  flex: 1 1 300px;
 }
 
-/* El área de listado ocupa el resto del espacio */
-app-listar-locaciones {
-  flex: 1;
-  overflow-y: auto;
-  padding: 20px;
+h2 {
+  border-bottom: 2px solid #005a87;
+  padding-bottom: 6px;
+  margin-bottom: 16px;
+  color: #005a87;
+}
+
+h3 {
+  margin-bottom: 8px;
+  color: #007bbd;
+}
+
+.empresa-contacto p {
+  margin: 6px 0;
+}
+
+/* Footer */
+.empresa-footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 60px;
+  border-top: 1px solid #ccc;
+  padding-top: 16px;
 }
