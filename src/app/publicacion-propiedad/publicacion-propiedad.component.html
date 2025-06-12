@@ -1,0 +1,110 @@
+<div class="container">
+  <h1>Publicar Propiedad</h1>
+  <form [formGroup]="propiedadForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="fotos">Fotos</label>
+      <input
+        id="fotos"
+        type="file"
+        (change)="onFileChange($event)"
+        multiple
+        accept="image/*"
+      />
+      <div class="error" *ngIf="fotosError">Debes subir al menos una foto.</div>
+    </div>
+    <div class="form-group">
+      <label for="descripcion">Descripción</label>
+      <textarea
+        id="descripcion"
+        formControlName="descripcion"
+        placeholder="Describe la propiedad"
+      ></textarea>
+      <div
+        class="error"
+        *ngIf="
+          propiedadForm.get('descripcion')?.invalid &&
+          propiedadForm.get('descripcion')?.touched
+        "
+      >
+        La descripción es obligatoria.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="precio">Precio</label>
+      <input
+        id="precio"
+        type="number"
+        formControlName="precio"
+        placeholder="Precio"
+      />
+      <div
+        class="error"
+        *ngIf="
+          propiedadForm.get('precio')?.invalid &&
+          propiedadForm.get('precio')?.touched
+        "
+      >
+        El precio es obligatorio y debe ser mayor o igual a 0.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="reglas">Reglas de la casa</label>
+      <textarea
+        id="reglas"
+        formControlName="reglas"
+        placeholder="Ejemplo: No se permiten mascotas, no fumar, etc."
+      ></textarea>
+      <div
+        class="error"
+        *ngIf="
+          propiedadForm.get('reglas')?.invalid &&
+          propiedadForm.get('reglas')?.touched
+        "
+      >
+        Las reglas de la casa son obligatorias.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="contacto">Contacto</label>
+      <input
+        id="contacto"
+        type="text"
+        formControlName="contacto"
+        placeholder="Teléfono o email"
+      />
+      <div
+        class="error"
+        *ngIf="
+          propiedadForm.get('contacto')?.invalid &&
+          propiedadForm.get('contacto')?.touched
+        "
+      >
+        El contacto es obligatorio.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="servicios">Servicios incluidos</label>
+      <textarea
+        id="servicios"
+        formControlName="servicios"
+        placeholder="Ejemplo: Agua, luz, internet, limpieza, etc."
+      ></textarea>
+      <div
+        class="error"
+        *ngIf="
+          propiedadForm.get('servicios')?.invalid &&
+          propiedadForm.get('servicios')?.touched
+        "
+      >
+        Los servicios incluidos son obligatorios.
+      </div>
+    </div>
+    <button
+      class="full-width btn-blue"
+      type="submit"
+      [disabled]="propiedadForm.invalid || fotosError"
+    >
+      Publicar
+    </button>
+  </form>
+</div>
