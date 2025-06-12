@@ -15,6 +15,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { ReportModalComponent } from "./shared/components/report-modal/report-modal.component";
+import { AdminReportesComponent } from './shared/components/admin-reportes/admin-reportes.component';
 
 
 
@@ -28,6 +29,7 @@ import { ReportModalComponent } from "./shared/components/report-modal/report-mo
     DetalleProductoComponent,
     NavbarComponent,
     MapasComponent,
+    AdminReportesComponent,
 
 
 

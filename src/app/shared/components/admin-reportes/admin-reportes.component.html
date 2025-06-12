@@ -1,0 +1,50 @@
+<div class="admin-reportes-container">
+  <h1>Gestión de Reportes</h1>
+  <table class="reportes-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Usuario</th>
+        <th>Motivo</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let reporte of reportes">
+        <td>{{ reporte.id }}</td>
+        <td>{{ reporte.usuario }}</td>
+        <td>{{ reporte.motivo }}</td>
+        <td>{{ reporte.fecha }}</td>
+        <td>
+          <select
+            [value]="estadoSeleccionado[reporte.id]"
+            (change)="cambiarEstado($event, reporte.id)"
+          >
+            <option value="Pendiente">Pendiente</option>
+            <option value="Advertencia enviada">Advertencia enviada</option>
+            <option value="Suspendido">Suspendido</option>
+            <option value="Resuelto">Resuelto</option>
+          </select>
+        </td>
+        <td>
+          <button (click)="abrirConfirmacion(reporte)">Aplicar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="modal" *ngIf="mostrarConfirmacion">
+    <div class="modal-content">
+      <h3>Confirmar cambio de estado</h3>
+      <p>
+        ¿Desea cambiar el estado del reporte
+        #{{ reporteSeleccionado?.id }} a
+        "{{ estadoSeleccionado[reporteSeleccionado?.id!] }}"?
+      </p>
+      <button (click)="aplicarCambioEstado()">Confirmar</button>
+      <button (click)="cerrarConfirmacion()">Cancelar</button>
+    </div>
+  </div>
+</div>
