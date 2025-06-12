@@ -10,52 +10,56 @@
       />
       <h1 class="h3 mb-3 fw-normal">Crear tu cuenta</h1>
       <form autocomplete="off">
-        <div class="form-floating mb-2">
-          <input
-            type="text"
-            class="form-control"
-            id="floatingNombre"
-            name="nombre"
-            required
-            placeholder=""
-          />
-          <label for="floatingNombre">Nombre</label>
+        <div class="row">
+          <div class="col form-floating mb-2">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingNombre"
+              name="nombre"
+              required
+              placeholder=""
+            />
+            <label for="floatingNombre">Nombre</label>
+          </div>
+          <div class="col form-floating mb-2">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingApellidoPaterno"
+              name="apellidoPaterno"
+              required
+              placeholder=""
+            />
+            <label for="floatingApellidoPaterno">Apellido Paterno</label>
+          </div>
         </div>
-        <div class="form-floating mb-2">
-          <input
-            type="text"
-            class="form-control"
-            id="floatingApellidoPaterno"
-            name="apellidoPaterno"
-            required
-            placeholder=""
-          />
-          <label for="floatingApellidoPaterno">Apellido Paterno</label>
+        <div class="row">
+          <div class="col form-floating mb-2">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingApellidoMaterno"
+              name="apellidoMaterno"
+              required
+              placeholder=""
+            />
+            <label for="floatingApellidoMaterno">Apellido Materno</label>
+          </div>
+          <div class="col form-floating mb-2">
+            <input
+              type="email"
+              class="form-control"
+              id="floatingInput"
+              placeholder="correo@ejemplo.com"
+            />
+            <label for="floatingInput">Correo electrónico</label>
+          </div>
         </div>
-        <div class="form-floating mb-2">
-          <input
-            type="text"
-            class="form-control"
-            id="floatingApellidoMaterno"
-            name="apellidoMaterno"
-            required
-            placeholder=""
-          />
-          <label for="floatingApellidoMaterno">Apellido Materno</label>
-        </div>
-        <div class="form-floating mb-2">
-          <input
-            type="email"
-            class="form-control"
-            id="floatingInput"
-            placeholder="correo@ejemplo.com"
-          />
-          <label for="floatingInput">Correo electrónico</label>
-        </div>
-        <div class="form-floating mb-2">
+        <div class="form-floating mb-3">
           <input
             type="password"
-            class="form-control"
+            class="form-control password-large"
             id="floatingPassword"
             name="password"
             required
