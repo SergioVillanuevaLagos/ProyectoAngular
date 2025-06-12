@@ -95,3 +95,10 @@ container {
   color: #1565c0;
   border-color: #1565c0;
 }
+
+.login-background {
+    background: url('assets/fondo.png') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+}
+
