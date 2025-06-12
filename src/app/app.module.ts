@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,9 +10,12 @@ import { LocationFilterSidebarComponent } from './shared/components/location-fil
 import { FormsModule } from '@angular/forms';
 import { DetalleLocacionComponent } from './shared/components/detalle-locacion/detalle-locacion.component';
 import { DetalleProductoComponent } from './views/detalle-producto/detalle-producto.component';
-import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { NavbarComponent } from './navbar/navbar.component'; // Solo este navbar
 import { MapasComponent } from './shared/components/mapas/mapas.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   declarations: [
@@ -30,8 +34,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    OAuthModule.forRoot(),
-    HttpClientModule,
+    RouterModule,
     FormsModule,
     GoogleMapsModule
   ],
