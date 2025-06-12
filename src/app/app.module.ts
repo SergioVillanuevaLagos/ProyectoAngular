@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
@@ -10,12 +10,18 @@ import { LocationFilterSidebarComponent } from './shared/components/location-fil
 import { FormsModule } from '@angular/forms';
 import { DetalleLocacionComponent } from './shared/components/detalle-locacion/detalle-locacion.component';
 import { DetalleProductoComponent } from './views/detalle-producto/detalle-producto.component';
-import { NavbarComponent } from './navbar/navbar.component'; // Solo este navbar
+import { NavbarComponent } from './navbar/navbar.component'; 
 import { MapasComponent } from './shared/components/mapas/mapas.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MainComponent } from './main/main.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+import { AgendaVisitaComponent } from './agenda-visita/agenda-visita.component'; 
+
+registerLocaleData(localeEs);
 
 @NgModule({
   declarations: [
@@ -29,16 +35,20 @@ import { MainComponent } from './main/main.component';
     LocationFilterSidebarComponent,
     DetalleLocacionComponent,
     DetalleProductoComponent,
-    MapasComponent
+    MapasComponent,
+    AgendaVisitaComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule,
     FormsModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'es' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

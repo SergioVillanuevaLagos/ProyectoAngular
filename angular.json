@@ -38,6 +38,7 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -96,6 +97,7 @@
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -105,7 +107,6 @@
     }
   },
   "cli": {
-    "analytics": "bd7d5c88-ac62-47a0-b443-6b7f28983fa2"
-    "analytics": "07a0d1a2-e623-4f2c-95e6-c55d33f1b028"
+    "analytics": "a329e2c4-cc07-4072-a47f-ed51ccf1a464"
   }
 }
