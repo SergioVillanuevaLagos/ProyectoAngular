@@ -1,0 +1,181 @@
+/* CONTENEDOR PRINCIPAL HORIZONTAL */
+.admin-layout {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* LISTADO DE TARJETAS */
+.card-list-vertical {
+  flex: 1;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  background-color: #f4f6f9;
+}
+
+/* TARJETAS */
+.card-rect {
+  width: 100%;
+  display: flex;
+  background: white;
+  border-radius: 14px;
+  box-shadow:
+    0 8px 20px rgba(41, 128, 185, 0.1),
+    0 0 12px rgba(41, 128, 185, 0.1);
+  overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  cursor: pointer;
+  border: 1.8px solid transparent;
+}
+
+.card-rect:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 12px 35px rgba(41, 128, 185, 0.25),
+    0 0 18px rgba(41, 128, 185, 0.3);
+  border-color: #2980b9;
+}
+
+/* Imagen */
+.card-rect-image-wrapper {
+  flex: 0 0 180px;
+  overflow: hidden;
+  border-right: 1.5px solid #ddd;
+  position: relative;
+}
+
+.card-rect-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.card-rect:hover .card-rect-image {
+  transform: scale(1.07);
+}
+
+/* Contenido */
+.card-rect-content {
+  padding: 22px 28px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.card-rect-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1f2d3d;
+  margin: 0;
+  letter-spacing: 0.03em;
+  text-transform: capitalize;
+}
+
+/* Puntaje */
+.puntaje {
+  background: #f39c12;
+  color: white;
+  font-weight: 700;
+  padding: 4px 16px;
+  border-radius: 24px;
+  font-size: 0.95rem;
+  user-select: none;
+}
+
+/* Descripción */
+.card-rect-description {
+  font-size: 1.1rem;
+  color: #485563;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  flex-grow: 1;
+}
+
+/* Info extra */
+.card-rect-info {
+  display: flex;
+  gap: 22px;
+  font-size: 1rem;
+  color: #667781;
+  margin-bottom: 22px;
+}
+
+.card-rect-info span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+  font-weight: 600;
+}
+
+/* Footer */
+.card-rect-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.precio {
+  font-weight: 900;
+  font-size: 1.3rem;
+  color: #27ae60;
+}
+
+.ver-detalle-btn {
+  background-color: #2980b9;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(41, 128, 185, 0.6);
+  transition: background-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.ver-detalle-btn:hover {
+  background-color: #1c5d8a;
+  box-shadow: 0 6px 22px rgba(28, 93, 138, 0.9);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .card-list-vertical {
+    padding: 16px;
+  }
+
+  .card-rect {
+    flex-direction: column;
+  }
+
+  .card-rect-image-wrapper {
+    width: 100%;
+    height: 220px;
+    border-right: none;
+    border-bottom: 1.5px solid #ddd;
+  }
+}

@@ -11,19 +11,18 @@ import { LocationFilterSidebarComponent } from './shared/components/location-fil
 import { FormsModule } from '@angular/forms';
 import { DetalleLocacionComponent } from './shared/components/detalle-locacion/detalle-locacion.component';
 import { DetalleProductoComponent } from './views/detalle-producto/detalle-producto.component';
-import { NavbarComponent } from './navbar/navbar.component'; 
 import { MapasComponent } from './shared/components/mapas/mapas.component';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { MainComponent } from './main/main.component';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
-import { AgendaVisitaComponent } from './agenda-visita/agenda-visita.component'; 
 
 registerLocaleData(localeEs);
-import { NavbarComponentComponent } from './shared/components/navbar-component/navbar-component.component';
-import { PublicacionPropiedadComponent } from './publicacion-propiedad/publicacion-propiedad.component';
+import { LoginComponent } from './shared/components/login/login.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { PublicacionPropiedadComponent } from './shared/components/publicacion-propiedad/publicacion-propiedad.component';
+import { RegisterComponent } from './shared/components/register/register.component';
+import { AgendaVisitaComponent } from './shared/components/agenda-visita/agenda-visita.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +38,6 @@ import { PublicacionPropiedadComponent } from './publicacion-propiedad/publicaci
     DetalleProductoComponent,
     MapasComponent,
     AgendaVisitaComponent,
-    NavbarComponentComponent,
     PublicacionPropiedadComponent
   ],
   imports: [

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AutenticacionGoogleService } from '../autenticacion-google.service';
 import { Router } from '@angular/router';
+import { AutenticacionGoogleService } from '../../../autenticacion-google.service';
 
 @Component({
   selector: 'app-login',

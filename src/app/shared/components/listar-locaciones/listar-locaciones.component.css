@@ -1,79 +1,189 @@
-/* location-card-list.component.css */
-
+/* Contenedor general - ocupa 100% ancho disponible */
 .card-list-vertical {
+  max-width: 100%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 20px;
-  max-width: 800px;
-  margin: 0 auto;
+  gap: 24px;
+  padding: 0 12px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
+/* Header lista como pseudo-elemento si quieres */
+/* Puedes agregar si gustas */
+
+/* Tarjetas ocupan 100% ancho del contenedor */
 .card-rect {
+  width: 100%;
   display: flex;
-  flex-direction: row;
-  background-color: #ffffff;
-  border-radius: 10px;
+  background: white;
+  border-radius: 14px;
+  box-shadow:
+    0 8px 20px rgba(41, 128, 185, 0.1),
+    0 0 12px rgba(41, 128, 185, 0.1);
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  cursor: pointer;
+  border: 1.8px solid transparent;
 }
 
 .card-rect:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px);
+  box-shadow:
+    0 12px 35px rgba(41, 128, 185, 0.25),
+    0 0 18px rgba(41, 128, 185, 0.3);
+  border-color: #2980b9;
+}
+
+/* Imagen */
+.card-rect-image-wrapper {
+  flex: 0 0 180px;
+  overflow: hidden;
+  border-right: 1.5px solid #ddd;
+  position: relative;
 }
 
 .card-rect-image {
-  width: 200px;
-  height: 140px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  flex-shrink: 0;
+  display: block;
+  transition: transform 0.35s ease;
+  border-radius: 0 14px 14px 0;
 }
 
+.card-rect:hover .card-rect-image {
+  transform: scale(1.07);
+}
+
+/* Contenido */
 .card-rect-content {
-  padding: 12px 16px;
+  padding: 22px 28px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   flex: 1;
 }
 
-.card-rect-title {
-  font-size: 1.1rem;
-  font-weight: bold;
-  margin-bottom: 4px;
-  color: #222;
-}
-
-.card-rect-description {
-  font-size: 0.9rem;
-  color: #555;
-  margin-bottom: 6px;
-  max-height: 40px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.card-rect-info {
-  font-size: 0.85rem;
-  color: #444;
-  display: flex;
-  gap: 16px;
-  margin-bottom: 8px;
-}
-
-.card-rect-bottom {
+/* Header */
+.card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-.precio {
-  color: #1b5e20;
+.card-rect-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1f2d3d;
+  margin: 0;
+  letter-spacing: 0.03em;
+  text-transform: capitalize;
 }
 
+/* Puntaje */
 .puntaje {
-  color: #f59e0b;
+  background: #f39c12;
+  color: white;
+  font-weight: 700;
+  padding: 4px 16px;
+  border-radius: 24px;
+  font-size: 0.95rem;
+  user-select: none;
+  box-shadow: 0 3px 9px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Descripción */
+.card-rect-description {
+  font-size: 1.1rem;
+  color: #485563;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  flex-grow: 1;
+}
+
+/* Información adicional */
+.card-rect-info {
+  display: flex;
+  gap: 22px;
+  font-size: 1rem;
+  color: #667781;
+  margin-bottom: 22px;
+}
+
+.card-rect-info span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+  font-weight: 600;
+}
+
+/* Íconos grandes y coloridos */
+.card-rect-info span:nth-child(1) {
+  color: #2980b9; /* habitaciones */
+}
+.card-rect-info span:nth-child(2) {
+  color: #27ae60; /* área */
+}
+
+/* Footer */
+.card-rect-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Precio destacado */
+.precio {
+  font-weight: 900;
+  font-size: 1.3rem;
+  color: #27ae60;
+  letter-spacing: 0.03em;
+}
+
+/* Botón con efecto glow */
+.ver-detalle-btn {
+  background-color: #2980b9;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(41, 128, 185, 0.6);
+  transition: background-color 0.35s ease, box-shadow 0.35s ease;
+  user-select: none;
+  letter-spacing: 0.02em;
+}
+
+.ver-detalle-btn:hover {
+  background-color: #1c5d8a;
+  box-shadow: 0 6px 22px rgba(28, 93, 138, 0.9);
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .card-rect {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .card-rect-image-wrapper {
+    flex: none;
+    width: 100%;
+    height: 220px;
+    border-right: none;
+    border-bottom: 1.5px solid #ddd;
+    border-radius: 14px 14px 0 0;
+  }
+
+  .card-rect-content {
+    padding: 20px 22px;
+  }
 }

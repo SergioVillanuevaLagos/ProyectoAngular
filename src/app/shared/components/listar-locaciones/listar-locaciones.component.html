@@ -3,25 +3,37 @@
     *ngFor="let locacion of displayLocaciones"
     class="card-rect"
     (click)="goToDetalle(locacion.IDLocacion)"
-    style="cursor: pointer;"
   >
-    <img
-      [src]="getImageUrl(locacion.Imagen)"
-      alt="Imagen Locación"
-      class="card-rect-image"
-    />
+    <!-- Imagen principal -->
+    <div class="card-rect-image-wrapper">
+      <img
+        [src]="getImageUrl(locacion.Imagen)"
+        alt="Imagen de {{ locacion.Ubicacion }}"
+        class="card-rect-image"
+      />
+    </div>
+
+    <!-- Contenido de la tarjeta -->
     <div class="card-rect-content">
-      <h2 class="card-rect-title">{{ locacion.Ubicacion }}</h2>
-      <p class="card-rect-description">{{ locacion.Descripcion }}</p>
+      <div class="card-header">
+        <h2 class="card-rect-title">{{ locacion.Ubicacion }}</h2>
+        <span class="puntaje">⭐ {{ locacion.Puntaje }}</span>
+      </div>
+
+      <p class="card-rect-description">
+        {{ locacion.Descripcion }}
+      </p>
+
       <div class="card-rect-info">
         <span>🏠 {{ locacion.Habitaciones }} hab</span>
         <span>📐 {{ locacion.Area }} m²</span>
       </div>
-      <div class="card-rect-bottom">
+
+      <div class="card-rect-footer">
         <span class="precio">
           ${{ locacion.PrecioMensual | number: '1.0-0' }} CLP/mes
         </span>
-        <span class="puntaje">⭐ {{ locacion.Puntaje }}</span>
+        <button class="ver-detalle-btn" (click)="$event.stopPropagation(); goToDetalle(locacion.IDLocacion)">Ver detalles</button>
       </div>
     </div>
   </div>
