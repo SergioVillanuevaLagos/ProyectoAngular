@@ -1,0 +1,57 @@
+<div class="login-background">
+  <br />
+  <h1></h1>
+  <div class="text-center card container col-md-3">
+    <div class="mt-5 mb-5">
+      <img class="mb-4" src="assets/logo.png" alt="" width="72" height="57" />
+      <h1 class="h3 mb-3 fw-normal">Iniciar Sesión</h1>
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          id="floatingInput"
+          placeholder="correo@ejemplo.com"
+        />
+        <label for="floatingInput">Correo electrónico</label>
+      </div>
+      <div class="form-floating mt-1">
+        <input
+          type="password"
+          class="form-control"
+          id="floatingPassword"
+          placeholder="Contraseña"
+        />
+        <label for="floatingPassword">Contraseña</label>
+      </div>
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me" /> Recuérdame
+        </label>
+      </div>
+      <button class="w-100 btn btn-lg btn-primary" type="submit">
+        Iniciar sesión
+      </button>
+      <div class="or-container">
+        <div class="line-separator"></div>
+        <div class="or-label">o</div>
+        <div class="line-separator"></div>
+      </div>
+      <div class="row">
+        <button
+          class="btn btn-lg btn-google btn-block text-uppercase btn-outline"
+          (click)="login()"
+        >
+          <img src="https://img.icons8.com/color/22/000000/google-logo.png" />
+          Iniciar sesión con Google
+        </button>
+      </div>
+      <a
+        class="register-link"
+        (click)="goToRegister()"
+        style="cursor: pointer; display: block; margin-top: 10px"
+      >
+        ¿No tienes cuenta? Regístrate aquí
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+<div class="login-background">
+  <div class="text-center card container custom-width">
+    <div class="mt-5 mb-5">
+      <img
+        class="mb-4"
+        src="assets/logo.png"
+        alt="Logo"
+        width="102"
+        height="87"
+      />
+      <h1 class="h3 mb-3 fw-normal">Crear tu cuenta</h1>
+      <form autocomplete="off">
+        <div class="row">
+          <div class="col form-floating mb-2">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingNombre"
+              name="nombre"
+              required
+              placeholder=""
+            />
+            <label for="floatingNombre">Nombre</label>
+          </div>
+          <div class="col form-floating mb-2">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingApellidoPaterno"
+              name="apellidoPaterno"
+              required
+              placeholder=""
+            />
+            <label for="floatingApellidoPaterno">Apellido Paterno</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col form-floating mb-2">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingApellidoMaterno"
+              name="apellidoMaterno"
+              required
+              placeholder=""
+            />
+            <label for="floatingApellidoMaterno">Apellido Materno</label>
+          </div>
+          <div class="col form-floating mb-2">
+            <input
+              type="email"
+              class="form-control"
+              id="floatingInput"
+              placeholder="correo@ejemplo.com"
+            />
+            <label for="floatingInput">Correo electrónico</label>
+          </div>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="password"
+            class="form-control password-large"
+            id="floatingPassword"
+            name="password"
+            required
+            placeholder="Contraseña"
+          />
+          <label for="floatingPassword">Contraseña</label>
+        </div>
+        <button class="btn btn-lg btn-primary mb-3 btn-register" type="submit">
+          Registrar
+        </button>
+      </form>
+      <div class="or-container">
+        <div class="line-separator"></div>
+        <div class="or-label">o</div>
+        <div class="line-separator"></div>
+      </div>
+
+      <div>
+        <a routerLink="/login">¿Ya tienes cuenta? Inicia sesión</a>
+      </div>
+    </div>
+  </div>
+</div>
