@@ -1,25 +1,28 @@
-/* Navbar bonito azul */
 .navbar {
   width: 100%;
   background-color: #1976d2;
   color: #fff;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  height: 48px;       
+  justify-content: center;
+  height:  60px;       
   box-shadow: 0 2px 8px rgba(0,0,0,0.07);
   margin: 0;
   border-radius: 0;
+  position: relative;
 }
 
 .navbar-left {
   display: flex;
   align-items: center;
+  position: absolute; 
+  left: 0;
+  margin-left: 16px;
 }
 
 .navbar-icon {
-  width: 28px;
-  height: 28px;
+  width: 48px;
+  height: 48px;
   margin-right: 10px;
 }
 
@@ -31,7 +34,15 @@
 
 .navbar-right {
   display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.navbar-links {
+  display: flex;
   gap: 24px;
+  margin-left: auto;
+  margin-right: 0;
 }
 
 .navbar-link {
@@ -46,6 +57,12 @@
 .navbar-link:hover {
   color: #ffeb3b;
   border-bottom: 2px solid #ffeb3b;
+}
+
+.navbar-profile {
+  margin-left: auto;
+  margin-right: 32px;
+
 }
 
 :host {
