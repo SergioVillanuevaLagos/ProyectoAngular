@@ -1,0 +1,15 @@
+
+<!-- Botón para mostrar/ocultar sidebar -->
+<button class="sidebar-toggle" (click)="sidebarOpen = !sidebarOpen">
+  <i class="fas" [ngClass]="sidebarOpen ? 'fa-times' : 'fa-bars'"></i>
+</button>
+
+<div class="sidebar" [class.closed]="!sidebarOpen">
+  <h3>Menú</h3>
+  <ul>
+    <li><a href="#">Inicio</a></li>
+    <li><a href="#">Publicaciones</a></li>
+    <li><a href="#">Favoritos</a></li>
+    <li><a href="#">Perfil</a></li>
+  </ul>
+</div>

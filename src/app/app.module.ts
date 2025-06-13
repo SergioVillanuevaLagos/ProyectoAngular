@@ -26,6 +26,14 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 registerLocaleData(localeEs);
 
+
+import { UserModule } from './user/user.module';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { HomeComponent } from './views/home/home.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +49,7 @@ registerLocaleData(localeEs);
     NavbarComponent,
     PublicacionPropiedadComponent,
     AdminReportesComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +65,8 @@ registerLocaleData(localeEs);
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es' }
+    UserModule
+    
   ],
   bootstrap: [AppComponent]
 })

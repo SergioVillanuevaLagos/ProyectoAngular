@@ -25,6 +25,11 @@ const routes: Routes = [
   { path: 'pagina-principal', component: HomeComponent },
   { path: 'publicar-propiedad', component: PublicacionPropiedadComponent },
   { path: 'reportes', component: AdminReportesComponent }
+import { UserProfileComponent } from './user/user-profile/user-profile.component';
+
+const routes: Routes = [
+  { path: 'perfil', component: UserProfileComponent },
+  { path: '**', redirectTo: 'perfil' }
 ];
 
 @NgModule({
