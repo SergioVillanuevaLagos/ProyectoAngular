@@ -24,6 +24,7 @@ import { PublicacionPropiedadComponent } from './shared/components/publicacion-p
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { HttpClientModule } from '@angular/common/http';
 import { UserModule } from './user/user.module';
+import { AdminSidebarComponent } from './shared/components/admin-sidebar/admin-sidebar.component';
 
 registerLocaleData(localeEs);
 
@@ -40,7 +41,8 @@ registerLocaleData(localeEs);
     DetalleProductoComponent,
     AgendaVisitaComponent,
     PublicacionPropiedadComponent,
-    AdminReportesComponent
+    AdminReportesComponent,
+    AdminSidebarComponent
   ],
   imports: [
     BrowserModule,
