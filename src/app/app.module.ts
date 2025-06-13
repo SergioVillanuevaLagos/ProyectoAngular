@@ -11,17 +11,16 @@ import { ListarLocacionesComponent } from './shared/components/listar-locaciones
 import { LocationFilterSidebarComponent } from './shared/components/location-filter-sidebar/location-filter-sidebar.component';
 import { DetalleLocacionComponent } from './shared/components/detalle-locacion/detalle-locacion.component';
 import { DetalleProductoComponent } from './views/detalle-producto/detalle-producto.component';
-import { NavbarComponent } from './navbar/navbar.component'; 
 import { GoogleMapsModule } from '@angular/google-maps';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { MainComponent } from './main/main.component';
-import { AgendaVisitaComponent } from './agenda-visita/agenda-visita.component'; 
-import { NavbarComponentComponent } from './shared/components/navbar-component/navbar-component.component';
-import { PublicacionPropiedadComponent } from './publicacion-propiedad/publicacion-propiedad.component';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ReportModalComponent } from "./shared/components/report-modal/report-modal.component";
 import { AdminReportesComponent } from './shared/components/admin-reportes/admin-reportes.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { LoginComponent } from './shared/components/login/login.component';
+import { RegisterComponent } from './shared/components/register/register.component';
+import { AgendaVisitaComponent } from './shared/components/agenda-visita/agenda-visita.component';
+import { PublicacionPropiedadComponent } from './shared/components/publicacion-propiedad/publicacion-propiedad.component';
 
 registerLocaleData(localeEs);
 
@@ -37,7 +36,7 @@ registerLocaleData(localeEs);
     LocationFilterSidebarComponent,
     DetalleProductoComponent,
     AgendaVisitaComponent,
-    NavbarComponentComponent,
+    NavbarComponent,
     PublicacionPropiedadComponent,
     AdminReportesComponent,
   ],
