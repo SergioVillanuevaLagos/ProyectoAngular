@@ -2,18 +2,28 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { LocacionesService } from '../../../services/locaciones.service';
 import { Locacion } from '../../../models/locacion.model';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, catchError, finalize } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { ReportModalComponent } from '../report-modal/report-modal.component'; // <-- IMPORTA EL COMPONENTE
 
 @Component({
   selector: 'app-detalle-locacion',
   templateUrl: './detalle-locacion.component.html',
-  styleUrls: ['./detalle-locacion.component.css']
+  styleUrls: ['./detalle-locacion.component.css'],
+  imports: [ReportModalComponent], 
+  standalone: true 
 })
 export class DetalleLocacionComponent implements OnInit {
+  isLoading: boolean = true;
+  hasError: boolean = false;
   locacionId: number = 0;
-  locacion: Locacion | undefined;
+  locacion: Locacion | null = null;
   userRating: number = 0;
   hoverRating: number = 0;
+  showReportModal: boolean = false;
+  reportType: string = '';
+  startDate: string = '';
+  endDate: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -21,40 +31,83 @@ export class DetalleLocacionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      this.locacionId = Number(params.get('id'));
-      this.loadLocacion();
+    this.loadLocacionData();
+  }
+
+  loadLocacionData(): void {
+    this.isLoading = true;
+    this.hasError = false;
+
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        this.locacionId = Number(params.get('id'));
+        return this.locacionesService.getLocaciones().pipe(
+          catchError(() => {
+            this.hasError = true;
+            return of([]); // Retorna un array vacío en caso de error
+          }),
+          finalize(() => this.isLoading = false)
+        );
+      })
+    ).subscribe({
+      next: (locaciones) => {
+        this.locacion = locaciones.find(l => l.IDLocacion === this.locacionId) || null;
+        if (!this.locacion) {
+          this.hasError = true;
+        }
+      },
+      error: () => {
+        this.hasError = true;
+        this.locacion = null;
+      }
     });
   }
 
-  loadLocacion(): void {
-    this.locacionesService.getLocaciones().subscribe((locaciones) => {
-      this.locacion = locaciones.find(l => l.IDLocacion === this.locacionId);
+  openReportModal(): void {
+    this.showReportModal = true;
+  }
+
+  sendReport(reportData: any): void {
+    console.log('Reporte enviado:', {
+      locacionId: this.locacionId,
+      tipoReporte: reportData.reportType,
+      fechaInicio: reportData.startDate,
+      fechaFin: reportData.endDate
     });
+
+    this.showReportModal = false;
+    alert('Reporte enviado exitosamente');
   }
 
   getImageUrl(imagenId: number): string {
-    return `https://picsum.photos/seed/${imagenId}/200/140`
+    return `https://picsum.photos/seed/${imagenId}/600/400`;
   }
 
-
-
-setUserRating(rating: number) {
-  this.userRating = rating;
-}
-
-setHoverRating(rating: number) {
-  this.hoverRating = rating;
-}
-
-clearHoverRating() {
-  this.hoverRating = 0;
-}
-
-submitRating() {
-  if(this.userRating > 0) {
-    alert(`Gracias por calificar con ${this.userRating} estrella(s).`);
-    // Aquí puedes agregar lógica para enviar la calificación a un backend o actualizar datos
+  setUserRating(rating: number): void {
+    this.userRating = rating;
   }
-}
+
+  setHoverRating(rating: number): void {
+    this.hoverRating = rating;
+  }
+
+  clearHoverRating(): void {
+    this.hoverRating = 0;
+  }
+
+  submitRating(): void {
+    if (this.userRating > 0 && this.locacion) {
+      console.log(`Calificación ${this.userRating} para locación ${this.locacion.IDLocacion}`);
+
+      if (this.locacion) {
+        this.locacion.Puntaje = this.userRating;
+      }
+
+      alert(`Gracias por calificar con ${this.userRating} estrella(s)`);
+    }
+  }
+
+  retryLoad(): void {
+    this.loadLocacionData();
+  }
 }

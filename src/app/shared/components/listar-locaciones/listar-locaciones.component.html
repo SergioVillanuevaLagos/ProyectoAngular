@@ -3,6 +3,7 @@
     *ngFor="let locacion of displayLocaciones"
     class="card-rect"
     (click)="goToDetalle(locacion.IDLocacion)"
+    style="cursor: pointer;"
   >
     <!-- Imagen principal -->
     <div class="card-rect-image-wrapper">
@@ -33,7 +34,7 @@
         <span class="precio">
           ${{ locacion.PrecioMensual | number: '1.0-0' }} CLP/mes
         </span>
-        <button class="ver-detalle-btn" (click)="$event.stopPropagation(); goToDetalle(locacion.IDLocacion)">Ver detalles</button>
+        <button class="ver-detalle-btn">Ver detalles</button>
       </div>
     </div>
   </div>

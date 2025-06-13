@@ -20,7 +20,8 @@ export class LocacionesService {
       TipoLocacion: 1,
       Puntaje: 4.5,
       lat: -33.4378,
-      lng: -70.6505
+      lng: -70.6505,
+      Banos: 2
     },
     {
       IDLocacion: 2,
@@ -34,7 +35,8 @@ export class LocacionesService {
       TipoLocacion: 2,
       Puntaje: 4.2,
       lat: -33.4569,
-      lng: -70.6100
+      lng: -70.6100,
+      Banos: 3
     },
     {
       IDLocacion: 3,
@@ -48,7 +50,8 @@ export class LocacionesService {
       TipoLocacion: 1,
       Puntaje: 4.8,
       lat: -33.4175,
-      lng: -70.5836
+      lng: -70.5836,
+      Banos: 7
     },
     {
       IDLocacion: 4,
@@ -62,7 +65,8 @@ export class LocacionesService {
       TipoLocacion: 1,
       Puntaje: 5,
       lat: -36.6064,
-      lng: -72.1034
+      lng: -72.1034,
+      Banos: 3
     },
   ];
 
