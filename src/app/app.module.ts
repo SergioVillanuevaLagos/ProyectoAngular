@@ -21,6 +21,8 @@ import { LoginComponent } from './shared/components/login/login.component';
 import { RegisterComponent } from './shared/components/register/register.component';
 import { AgendaVisitaComponent } from './shared/components/agenda-visita/agenda-visita.component';
 import { PublicacionPropiedadComponent } from './shared/components/publicacion-propiedad/publicacion-propiedad.component';
+import { OAuthErrorEvent, OAuthModule } from 'angular-oauth2-oidc';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 registerLocaleData(localeEs);
 
@@ -49,6 +51,8 @@ registerLocaleData(localeEs);
     ReactiveFormsModule,
     CommonModule,
     MatDialogModule,
+    OAuthModule.forRoot(),
+    HttpClientModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es' }
