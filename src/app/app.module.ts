@@ -13,7 +13,7 @@ import { DetalleLocacionComponent } from './shared/components/detalle-locacion/d
 import { DetalleProductoComponent } from './views/detalle-producto/detalle-producto.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MainComponent } from './main/main.component';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ReportModalComponent } from "./shared/components/report-modal/report-modal.component";
 import { AdminReportesComponent } from './shared/components/admin-reportes/admin-reportes.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
@@ -21,10 +21,10 @@ import { LoginComponent } from './shared/components/login/login.component';
 import { RegisterComponent } from './shared/components/register/register.component';
 import { AgendaVisitaComponent } from './shared/components/agenda-visita/agenda-visita.component';
 import { PublicacionPropiedadComponent } from './shared/components/publicacion-propiedad/publicacion-propiedad.component';
-import { OAuthModule } from 'angular-oauth2-oidc';
-import { HttpClientModule } from '@angular/common/http';
-import { UserModule } from './user/user.module';
+import { OAuthErrorEvent, OAuthModule } from 'angular-oauth2-oidc';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AdminSidebarComponent } from './shared/components/admin-sidebar/admin-sidebar.component';
+import { AdminLocacionesComponent } from './shared/components/admin-locaciones/admin-locaciones.component';
 
 registerLocaleData(localeEs);
 
@@ -40,9 +40,11 @@ registerLocaleData(localeEs);
     LocationFilterSidebarComponent,
     DetalleProductoComponent,
     AgendaVisitaComponent,
+    NavbarComponent,
     PublicacionPropiedadComponent,
     AdminReportesComponent,
-    AdminSidebarComponent
+    AdminSidebarComponent,
+    AdminLocacionesComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,8 +56,7 @@ registerLocaleData(localeEs);
     CommonModule,
     MatDialogModule,
     OAuthModule.forRoot(),
-    HttpClientModule,
-    UserModule
+    HttpClientModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es' }
