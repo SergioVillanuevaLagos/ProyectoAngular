@@ -34,7 +34,7 @@ export class ListarLocacionesComponent implements OnInit {
   }
 
   getImageUrl(index: number): string {
-    // Usa el índice para rotar entre las imágenes
+    
     return this.houseImages[index % this.houseImages.length];
   }
 

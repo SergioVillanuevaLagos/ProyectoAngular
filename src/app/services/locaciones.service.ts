@@ -15,7 +15,7 @@ export class LocacionesService {
       Imagen: 101,
       Ubicacion: 'Providencia, Santiago',
       Descripcion: 'Departamento moderno con excelente conectividad.',
-      PrecioMensual: 750000,
+      PrecioMensual: 500000,
       IDAdmin: 2,
       TipoLocacion: 1,
       Puntaje: 4.5,

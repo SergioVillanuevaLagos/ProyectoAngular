@@ -14,16 +14,16 @@
   <!-- Galería de imágenes -->
   <div class="property-gallery">
     <img
-      [src]="getImageUrl(locacion.Imagen)"
-      alt="Imagen de {{ locacion.Ubicacion }}"
       class="main-image"
+      [src]="getHouseImage(0)"
+      alt="Imagen principal de la casa"
     />
     <div class="thumbnail-container">
-      <div class="thumbnail" *ngFor="let img of [1, 2, 3]">
-        <img
-          [src]="getImageUrl(locacion.Imagen + img)"
-          alt="Miniatura {{ img }}"
-        />
+      <div
+        class="thumbnail"
+        *ngFor="let img of houseImages.slice(1); let i = index"
+      >
+        <img [src]="img" alt="Miniatura {{ i + 1 }}" />
       </div>
     </div>
   </div>

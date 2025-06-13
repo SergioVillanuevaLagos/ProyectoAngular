@@ -28,6 +28,14 @@ export class DetalleLocacionComponent implements OnInit {
   startDate: string = '';
   endDate: string = '';
 
+  houseImages: string[] = [
+    'https://img10.naventcdn.com/avisos/resize/9/01/46/64/67/30/1200x1200/1536967291.jpg',
+    'https://img10.naventcdn.com/avisos/resize/9/01/46/64/67/30/1200x1200/1536967278.jpg',
+    'https://img10.naventcdn.com/avisos/resize/9/01/46/64/67/30/1200x1200/1536967284.jpg',
+    'https://img10.naventcdn.com/avisos/resize/9/01/46/64/67/30/1200x1200/1536967286.jpg'
+
+  ];
+
   constructor(
     private route: ActivatedRoute,
     private locacionesService: LocacionesService,
@@ -117,5 +125,9 @@ export class DetalleLocacionComponent implements OnInit {
 
   irAAgendarVisita() {
     this.router.navigate(['/agendar-visita']);
+  }
+
+  getHouseImage(index: number): string {
+    return this.houseImages[index % this.houseImages.length];
   }
 }
