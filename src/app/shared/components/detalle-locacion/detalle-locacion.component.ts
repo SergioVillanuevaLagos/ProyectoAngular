@@ -7,6 +7,7 @@ import { of } from 'rxjs';
 import { ReportModalComponent } from '../report-modal/report-modal.component';
 import { MapasComponent } from '../mapas/mapas.component'; 
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-detalle-locacion',
@@ -29,7 +30,8 @@ export class DetalleLocacionComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private locacionesService: LocacionesService
+    private locacionesService: LocacionesService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -111,5 +113,9 @@ export class DetalleLocacionComponent implements OnInit {
 
   retryLoad(): void {
     this.loadLocacionData();
+  }
+
+  irAAgendarVisita() {
+    this.router.navigate(['/agendar-visita']);
   }
 }

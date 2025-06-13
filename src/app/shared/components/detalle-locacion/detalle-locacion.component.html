@@ -1,9 +1,13 @@
-<div class="detalle-locacion-container" *ngIf="locacion && !isLoading; else loadingOrError">
+<div
+  class="detalle-locacion-container"
+  *ngIf="locacion && !isLoading; else loadingOrError"
+>
   <!-- Header con título y breadcrumb -->
   <div class="property-header">
     <h1 class="property-title">{{ locacion.Ubicacion }}</h1>
     <div class="property-breadcrumb">
-      <span>Inicio</span> &gt; <span>Locaciones</span> &gt; <span>{{ locacion.Ubicacion }}</span>
+      <span>Inicio</span> &gt; <span>Locaciones</span> &gt;
+      <span>{{ locacion.Ubicacion }}</span>
     </div>
   </div>
 
@@ -15,8 +19,11 @@
       class="main-image"
     />
     <div class="thumbnail-container">
-      <div class="thumbnail" *ngFor="let img of [1,2,3]">
-        <img [src]="getImageUrl(locacion.Imagen + img)" alt="Miniatura {{img}}">
+      <div class="thumbnail" *ngFor="let img of [1, 2, 3]">
+        <img
+          [src]="getImageUrl(locacion.Imagen + img)"
+          alt="Miniatura {{ img }}"
+        />
       </div>
     </div>
   </div>
@@ -30,7 +37,17 @@
       <div class="amenities-section">
         <h2 class="section-title">Características</h2>
         <div class="amenities-grid">
-          <div class="amenity" *ngFor="let amenity of ['Wifi', 'Estacionamiento', 'Aire acondicionado', 'Lavadora']">
+          <div
+            class="amenity"
+            *ngFor="
+              let amenity of [
+                'Wifi',
+                'Estacionamiento',
+                'Aire acondicionado',
+                'Lavadora'
+              ]
+            "
+          >
             <span class="amenity-icon">✓</span>
             <span class="amenity-name">{{ amenity }}</span>
           </div>
@@ -43,14 +60,18 @@
       <div class="summary-card">
         <h3 class="summary-title">Resumen</h3>
         <div class="price-section">
-          <span class="price">${{ locacion.PrecioMensual | number : '1.0-0' }}</span>
+          <span class="price"
+            >${{ locacion.PrecioMensual | number : "1.0-0" }}</span
+          >
           <span class="price-period">por mes</span>
         </div>
 
         <div class="quick-facts">
           <div class="fact">
             <span class="fact-icon">🛏️</span>
-            <span class="fact-value">{{ locacion.Habitaciones }} dormitorios</span>
+            <span class="fact-value"
+              >{{ locacion.Habitaciones }} dormitorios</span
+            >
           </div>
           <div class="fact">
             <span class="fact-icon">🛁</span>
@@ -62,8 +83,9 @@
           </div>
         </div>
 
-        <button class="contact-button">Contactar </button>
-
+        <button class="contact-button" (click)="irAAgendarVisita()">
+          Contactar
+        </button>
 
         <button class="favorite-button">❤ Guardar</button>
       </div>
@@ -81,10 +103,15 @@
           (click)="setUserRating(star)"
           (mouseenter)="setHoverRating(star)"
           (mouseleave)="clearHoverRating()"
-        >★</span>
+          >★</span
+        >
       </ng-container>
     </div>
-    <button class="submit-rating" (click)="submitRating()" [disabled]="userRating === 0">
+    <button
+      class="submit-rating"
+      (click)="submitRating()"
+      [disabled]="userRating === 0"
+    >
       Enviar Calificación
     </button>
   </div>
@@ -107,7 +134,8 @@
     *ngIf="showReportModal"
     [locacion]="locacion"
     (close)="showReportModal = false"
-    (generate)="sendReport($event)">
+    (generate)="sendReport($event)"
+  >
   </app-report-modal>
 </div>
 
@@ -117,4 +145,4 @@
     <div class="spinner"></div>
     <p>Cargando información de la locación...</p>
   </div>
-
+</ng-template>
