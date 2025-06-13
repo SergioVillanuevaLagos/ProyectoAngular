@@ -13,7 +13,7 @@ import { DetalleLocacionComponent } from './shared/components/detalle-locacion/d
 import { DetalleProductoComponent } from './views/detalle-producto/detalle-producto.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MainComponent } from './main/main.component';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { ReportModalComponent } from "./shared/components/report-modal/report-modal.component";
 import { AdminReportesComponent } from './shared/components/admin-reportes/admin-reportes.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
@@ -21,18 +21,11 @@ import { LoginComponent } from './shared/components/login/login.component';
 import { RegisterComponent } from './shared/components/register/register.component';
 import { AgendaVisitaComponent } from './shared/components/agenda-visita/agenda-visita.component';
 import { PublicacionPropiedadComponent } from './shared/components/publicacion-propiedad/publicacion-propiedad.component';
-import { OAuthErrorEvent, OAuthModule } from 'angular-oauth2-oidc';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { HttpClientModule } from '@angular/common/http';
+import { UserModule } from './user/user.module';
 
 registerLocaleData(localeEs);
-
-
-import { UserModule } from './user/user.module';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HomeComponent } from './views/home/home.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -46,10 +39,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     LocationFilterSidebarComponent,
     DetalleProductoComponent,
     AgendaVisitaComponent,
-    NavbarComponent,
     PublicacionPropiedadComponent,
-    AdminReportesComponent,
-    SidebarComponent
+    AdminReportesComponent
   ],
   imports: [
     BrowserModule,
@@ -61,12 +52,11 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     CommonModule,
     MatDialogModule,
     OAuthModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    UserModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es' }
-    UserModule
-    
   ],
   bootstrap: [AppComponent]
 })

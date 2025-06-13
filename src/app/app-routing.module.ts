@@ -7,10 +7,10 @@ import { HomeComponent } from './views/home/home.component';
 import { AdminReportesComponent } from './shared/components/admin-reportes/admin-reportes.component';
 import { LoginComponent } from './shared/components/login/login.component';
 import { RegisterComponent } from './shared/components/register/register.component';
-import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { AgendaVisitaComponent } from './shared/components/agenda-visita/agenda-visita.component';
 import { PublicacionPropiedadComponent } from './shared/components/publicacion-propiedad/publicacion-propiedad.component';
 import { DetalleProductoComponent } from './views/detalle-producto/detalle-producto.component';
+import { UserProfileComponent } from './user/user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,16 +20,12 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'Publicaciones', component: DetalleProductoComponent },
   { path: 'detalle-locacion/:id', component: DetalleLocacionComponent },
-  { path: 'navbar', component: NavbarComponent },
   { path: 'agendar-visita', component: AgendaVisitaComponent },
   { path: 'pagina-principal', component: HomeComponent },
   { path: 'publicar-propiedad', component: PublicacionPropiedadComponent },
-  { path: 'reportes', component: AdminReportesComponent }
-import { UserProfileComponent } from './user/user-profile/user-profile.component';
-
-const routes: Routes = [
+  { path: 'reportes', component: AdminReportesComponent },
   { path: 'perfil', component: UserProfileComponent },
-  { path: '**', redirectTo: 'perfil' }
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
