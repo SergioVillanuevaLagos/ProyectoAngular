@@ -11,6 +11,7 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { AgendaVisitaComponent } from './shared/components/agenda-visita/agenda-visita.component';
 import { PublicacionPropiedadComponent } from './shared/components/publicacion-propiedad/publicacion-propiedad.component';
 import { DetalleProductoComponent } from './views/detalle-producto/detalle-producto.component';
+import { AdminLocacionesComponent } from './shared/components/admin-locaciones/admin-locaciones.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: 'agendar-visita', component: AgendaVisitaComponent },
   { path: 'pagina-principal', component: HomeComponent },
   { path: 'publicar-propiedad', component: PublicacionPropiedadComponent },
-  { path: 'reportes', component: AdminReportesComponent }
+  { path: 'reportes', component: AdminReportesComponent },
+  { path: 'AdminLocaciones', component: AdminLocacionesComponent }
 ];
 
 @NgModule({
