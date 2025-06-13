@@ -1,9 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @Component({
   selector: 'app-mapas',
   templateUrl: './mapas.component.html',
-  styleUrls: ['./mapas.component.css']
+  styleUrls: ['./mapas.component.css'],
+  standalone: true,
+  imports: [CommonModule, GoogleMapsModule]
 })
 export class MapasComponent implements OnInit {
   @Input() lat!: number;

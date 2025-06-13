@@ -4,13 +4,15 @@ import { LocacionesService } from '../../../services/locaciones.service';
 import { Locacion } from '../../../models/locacion.model';
 import { switchMap, catchError, finalize } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { ReportModalComponent } from '../report-modal/report-modal.component'; // <-- IMPORTA EL COMPONENTE
+import { ReportModalComponent } from '../report-modal/report-modal.component';
+import { MapasComponent } from '../mapas/mapas.component'; 
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-detalle-locacion',
   templateUrl: './detalle-locacion.component.html',
   styleUrls: ['./detalle-locacion.component.css'],
-  imports: [ReportModalComponent], 
+  imports: [CommonModule, ReportModalComponent, MapasComponent], 
   standalone: true 
 })
 export class DetalleLocacionComponent implements OnInit {

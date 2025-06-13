@@ -12,7 +12,6 @@ import { LocationFilterSidebarComponent } from './shared/components/location-fil
 import { DetalleLocacionComponent } from './shared/components/detalle-locacion/detalle-locacion.component';
 import { DetalleProductoComponent } from './views/detalle-producto/detalle-producto.component';
 import { NavbarComponent } from './navbar/navbar.component'; 
-import { MapasComponent } from './shared/components/mapas/mapas.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -36,9 +35,7 @@ registerLocaleData(localeEs);
     RegisterComponent,
     ListarLocacionesComponent,
     LocationFilterSidebarComponent,
-    
     DetalleProductoComponent,
-    MapasComponent,
     AgendaVisitaComponent,
     NavbarComponentComponent,
     PublicacionPropiedadComponent,
