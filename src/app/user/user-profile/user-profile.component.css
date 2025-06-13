@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+.profile-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  max-width: 1100px;
+  margin: 2rem auto;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.05rem;
+  color: #1f2d3d;
+}
+
+.profile-left {
+  flex: 1 1 300px;
+  border-right: 1px solid #e0e0e0;
+  padding-right: 2rem;
+}
+
+.profile-right {
+  flex: 2 1 600px;
+}
+
+/* Títulos */
+h2 {
+  margin-top: 0;
+  color: #1a4e8a;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.box h3 {
+  margin-top: 0;
+  color: #0078d4;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+/* Texto informativo */
+.info-item {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #2c3e50;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+}
+
+.info-item i {
+  margin-right: 0.6rem;
+  color: #0078d4;
+  font-size: 1.1rem;
+}
+
+/* Botones */
+.section {
+  margin-top: 2rem;
+}
+
+.section-button {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #eaf1fb;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+  text-align: left;
+  font-weight: 600;
+  color: #1a1a1a;
+  transition: background-color 0.2s ease;
+  font-size: 1rem;
+}
+
+.section-button:hover {
+  background-color: #d4e4f4;
+}
+
+/* Cajas */
+.box {
+  background-color: #f9fbfd;
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  border: 1px solid #dde2e7;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* sombra agregada */
+}
+
+.box:not(:first-child) {
+  margin-top: 2rem;
+  border-top: 1px solid #d0d7de;
+  padding-top: 2rem;
+}
+
+.property-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1rem;
+}
+
+.property-list li {
+  background-color: #eef5fb;
+  border-left: 4px solid #0078d4;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Badges (si los usas) */
+.badges {
+  margin: 1rem 0;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  color: #fff;
+  margin-right: 0.5rem;
+  font-weight: 500;
+}
+
+.badge-blue {
+  background-color: #0078d4;
+}
+
+.badge-green {
+  background-color: #107c10;
+}
+
+
