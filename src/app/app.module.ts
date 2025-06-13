@@ -23,6 +23,7 @@ import { AgendaVisitaComponent } from './shared/components/agenda-visita/agenda-
 import { PublicacionPropiedadComponent } from './shared/components/publicacion-propiedad/publicacion-propiedad.component';
 import { OAuthErrorEvent, OAuthModule } from 'angular-oauth2-oidc';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AdminSidebarComponent } from './shared/components/admin-sidebar/admin-sidebar.component';
 
 registerLocaleData(localeEs);
 
@@ -41,6 +42,7 @@ registerLocaleData(localeEs);
     NavbarComponent,
     PublicacionPropiedadComponent,
     AdminReportesComponent,
+    AdminSidebarComponent,
   ],
   imports: [
     BrowserModule,
