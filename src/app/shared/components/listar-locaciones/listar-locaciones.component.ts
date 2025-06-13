@@ -12,6 +12,14 @@ export class ListarLocacionesComponent implements OnInit {
 
   locaciones: Locacion[] = [];
 
+  houseImages: string[] = [
+    '',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSO5NOj5RT-0PUp2VeRVOuUYaO06fcMMyxxCA&s',
+    'https://img10.naventcdn.com/avisos/resize/9/01/46/64/67/30/1200x1200/1536967289.jpg?isFirstImage=true',
+    'https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=400&q=80',
+    'https://www.toppropiedades.cl/imagenes/blog_7e42facbb1.jpg'
+  ];
+
   constructor(private router: Router) {}
 
   ngOnInit(): void {
@@ -22,12 +30,12 @@ export class ListarLocacionesComponent implements OnInit {
   }
 
   get displayLocaciones(): Locacion[] {
-    // Si llegan locaciones filtradas, usarlas, si no, usar las internas
     return this.filteredLocaciones ?? this.locaciones;
   }
 
-  getImageUrl(imagenId: number): string {
-    return `https://picsum.photos/seed/${imagenId}/200/140`;
+  getImageUrl(index: number): string {
+    // Usa el índice para rotar entre las imágenes
+    return this.houseImages[index % this.houseImages.length];
   }
 
   goToDetalle(id: number) {
