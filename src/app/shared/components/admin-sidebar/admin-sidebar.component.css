@@ -1,0 +1,26 @@
+aside {
+  width: 250px;
+  height: 100vh;
+  background-color: #1f2937;
+  color: white;
+  position: fixed;
+}
+
+aside nav ul {
+  list-style: none;
+  padding: 1rem;
+}
+
+aside nav ul li a {
+  display: block;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  color: white;
+  transition: background-color 0.2s ease;
+}
+
+aside nav ul li a:hover,
+aside nav ul li a.active {
+  background-color: #374151;
+}
