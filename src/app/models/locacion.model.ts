@@ -10,7 +10,6 @@ export interface Locacion {
   TipoLocacion: number;
   Puntaje: number;
   Banos: number;
-
   // Nuevas propiedades para el mapa
   lat: number;
   lng: number;

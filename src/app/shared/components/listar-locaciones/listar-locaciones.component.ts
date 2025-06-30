@@ -34,8 +34,9 @@ export class ListarLocacionesComponent implements OnInit {
   }
 
   getImageUrl(index: number): string {
-    
+
     return this.houseImages[index % this.houseImages.length];
+
   }
 
   goToDetalle(id: number) {
