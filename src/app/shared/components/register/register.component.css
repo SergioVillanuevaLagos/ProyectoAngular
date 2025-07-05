@@ -120,3 +120,30 @@
   padding: 8px 0;    
 }
 
+/* Estilos nuevos para el texto promocional */
+.promo-text {
+  padding: 20px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.promo-text h1 {
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.promo-text p {
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .row.justify-content-center {
+    flex-direction: column;
+  }
+  
+  .promo-text {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+}
+
