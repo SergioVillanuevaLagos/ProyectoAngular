@@ -1,78 +1,47 @@
-.login-block {
-    margin: 30px auto;
-    min-height: 93.6vh
-}
-
-.login-block .auth-box {
-    margin: 80px auto 0;
-    max-width: 750px !important;
+.login-background {
+  background: url('/assets/fondo.png') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card {
-    border-radius: 8px;
-    -webkit-box-shadow: 0 0 5px 0 rgba(43, 43, 43, .1), 0 11px 6px -7px rgba(43, 43, 43, .1);
-    box-shadow: 0 0 5px 0 rgba(43, 43, 43, .1), 0 11px 6px -7px rgba(43, 43, 43, .1);
-    border: none;
-    margin-bottom: 30px;
-    -webkit-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;
-    background-color: #fff;
-    max-width: 600px;      
-    width: 100%;
-    margin: 40px auto;     
-}
-
-.card .card-block {
-    padding: 1.25rem
+  border-radius: 8px;
+  box-shadow: 0 0 5px 0 rgba(43, 43, 43, 0.1), 0 11px 6px -7px rgba(43, 43, 43, 0.1);
+  border: none;
+  background-color: #fff;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  margin: 40px auto;
 }
 
 .btn {
-    border-radius: 2px;
-    text-transform: capitalize;
-    font-size: 15px;
-    padding: 10px 19px;
-    cursor: pointer
-}
-
-.btn-md {
-    padding: 10px 16px;
-    font-size: 15px;
-    line-height: 23px
-}
-
-.btn-google {
-    color: #545454;
-    background-color: #ffffff;
-    box-shadow: 0 1px 3px 1px #ddd;
-    border-radius: 5px;
+  border-radius: 2px;
+  text-transform: capitalize;
+  font-size: 15px;
+  padding: 10px 19px;
+  cursor: pointer;
 }
 
 .or-container {
-    align-items: center;
-    color: #ccc;
-    display: flex;
-    margin: 25px 0;
+  display: flex;
+  align-items: center;
+  color: #ccc;
+  margin: 25px 0;
 }
 
 .line-separator {
-    background-color: #ccc;
-    flex-grow: 5;
-    height: 1px;
+  background-color: #ccc;
+  flex-grow: 5;
+  height: 1px;
 }
 
 .or-label {
-    flex-grow: 1;
-    margin: 0 15px;
-    text-align: center;
-}
-
-.row {
-  display: flex;
-  gap: 10px;
-}
-
-.col {
-  flex: 1;
+  flex-grow: 1;
+  margin: 0 15px;
+  text-align: center;
 }
 
 .password-large {
@@ -80,28 +49,11 @@
   height: 60px;
 }
 
-.btn-google:hover {
-
-    background-color: #C23B33;
-    border-color: #C23B33;
-    color: #ffffff;
-}
-
-.login-background {
-    background: url('/assets/fondo.png') no-repeat center center fixed;
-    background-size: cover;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;      
-    justify-content: center;  
-}
-
 .custom-width {
-  max-width: 600px;     
+  max-width: 340px;
   width: 100%;
   margin: 0 auto;
   overflow-y: auto;
-  
 }
 
 .form-floating > label {
@@ -113,14 +65,11 @@
 }
 
 .btn-register {
-  width: 500px;      
-  margin: 0 auto;    
-  display: block;    
-  font-size: 15px;   
-  padding: 8px 0;    
+  width: 100%;
+  font-size: 15px;
+  padding: 8px 0;
 }
 
-/* Estilos nuevos para el texto promocional */
 .promo-text {
   padding: 20px;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
@@ -136,14 +85,29 @@
   line-height: 1.5;
 }
 
+.logo-rounded {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 @media (max-width: 768px) {
   .row.justify-content-center {
     flex-direction: column;
   }
-  
+
   .promo-text {
     text-align: center;
     margin-bottom: 30px;
   }
 }
+.promo-text h1 {
+  color: #000000; 
+  font-weight: 700;
+  margin-bottom: 20px;
+}
 
+.promo-text p {
+  color: #000000; 
+  font-weight: 400;
+  line-height: 1.5;
+}
