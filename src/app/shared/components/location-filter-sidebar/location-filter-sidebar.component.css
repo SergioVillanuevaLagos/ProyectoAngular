@@ -1,0 +1,65 @@
+.sidebar {
+  background-color: #f9fbfc;
+  border-radius: 12px;
+  padding: 24px 20px;
+  max-width: 320px;
+  box-shadow: 0 10px 30px rgba(41, 128, 185, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  user-select: none;
+  color: #2c3e50;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sidebar h3 {
+  margin: 0 0 16px 0;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: #2980b9;
+  letter-spacing: 0.03em;
+}
+
+.sidebar label {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 6px;
+  display: block;
+  color: #34495e;
+}
+
+.sidebar input[type="text"],
+.sidebar input[type="number"] {
+  width: 100%;
+  padding: 10px 14px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline-offset: 2px;
+  color: #2c3e50;
+  box-sizing: border-box;
+}
+
+.sidebar input[type="text"]:focus,
+.sidebar input[type="number"]:focus {
+  border-color: #2980b9;
+  box-shadow: 0 0 10px rgba(41, 128, 185, 0.3);
+}
+
+.price-inputs {
+  display: flex;
+  gap: 12px;
+}
+
+.price-inputs input {
+  flex: 1;
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 480px) {
+  .sidebar {
+    max-width: 100%;
+    padding: 20px 16px;
+  }
+}

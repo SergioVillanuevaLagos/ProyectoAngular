@@ -1,0 +1,8 @@
+<div class="admin-layout">
+  <div class="sidebar">
+    <app-location-filter-sidebar (filterChanged)="applyFilters($event)"></app-location-filter-sidebar>
+  </div>
+  <div class="card-list-vertical">
+    <app-listar-locaciones [filteredLocaciones]="filteredLocaciones"></app-listar-locaciones>
+  </div>
+</div>

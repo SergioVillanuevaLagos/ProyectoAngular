@@ -1,0 +1,280 @@
+<div class="login-background">
+  <div class="container">
+    <div class="row">
+      <!-- Columna de texto promocional -->
+      <div class="col-md-6 d-flex align-items-center order-md-1">
+        <div class="promo-text">
+          <h1 class="display-5 fw-bold">Vive cerca, vive mejor.</h1>
+          <p class="fs-4">
+            Regístrate en HakoRoom y encuentra el arriendo perfecto para tu vida
+            universitaria.
+          </p>
+        </div>  
+      </div>
+
+      <!-- Columna del formulario -->
+      <div class="col-md-6 order-md-2">
+        <div
+          class="text-center card custom-width"
+          style="
+            max-width: 500px;
+            padding: 16px 8px;
+            min-height: 0;
+            height: 95%;
+            margin-top: 40px;
+          "
+        >
+          <div class="mt-3 mb-3" style="min-height: 0">
+            <img 
+            src="assets/logo.png" 
+            alt="Logo" 
+            width="60" 
+            height="60" 
+            class="mb-3 logo-rounded" />
+            <h1 class="h5 mb-3 fw-normal">Crear tu cuenta</h1>
+            <form
+              [formGroup]="registerForm"
+              (ngSubmit)="onSubmit()"
+              autocomplete="off"
+              style="min-height: 0"
+            >
+              <div
+                class="form-floating mb-2"
+                style="font-size: 0.92rem; min-height: 0"
+              >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="RUN"
+                  formControlName="run"
+                  required
+                  placeholder=""
+                  [ngClass]="{
+                    'is-invalid':
+                      submitted && registerForm.controls['run'].errors
+                  }"
+                />
+                <label for="floatingApellidoPaterno">RUN</label>
+                <div
+                  *ngIf="submitted && registerForm.controls['run'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="registerForm.controls['run'].errors['required']">
+                    RUN es requerido
+                  </div>
+                </div>
+              </div>
+              <div
+                class="form-floating mb-2"
+                style="font-size: 0.92rem; min-height: 0"
+              >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="floatingNombre"
+                  formControlName="nombre"
+                  required
+                  placeholder=""
+                  [ngClass]="{
+                    'is-invalid':
+                      submitted && registerForm.controls['nombre'].errors
+                  }"
+                />
+                <label for="floatingNombre">Nombre</label>
+                <div
+                  *ngIf="submitted && registerForm.controls['nombre'].errors"
+                  class="invalid-feedback"
+                >
+                  <div
+                    *ngIf="registerForm.controls['nombre'].errors['required']"
+                  >
+                    Nombre es requerido
+                  </div>
+                </div>
+              </div>
+              <div
+                class="form-floating mb-2"
+                style="font-size: 0.92rem; min-height: 0"
+              >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="floatingApellidoPaterno"
+                  formControlName="apellidoPaterno"
+                  required
+                  placeholder=""
+                  [ngClass]="{
+                    'is-invalid':
+                      submitted &&
+                      registerForm.controls['apellidoPaterno'].errors
+                  }"
+                />
+                <label for="floatingApellidoPaterno">Apellido Paterno</label>
+                <div
+                  *ngIf="
+                    submitted && registerForm.controls['apellidoPaterno'].errors
+                  "
+                  class="invalid-feedback"
+                >
+                  <div
+                    *ngIf="
+                      registerForm.controls['apellidoPaterno'].errors[
+                        'required'
+                      ]
+                    "
+                  >
+                    Apellido paterno es requerido
+                  </div>
+                </div>
+              </div>
+              <div
+                class="form-floating mb-2"
+                style="font-size: 0.92rem; min-height: 0"
+              >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="floatingApellidoMaterno"
+                  formControlName="apellidoMaterno"
+                  required
+                  placeholder=""
+                  [ngClass]="{
+                    'is-invalid':
+                      submitted &&
+                      registerForm.controls['apellidoMaterno'].errors
+                  }"
+                />
+                <label for="floatingApellidoMaterno">Apellido Materno</label>
+                <div
+                  *ngIf="
+                    submitted && registerForm.controls['apellidoMaterno'].errors
+                  "
+                  class="invalid-feedback"
+                >
+                  <div
+                    *ngIf="
+                      registerForm.controls['apellidoMaterno'].errors[
+                        'required'
+                      ]
+                    "
+                  >
+                    Apellido materno es requerido
+                  </div>
+                </div>
+              </div>
+              <div
+                class="form-floating mb-2"
+                style="font-size: 0.92rem; min-height: 0"
+              >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="floatingInput"
+                  formControlName="email"
+                  placeholder="correo@ejemplo.com"
+                  [ngClass]="{
+                    'is-invalid':
+                      submitted && registerForm.controls['email'].errors
+                  }"
+                />
+                <label for="floatingInput">Correo electrónico</label>
+                <div
+                  *ngIf="submitted && registerForm.controls['email'].errors"
+                  class="invalid-feedback"
+                >
+                  <div
+                    *ngIf="registerForm.controls['email'].errors['required']"
+                  >
+                    Email es requerido
+                  </div>
+                  <div *ngIf="registerForm.controls['email'].errors['email']">
+                    Debe ingresar un email válido
+                  </div>
+                </div>
+              </div>
+              <div
+                class="form-floating mb-2"
+                style="font-size: 0.92rem; min-height: 0"
+              >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="Telefono"
+                  formControlName="telefono"
+                  required
+                  placeholder=""
+                  [ngClass]="{
+                    'is-invalid':
+                      submitted && registerForm.controls['telefono'].errors
+                  }"
+                />
+                <label for="floatingApellidoPaterno">Teléfono</label>
+                <div
+                  *ngIf="submitted && registerForm.controls['telefono'].errors"
+                  class="invalid-feedback"
+                >
+                  <div
+                    *ngIf="registerForm.controls['telefono'].errors['required']"
+                  >
+                    Teléfono es requerido
+                  </div>
+                </div>
+              </div>
+              <div
+                class="form-floating mb-3"
+                style="font-size: 0.92rem; min-height: 0"
+              >
+                <input
+                  type="password"
+                  class="form-control password-large"
+                  id="floatingPassword"
+                  formControlName="password"
+                  required
+                  placeholder="Contraseña"
+                  [ngClass]="{
+                    'is-invalid':
+                      submitted && registerForm.controls['password'].errors
+                  }"
+                />
+                <label for="floatingPassword">Contraseña</label>
+                <div
+                  *ngIf="submitted && registerForm.controls['password'].errors"
+                  class="invalid-feedback"
+                >
+                  <div
+                    *ngIf="registerForm.controls['password'].errors['required']"
+                  >
+                    Contraseña es requerida
+                  </div>
+                  <div
+                    *ngIf="
+                      registerForm.controls['password'].errors['minlength']
+                    "
+                  >
+                    La contraseña debe tener al menos 6 caracteres
+                  </div>
+                </div>
+              </div>
+              <button
+                class="btn btn-primary mb-3 btn-register w-100"
+                style="font-size: 0.95rem; padding: 6px 0; min-height: 0"
+                type="submit"
+              >
+                Registrar
+              </button>
+            </form>
+            <div class="or-container">
+              <div class="line-separator"></div>
+              <div class="or-label">o</div>
+              <div class="line-separator"></div>
+            </div>
+
+            <div>
+              <a routerLink="/login">¿Ya tienes cuenta? Inicia sesión</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

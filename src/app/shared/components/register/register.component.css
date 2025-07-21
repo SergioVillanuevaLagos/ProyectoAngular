@@ -1,0 +1,113 @@
+.login-background {
+  background: url('/assets/fondo.png') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  border-radius: 8px;
+  box-shadow: 0 0 5px 0 rgba(43, 43, 43, 0.1), 0 11px 6px -7px rgba(43, 43, 43, 0.1);
+  border: none;
+  background-color: #fff;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  margin: 40px auto;
+}
+
+.btn {
+  border-radius: 2px;
+  text-transform: capitalize;
+  font-size: 15px;
+  padding: 10px 19px;
+  cursor: pointer;
+}
+
+.or-container {
+  display: flex;
+  align-items: center;
+  color: #ccc;
+  margin: 25px 0;
+}
+
+.line-separator {
+  background-color: #ccc;
+  flex-grow: 5;
+  height: 1px;
+}
+
+.or-label {
+  flex-grow: 1;
+  margin: 0 15px;
+  text-align: center;
+}
+
+.password-large {
+  font-size: 1.3rem;
+  height: 60px;
+}
+
+.custom-width {
+  max-width: 340px;
+  width: 100%;
+  margin: 0 auto;
+  overflow-y: auto;
+}
+
+.form-floating > label {
+  width: 100%;
+  text-align: center;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+.btn-register {
+  width: 100%;
+  font-size: 15px;
+  padding: 8px 0;
+}
+
+.promo-text {
+  padding: 20px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.promo-text h1 {
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.promo-text p {
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.logo-rounded {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .row.justify-content-center {
+    flex-direction: column;
+  }
+
+  .promo-text {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+}
+.promo-text h1 {
+  color: #000000; 
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.promo-text p {
+  color: #000000; 
+  font-weight: 400;
+  line-height: 1.5;
+}

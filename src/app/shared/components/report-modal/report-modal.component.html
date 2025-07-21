@@ -1,0 +1,71 @@
+<div class="modal-backdrop">
+  <div class="modal">
+    <h2>Reportar Locación</h2>
+
+    <!-- Información de la locación -->
+    <div class="locacion-info" *ngIf="locacion">
+      <h3>{{ locacion.Ubicacion }}</h3>
+      <div class="info-grid">
+        <div>
+          <span class="label">Precio:</span>
+          <span>${{ locacion.PrecioMensual | number:'1.0-0' }}</span>
+        </div>
+        <div>
+          <span class="label">Dormitorios:</span>
+          <span>{{ locacion.Habitaciones }}</span>
+        </div>
+        <div>
+          <span class="label">Baños:</span>
+          <span>{{ locacion.Banos }}</span>
+        </div>
+        <div>
+          <span class="label">Área:</span>
+          <span>{{ locacion.Area }} m²</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Campos del reporte -->
+    <div class="report-form">
+      <div class="form-group">
+        <label for="reportType">Tipo de Reporte:</label>
+        <select id="reportType" [(ngModel)]="reportType" class="form-control" required>
+          <option value="">Seleccione un tipo</option>
+          <option value="informacion_erronea">Información errónea</option>
+          <option value="no_disponible">No disponible</option>
+          <option value="problema_imagen">Problema con imágenes</option>
+          <option value="otro">Otro</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="reportReason">Motivo del reporte:</label>
+        <textarea
+          id="reportReason"
+          [(ngModel)]="reportReason"
+          class="form-control"
+          rows="4"
+          placeholder="Describa el motivo de su reporte..."
+          required>
+        </textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="startDate">Fecha del suceso:</label>
+        <input
+          id="startDate"
+          type="date"
+          [(ngModel)]="startDate"
+          class="form-control"
+          required>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-cancel" (click)="close.emit()">Cancelar</button>
+      <button class="btn-submit" (click)="onGenerate()" [disabled]="!isFormValid()">
+        Enviar Reporte
+      </button>
+    </div>
+  </div>
+</div>

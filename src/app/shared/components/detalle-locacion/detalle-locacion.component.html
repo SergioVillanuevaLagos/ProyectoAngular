@@ -1,0 +1,148 @@
+<div
+  class="detalle-locacion-container"
+  *ngIf="locacion && !isLoading; else loadingOrError"
+>
+  <!-- Header con título y breadcrumb -->
+  <div class="property-header">
+    <h1 class="property-title">{{ locacion.Ubicacion }}</h1>
+    <div class="property-breadcrumb">
+      <span>Inicio</span> &gt; <span>Locaciones</span> &gt;
+      <span>{{ locacion.Ubicacion }}</span>
+    </div>
+  </div>
+
+  <!-- Galería de imágenes -->
+  <div class="property-gallery">
+    <img
+      class="main-image"
+      [src]="getHouseImage(0)"
+      alt="Imagen principal de la casa"
+    />
+    <div class="thumbnail-container">
+      <div
+        class="thumbnail"
+        *ngFor="let img of houseImages.slice(1); let i = index"
+      >
+        <img [src]="img" alt="Miniatura {{ i + 1 }}" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Descripción y características principales -->
+  <div class="property-content">
+    <div class="left-column">
+      <h2 class="section-title">Descripción</h2>
+      <p class="property-description">{{ locacion.Descripcion }}</p>
+
+      <div class="amenities-section">
+        <h2 class="section-title">Características</h2>
+        <div class="amenities-grid">
+          <div
+            class="amenity"
+            *ngFor="
+              let amenity of [
+                'Wifi',
+                'Estacionamiento',
+                'Aire acondicionado',
+                'Lavadora'
+              ]
+            "
+          >
+            <span class="amenity-icon">✓</span>
+            <span class="amenity-name">{{ amenity }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-column">
+      <!-- Tarjeta de resumen -->
+      <div class="summary-card">
+        <h3 class="summary-title">Resumen</h3>
+        <div class="price-section">
+          <span class="price"
+            >${{ locacion.PrecioMensual | number : "1.0-0" }}</span
+          >
+          <span class="price-period">por mes</span>
+        </div>
+
+        <div class="quick-facts">
+          <div class="fact">
+            <span class="fact-icon">🛏️</span>
+            <span class="fact-value"
+              >{{ locacion.Habitaciones }} dormitorios</span
+            >
+          </div>
+          <div class="fact">
+            <span class="fact-icon">🛁</span>
+            <span class="fact-value">{{ locacion.Banos }} baños</span>
+          </div>
+          <div class="fact">
+            <span class="fact-icon">📐</span>
+            <span class="fact-value">{{ locacion.Area }} m²</span>
+          </div>
+        </div>
+
+        <button class="contact-button" (click)="irAAgendarVisita()">
+          Contactar
+        </button>
+
+        <button class="favorite-button">❤ Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección de calificación -->
+  <div class="rating-section">
+    <h2 class="section-title">Califica esta propiedad</h2>
+    <div class="stars-container">
+      <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+        <span
+          class="star"
+          [class.filled]="star <= (hoverRating || userRating)"
+          (click)="setUserRating(star)"
+          (mouseenter)="setHoverRating(star)"
+          (mouseleave)="clearHoverRating()"
+          >★</span
+        >
+      </ng-container>
+    </div>
+    <button
+      class="submit-rating"
+      (click)="submitRating()"
+      [disabled]="userRating === 0"
+    >
+      Enviar Calificación
+    </button>
+  </div>
+
+  <!-- Mapa -->
+  <div *ngIf="locacion.lat && locacion.lng" class="map-section">
+    <h2 class="section-title">Ubicación</h2>
+    <app-mapas [lat]="locacion.lat" [lng]="locacion.lng"></app-mapas>
+  </div>
+
+  <!-- Botón de reporte -->
+  <div class="report-section">
+    <button class="report-button" (click)="openReportModal()">
+      <i class="report-icon">⚠</i> Reportar propiedad
+    </button>
+  </div>
+
+  <!-- Modal de reporte -->
+  <app-report-modal
+    *ngIf="showReportModal"
+    [locacion]="locacion"
+    (close)="showReportModal = false"
+    (generate)="sendReport($event)"
+  >
+  </app-report-modal>
+</div>
+
+<!-- Estado de carga o error -->
+<ng-template #loadingOrError>
+  <div *ngIf="isLoading" class="loading-container">
+    <div class="spinner"></div>
+    <p>Cargando información de la locación...</p>
+  </div>
+</ng-template>
