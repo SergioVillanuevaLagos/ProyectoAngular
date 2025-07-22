@@ -9,10 +9,11 @@
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   max-width: 1100px;
-  margin: 2rem auto;
+  margin: 100px auto 2rem auto; /* 60px navbar + 40px extra */
   font-family: 'Poppins', sans-serif;
   font-size: 1.05rem;
   color: #1f2d3d;
+  box-sizing: border-box;
 }
 
 .profile-left {
@@ -89,7 +90,7 @@ h2 {
   border-radius: 10px;
   margin-bottom: 1rem;
   border: 1px solid #dde2e7;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* sombra agregada */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
 .box:not(:first-child) {
@@ -135,6 +136,54 @@ h2 {
 
 .badge-green {
   background-color: #107c10;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .profile-container {
+    margin-top: 80px; /* 60px navbar + 20px extra para móvil */
+    padding: 1.5rem;
+    flex-direction: column;
+  }
+
+  .profile-left {
+    border-right: none;
+    border-bottom: 1px solid #e0e0e0;
+    padding-right: 0;
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .profile-right {
+    padding-left: 0;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .box h3 {
+    font-size: 1.1rem;
+  }
+
+  .info-item {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-container {
+    margin-top: 70px; /* Menos espacio en pantallas muy pequeñas */
+    padding: 1rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  .box {
+    padding: 1rem;
+  }
 }
 
 

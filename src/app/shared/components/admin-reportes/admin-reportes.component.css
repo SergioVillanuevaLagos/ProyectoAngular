@@ -1,11 +1,22 @@
 .admin-reportes-container {
-  margin-left: 250px; /* deja espacio para el sidebar fijo */
+  flex: 1;
   padding: 20px;
   font-family: Arial, sans-serif;
   background-color: #f5f5f5;
-  min-height: 100vh;
+  margin-left: 250px;            /* ← solo si tu sidebar es fixed */
+  margin-top: 60px; /* Espacio para el navbar fijo */
   box-sizing: border-box;
+  transition: margin-left 0.3s ease;
+  min-height: calc(100vh - 60px); /* Altura menos el navbar */
+  overflow-x: auto;
 }
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+
 
 h1 {
   text-align: center;
@@ -98,4 +109,13 @@ button:hover {
 .modal-content button {
   margin: 10px 8px 0 8px;
   width: 100px;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .admin-reportes-container {
+    margin-left: 0;
+    margin-top: 60px; /* Mantener espacio del navbar en móvil */
+    padding: 20px 15px;
+  }
 }
