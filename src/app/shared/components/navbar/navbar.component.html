@@ -14,6 +14,13 @@
     </div>
     <div class="navbar-profile">
       <a routerLink="/login" class="navbar-link">Registrarse</a>
+      <button
+        class="navbar-logout-btn"
+        (click)="cerrarSesion()"
+        *ngIf="usuarioLogueado"
+      >
+        Cerrar sesión
+      </button>
     </div>
   </div>
 </nav>

@@ -42,7 +42,6 @@ registerLocaleData(localeEs);
     LocationFilterSidebarComponent,
     DetalleProductoComponent,
     AgendaVisitaComponent,
-    NavbarComponent,
     PublicacionPropiedadComponent,
     AdminReportesComponent,
     AdminSidebarComponent,
@@ -67,3 +66,4 @@ registerLocaleData(localeEs);
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

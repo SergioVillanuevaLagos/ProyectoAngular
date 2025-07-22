@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../user/user.service';
 import { AutenticacionGoogleService } from '../../../autenticacion-google.service';
+import { AuthService } from '../../../services/auth-service.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private router: Router,
-    private autenticacionGoogleService: AutenticacionGoogleService
+    private autenticacionGoogleService: AutenticacionGoogleService,
+    private authService: AuthService // <--- agrega esto
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -51,18 +53,13 @@ export class LoginComponent {
     this.userService.loginUser(credentials).subscribe({
       next: (res) => {
         if (!res.error) {
-          // ✅ Guardar usuario en localStorage (opcional, puedes usar sessionStorage también)
-          localStorage.setItem('user', JSON.stringify(res.data));
-
-          // ✅ Redirigir a la página principal (puedes cambiar la ruta)
+          this.authService.login(res.data); // <--- usa el servicio
           this.router.navigate(['/']);
         } else {
-          // ❌ Mostrar mensaje de error recibido del backend
           this.loginError = res.message || 'Credenciales incorrectas';
         }
       },
       error: (err) => {
-        // ❌ Error inesperado (ej: backend caído)
         this.loginError = err.error?.message || 'Error del servidor';
       }
     });
