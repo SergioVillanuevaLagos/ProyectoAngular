@@ -37,8 +37,8 @@ mc.connect(err => {
 
 // GET todas las locaciones sin las imágenes
 app.get('/locaciones', (req, res) => {
-    // Seleccionamos solo los campos que no incluyen Imagen
-    mc.query('SELECT IDLocacion, Area, Habitaciones, Ubicacion, Descripcion, PrecioMensual, IDAdmin, TipoLocacion, Puntaje FROM locacion', (err, results) => {
+    // Seleccionamos los campos incluyendo Banos
+    mc.query('SELECT IDLocacion, Area, Habitaciones, Ubicacion, Banos, Descripcion, PrecioMensual, IDAdmin, TipoLocacion, Puntaje FROM locacion', (err, results) => {
         if (err) return res.status(500).json({ error: true, message: err });
         res.json({ error: false, data: results });
     });
@@ -67,6 +67,7 @@ app.post('/locaciones', upload.array('imagenes'), (req, res) => {
             PrecioMensual,
             IDAdmin,
             TipoLocacion,
+            Banos
         } = req.body;
 
         // req.files es un array con las imágenes en memoria
@@ -86,6 +87,7 @@ app.post('/locaciones', upload.array('imagenes'), (req, res) => {
             PrecioMensual,
             IDAdmin,
             TipoLocacion,
+            Banos
         };
 
         mc.query('INSERT INTO locacion SET ?', nuevaLocacion, (err, result) => {

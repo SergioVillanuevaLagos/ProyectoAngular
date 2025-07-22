@@ -35,6 +35,7 @@ export class PublicacionPropiedadComponent implements OnInit {
     this.formularioPropiedad = this.fb.group({
       area: [null, [Validators.required, Validators.min(1)]],
       habitaciones: [null, [Validators.required, Validators.min(0)]],
+      banos: [null, [Validators.required, Validators.min(0)]],
       ubicacion: ['', [Validators.required, Validators.maxLength(100)]],
       descripcion: ['', [Validators.required, Validators.maxLength(500)]],
       precioMensual: [null, [Validators.required, Validators.min(0)]],
@@ -88,6 +89,7 @@ export class PublicacionPropiedadComponent implements OnInit {
     const valores = this.formularioPropiedad.value;
     formData.append('Area', valores.area);
     formData.append('Habitaciones', valores.habitaciones);
+    formData.append('Banos', valores.banos); // <-- NUEVO CAMPO
     formData.append('Ubicacion', valores.ubicacion);
     formData.append('Descripcion', valores.descripcion);
     formData.append('PrecioMensual', valores.precioMensual);
