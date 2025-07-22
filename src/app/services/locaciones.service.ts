@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Locacion } from '../models/locacion.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -70,7 +71,7 @@ export class LocacionesService {
     },
   ];
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   getLocaciones(): Observable<Locacion[]> {
     return of(this.locaciones);
@@ -81,8 +82,7 @@ export class LocacionesService {
     return of(this.locaciones);
   }
 
-  deleteById(id: number): Observable<boolean> {
-    this.locaciones = this.locaciones.filter(l => l.IDLocacion !== id);
-    return of(true);
+  deleteById(id: number): Observable<any> {
+    return this.http.delete(`http://localhost:3000/locaciones/${id}`);
   }
 }

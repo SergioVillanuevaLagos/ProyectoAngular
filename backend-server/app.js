@@ -114,8 +114,11 @@ app.put('/locaciones/:id', (req, res) => {
 // DELETE eliminar locación
 app.delete('/locaciones/:id', (req, res) => {
     const id = req.params.id;
-    mc.query('DELETE FROM locacion WHERE IDLocacion = ?', [id], (err) => {
+    mc.query('DELETE FROM locacion WHERE IDLocacion = ?', [id], (err, result) => {
         if (err) return res.status(500).json({ error: true, message: err });
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: true, message: 'Locación no encontrada' });
+        }
         res.json({ error: false, message: 'Locación eliminada' });
     });
 });

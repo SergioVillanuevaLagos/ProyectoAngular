@@ -72,9 +72,10 @@ export class AdminLocacionesComponent {
 
   eliminarLocacion(id: number): void {
     if (confirm('¿Estás seguro de que deseas eliminar esta locación?')) {
-      this.locacionesService.deleteById(id).subscribe({ // Usa el servicio inyectado
+      this.locacionesService.deleteById(id).subscribe({
         next: () => {
-          this.locaciones = this.locaciones.filter(l => l.IDLocacion !== id);
+          // Vuelve a consultar la lista tras eliminar
+          this.obtenerLocaciones();
           alert('Locación eliminada correctamente');
         },
         error: () => alert('Error al eliminar la locación')
