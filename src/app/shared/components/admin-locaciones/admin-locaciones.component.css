@@ -54,6 +54,18 @@
   padding: 14px 20px;
   vertical-align: middle;
   border: none;
+  word-wrap: break-word; /* Permite que el texto haga salto de línea */
+  max-width: 150px; /* Establece un ancho máximo para las celdas */
+}
+
+/* Específicamente para la columna de ubicación (segunda columna) */
+.tabla-locaciones tbody td:nth-child(2) {
+  max-width: 110px; /* Ancho específico para la columna de ubicación */
+  white-space: normal; /* Permite saltos de línea */
+}
+.tabla-locaciones tbody td:last-child {
+  max-width: 300px; /* Ancho específico para la columna de acciones */
+  white-space: normal; /* Permite saltos de línea */
 }
 
 /* Botones estilizados */
