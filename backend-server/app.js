@@ -35,13 +35,15 @@ mc.connect(err => {
 
 // --------- RUTAS LOCACIONES ---------
 
-// GET todas las locaciones
+// GET todas las locaciones sin las imágenes
 app.get('/locaciones', (req, res) => {
-    mc.query('SELECT * FROM locacion', (err, results) => {
+    // Seleccionamos solo los campos que no incluyen Imagen
+    mc.query('SELECT IDLocacion, Area, Habitaciones, Ubicacion, Descripcion, PrecioMensual, IDAdmin, TipoLocacion, Puntaje FROM locacion', (err, results) => {
         if (err) return res.status(500).json({ error: true, message: err });
         res.json({ error: false, data: results });
     });
 });
+
 
 // GET locación por ID
 app.get('/locaciones/:id', (req, res) => {
@@ -113,6 +115,20 @@ app.delete('/locaciones/:id', (req, res) => {
     mc.query('DELETE FROM locacion WHERE IDLocacion = ?', [id], (err) => {
         if (err) return res.status(500).json({ error: true, message: err });
         res.json({ error: false, message: 'Locación eliminada' });
+    });
+});
+
+// Ruta para obtener imagen por ID de locación
+app.get('/locaciones/:id/imagen', (req, res) => {
+    const id = req.params.id;
+
+    mc.query('SELECT Imagen FROM locacion WHERE IDLocacion = ?', [id], (err, results) => {
+        if (err || results.length === 0 || !results[0].Imagen) {
+            return res.status(404).send('Imagen no encontrada');
+        }
+
+        res.setHeader('Content-Type', 'image/jpeg'); // Ajusta si usas otro formato
+        res.send(results[0].Imagen);
     });
 });
 

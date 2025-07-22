@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Locacion } from '../../../models/locacion.model';
 import { Router } from '@angular/router';
+import { LocacionService } from '../../../services/locacion.service';
+import { Locacion } from '../../../models/locacion.model';
 
 @Component({
   selector: 'app-listar-locaciones',
@@ -9,37 +10,47 @@ import { Router } from '@angular/router';
 })
 export class ListarLocacionesComponent implements OnInit {
   @Input() filteredLocaciones: Locacion[] | null = null;
-
   locaciones: Locacion[] = [];
 
-  houseImages: string[] = [
-    '',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSO5NOj5RT-0PUp2VeRVOuUYaO06fcMMyxxCA&s',
-    'https://img10.naventcdn.com/avisos/resize/9/01/46/64/67/30/1200x1200/1536967289.jpg?isFirstImage=true',
-    'https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=400&q=80',
-    'https://www.toppropiedades.cl/imagenes/blog_7e42facbb1.jpg'
-  ];
-
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private locacionService: LocacionService
+  ) { }
 
   ngOnInit(): void {
     if (!this.filteredLocaciones) {
-
-      this.locaciones = [];
+      console.log('Cargando locaciones...');
+      this.locacionService.getLocaciones().subscribe({
+        next: (res) => {
+          console.log('Respuesta de locaciones:', res);
+          if (!res.error && Array.isArray(res.data)) {
+            this.locaciones = res.data;
+          } else {
+            console.error('La respuesta no contiene un array de locaciones:', res);
+          }
+        },
+        error: (err) => {
+          console.error('Error en la petición de locaciones:', err);
+        }
+      });
     }
   }
+
 
   get displayLocaciones(): Locacion[] {
     return this.filteredLocaciones ?? this.locaciones;
   }
 
-  getImageUrl(index: number): string {
-
-    return this.houseImages[index % this.houseImages.length];
-
+  getImageUrl(id: number): string {
+    return `http://localhost:3000/locaciones/${id}/imagen`;
   }
 
-  goToDetalle(id: number) {
+  goToDetalle(id: number): void {
     this.router.navigate(['/detalle-locacion', id]);
+  }
+
+  onImageError(event: Event): void {
+    const target = event.target as HTMLImageElement;
+    target.src = 'assets/imagen-fallback.jpg'; // Imagen por defecto
   }
 }
