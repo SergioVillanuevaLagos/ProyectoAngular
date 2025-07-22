@@ -26,17 +26,21 @@ export class LoginComponent {
     });
   }
 
+  // Login con Google (si tienes implementada la API de Google)
   login() {
     this.autenticacionGoogleService.login();
   }
 
+  // Navegar al registro
   goToRegister() {
     this.router.navigate(['/register']);
   }
 
+  // Login con usuario/contraseña
   onSubmit() {
     this.submitted = true;
     this.loginError = null;
+
     if (this.loginForm.invalid) return;
 
     const credentials = {
@@ -47,15 +51,19 @@ export class LoginComponent {
     this.userService.loginUser(credentials).subscribe({
       next: (res) => {
         if (!res.error) {
-          // Aquí puedes guardar el usuario en localStorage si quieres
-          // localStorage.setItem('user', JSON.stringify(res.data));
-          this.router.navigate(['/']); // Redirige a la raíz
+          // ✅ Guardar usuario en localStorage (opcional, puedes usar sessionStorage también)
+          localStorage.setItem('user', JSON.stringify(res.data));
+
+          // ✅ Redirigir a la página principal (puedes cambiar la ruta)
+          this.router.navigate(['/']);
         } else {
-          this.loginError = res.message || 'Error de autenticación';
+          // ❌ Mostrar mensaje de error recibido del backend
+          this.loginError = res.message || 'Credenciales incorrectas';
         }
       },
       error: (err) => {
-        this.loginError = err.error?.message || 'Error de servidor';
+        // ❌ Error inesperado (ej: backend caído)
+        this.loginError = err.error?.message || 'Error del servidor';
       }
     });
   }

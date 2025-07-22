@@ -109,7 +109,7 @@ app.get('/usuarios/:id', (req, res) => {
 
 // POST crear usuario
 app.post('/usuarios', (req, res) => {
-    console.log('Datos recibidos para crear usuario:', req.body); 
+    console.log('Datos recibidos para crear usuario:', req.body);
     const nuevoUsuario = {
         Run: req.body.Run,
         Nombre: req.body.Nombre,
@@ -150,21 +150,29 @@ app.delete('/usuarios/:id', (req, res) => {
 // POST login usuario
 app.post('/login', (req, res) => {
     const { Correo, Contrasena } = req.body;
+
+    if (!Correo || !Contrasena) {
+        return res.status(400).json({ error: true, message: 'Faltan Correo o Contrasena' });
+    }
+
     mc.query(
         'SELECT * FROM usuario WHERE Correo = ? AND Contrasena = ?',
         [Correo, Contrasena],
         (err, results) => {
-            if (err) return res.status(500).json({ error: true, message: err });
+            if (err) {
+                console.error('Error en consulta login:', err);
+                return res.status(500).json({ error: true, message: 'Error interno del servidor' });
+            }
             if (results.length === 0) {
                 return res.status(401).json({ error: true, message: 'Credenciales inválidas' });
             }
-            // Opcional: No enviar la contraseña en la respuesta
             const usuario = { ...results[0] };
             delete usuario.Contrasena;
             res.json({ error: false, data: usuario });
         }
     );
 });
+
 
 // Servidor escucha puerto 3000
 app.listen(3000, () => {
