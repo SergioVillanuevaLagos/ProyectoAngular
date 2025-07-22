@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Locacion } from '../../models/locacion.model';
-import { LocacionesService } from '../../services/locaciones.service';
 
 @Component({
   selector: 'app-home',

@@ -1,6 +1,6 @@
-<div class="card-list-vertical">
+<div class="card-list-vertical" *ngIf="displayLocaciones as locs; else sinDatos">
   <div
-    *ngFor="let locacion of displayLocaciones"
+    *ngFor="let locacion of locs"
     class="card-rect"
     (click)="goToDetalle(locacion.IDLocacion)"
     style="cursor: pointer;"
@@ -8,9 +8,10 @@
     <!-- Imagen principal -->
     <div class="card-rect-image-wrapper">
       <img
-        [src]="getImageUrl(locacion.Imagen)"
+        [src]="getImageUrl(locacion.IDLocacion)"
         alt="Imagen de {{ locacion.Ubicacion }}"
         class="card-rect-image"
+        (error)="onImageError($event)"
       />
     </div>
 
@@ -40,4 +41,6 @@
   </div>
 </div>
 
-
+<ng-template #sinDatos>
+  <p style="text-align: center;">No hay locaciones disponibles.</p>
+</ng-template>
