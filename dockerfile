@@ -28,5 +28,5 @@ COPY --from=build /app/dist/proyecto-angular/browser /usr/share/nginx/html
 # Expose port 80
 EXPOSE 80
 
-# Start nginx server
+# Start nginx server aaa
 CMD ["nginx", "-g", "daemon off;"]
