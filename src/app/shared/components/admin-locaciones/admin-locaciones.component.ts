@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+
 import { LocacionesService } from '../../../services/locaciones.service';
 import { Locacion } from '../../../models/locacion.model';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-locaciones',
@@ -14,16 +16,29 @@ export class AdminLocacionesComponent {
   idImagenActual: number | null = null;
   cargandoImagen = false;
 
-  constructor(private router: Router, private locacionService: LocacionesService) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private locacionesService: LocacionesService // Inyecta el servicio aquí
+  ) {}
 
   ngOnInit(): void {
     this.obtenerLocaciones();
   }
 
   obtenerLocaciones(): void {
-    this.locacionService.getAll().subscribe({
-      next: (data) => this.locaciones = data,
-      error: (err) => console.error('Error al obtener locaciones:', err)
+    this.http.get<any>('http://localhost:3000/locaciones').subscribe({
+      next: (res) => {
+        if (!res.error && Array.isArray(res.data)) {
+          this.locaciones = res.data;
+        } else {
+          this.locaciones = [];
+        }
+      },
+      error: (err) => {
+        console.error('Error al obtener locaciones:', err);
+        this.locaciones = [];
+      }
     });
   }
 
@@ -57,7 +72,7 @@ export class AdminLocacionesComponent {
 
   eliminarLocacion(id: number): void {
     if (confirm('¿Estás seguro de que deseas eliminar esta locación?')) {
-      this.locacionService.deleteById(id).subscribe({
+      this.locacionesService.deleteById(id).subscribe({ // Usa el servicio inyectado
         next: () => {
           this.locaciones = this.locaciones.filter(l => l.IDLocacion !== id);
           alert('Locación eliminada correctamente');
