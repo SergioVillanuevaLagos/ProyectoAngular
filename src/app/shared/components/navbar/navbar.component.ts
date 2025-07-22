@@ -1,10 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../../services/auth-service.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
+  usuarioLogueado = false;
 
+  constructor(private authService: AuthService) {}
+
+  ngOnInit() {
+    this.authService.isLoggedIn$.subscribe(
+      (logged: boolean) => this.usuarioLogueado = logged
+    );
+  }
+
+  cerrarSesion() {
+    this.authService.logout();
+    window.location.href = '/login';
+  }
 }
