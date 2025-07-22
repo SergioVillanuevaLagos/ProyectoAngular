@@ -65,7 +65,6 @@ app.post('/locaciones', upload.array('imagenes'), (req, res) => {
             PrecioMensual,
             IDAdmin,
             TipoLocacion,
-            Puntaje
         } = req.body;
 
         // req.files es un array con las imágenes en memoria
@@ -85,7 +84,6 @@ app.post('/locaciones', upload.array('imagenes'), (req, res) => {
             PrecioMensual,
             IDAdmin,
             TipoLocacion,
-            Puntaje
         };
 
         mc.query('INSERT INTO locacion SET ?', nuevaLocacion, (err, result) => {

@@ -1,56 +1,66 @@
+/* CONTENEDOR PRINCIPAL */
 .container {
-  max-width: 500px;
+  max-width: 600px;
   margin: 40px auto;
   padding: 32px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', sans-serif;
 }
 
+/* TITULOS */
 h1 {
   text-align: center;
-  font-size: 2.2rem;
-  margin-bottom: 24px;
+  font-size: 2rem;
+  margin-bottom: 28px;
+  color: #1e293b;
 }
 
 h2 {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   margin-bottom: 16px;
-  color: #222;
+  color: #374151;
 }
 
+/* GRUPOS DE FORMULARIO */
 .form-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .form-group label {
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 6px;
+  color: #1f2937;
 }
 
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+.form-group select {
   padding: 12px;
   border: 1px solid #d1d5db;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 1rem;
-  outline: none;
-  transition: border 0.2s;
-  background: #fafafa;
+  background-color: #f9fafb;
+  transition: border-color 0.2s, background-color 0.2s;
 }
 
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-group select:focus {
   border-color: #1976d2;
+  background-color: #fff;
+  outline: none;
 }
 
 .form-group textarea {
-  min-height: 70px;
+  min-height: 80px;
   resize: vertical;
 }
 
+/* FILAS OPCIONALES */
 .row {
   display: flex;
   gap: 16px;
@@ -64,73 +74,75 @@ h2 {
   width: 100%;
 }
 
+/* BOTÓN */
 .btn-blue {
   background-color: #1976d2;
-  color: #fff;
+  color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   padding: 14px 0;
   font-size: 1.1rem;
-  font-weight: 500;
+  font-weight: 600;
   width: 100%;
   cursor: pointer;
-  transition: background 0.2s;
-  margin-top: 8px;
+  transition: background 0.25s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .btn-blue:hover {
   background-color: #1565c0;
 }
 
+.btn-blue:disabled {
+  background-color: #90caf9;
+  cursor: not-allowed;
+}
+
+/* MENSAJES DE ERROR */
 .error {
   color: #d32f2f;
   font-size: 13px;
-  margin-top: 3px;
+  margin-top: 4px;
 }
 
+/* IMÁGENES */
 .fotos-container {
   display: flex;
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
+  margin-top: 6px;
 }
 
 .foto-cuadro {
   width: 60px;
   height: 60px;
   border: 2px dashed #1976d2;
-  border-radius: 8px;
+  border-radius: 10px;
+  background: #f0f8ff;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  background: #f5faff;
-  position: relative;
-  transition: border 0.2s;
+  transition: all 0.2s ease;
 }
 
 .foto-cuadro:hover {
-  border-color: #1565c0;
+  border-color: #0d47a1;
+  background: #e3f2fd;
 }
 
 .plus-icon {
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: #1976d2;
   user-select: none;
 }
 
+/* MINIATURAS */
 .miniaturas {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   flex-wrap: wrap;
-}
-
-.miniatura {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 6px;
-  border: 1px solid #d1d5db;
 }
 
 .miniatura-wrapper {
@@ -138,26 +150,53 @@ h2 {
   display: inline-block;
 }
 
+.miniatura {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+/* BOTÓN DE ELIMINAR */
 .eliminar-x {
   position: absolute;
-  top: -8px;
-  right: -8px;
-  background: #d32f2f;
-  color: #fff;
+  top: -6px;
+  right: -6px;
+  background: #ef4444;
+  color: white;
   border-radius: 50%;
   width: 20px;
   height: 20px;
+  font-size: 1rem;
+  font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 1.1rem;
-  font-weight: bold;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
-  z-index: 2;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   transition: background 0.2s;
 }
 
 .eliminar-x:hover {
-  background: #b71c1c;
+  background: #b91c1c;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .container {
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .miniatura,
+  .foto-cuadro {
+    width: 50px;
+    height: 50px;
+  }
+
+  .plus-icon {
+    font-size: 1.8rem;
+  }
 }

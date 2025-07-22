@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LocacionService } from '../../../services/locacion.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-publicacion-propiedad',
@@ -8,10 +9,10 @@ import { LocacionService } from '../../../services/locacion.service';
   styleUrls: ['./publicacion-propiedad.component.css']
 })
 export class PublicacionPropiedadComponent implements OnInit {
-  formularioPropiedad: FormGroup;
+  formularioPropiedad!: FormGroup;
   imagenes: File[] = [];
   imagenesPreview: string[] = [];
-  errorImagenes: boolean = false;
+  errorImagenes = false;
 
   tiposLocacion = [
     { id: 1, nombre: 'Departamento' },
@@ -20,7 +21,17 @@ export class PublicacionPropiedadComponent implements OnInit {
     { id: 4, nombre: 'Local Comercial' }
   ];
 
-  constructor(private fb: FormBuilder, private locacionService: LocacionService) {
+  constructor(
+    private fb: FormBuilder,
+    private locacionService: LocacionService,
+    private router: Router
+  ) { }
+
+  ngOnInit(): void {
+    this.initFormulario();
+  }
+
+  private initFormulario(): void {
     this.formularioPropiedad = this.fb.group({
       area: [null, [Validators.required, Validators.min(1)]],
       habitaciones: [null, [Validators.required, Validators.min(0)]],
@@ -31,18 +42,18 @@ export class PublicacionPropiedadComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { }
-
   alCambiarArchivo(evento: any): void {
     const archivos = evento.target.files;
+
     if (archivos && archivos.length > 0) {
       for (let i = 0; i < archivos.length; i++) {
         const archivo = archivos[i];
         this.imagenes.push(archivo);
 
         const lector = new FileReader();
-        lector.onload = (e: any) => {
-          this.imagenesPreview.push(e.target.result);
+        lector.onload = (e: ProgressEvent<FileReader>) => {
+          const resultado = (e.target as FileReader).result as string;
+          this.imagenesPreview.push(resultado);
         };
         lector.readAsDataURL(archivo);
       }
@@ -52,49 +63,55 @@ export class PublicacionPropiedadComponent implements OnInit {
     }
   }
 
-  eliminarImagen(indice: number): void {
-    this.imagenes.splice(indice, 1);
-    this.imagenesPreview.splice(indice, 1);
-    if (this.imagenes.length === 0) {
-      this.errorImagenes = true;
-    }
+
+  eliminarImagen(index: number): void {
+    this.imagenes.splice(index, 1);
+    this.imagenesPreview.splice(index, 1);
+    this.errorImagenes = this.imagenes.length === 0;
   }
 
   alEnviar(): void {
-    if (this.imagenes.length === 0) {
-      this.errorImagenes = true;
-      return;
-    }
-    if (this.formularioPropiedad.invalid) {
+    if (this.formularioPropiedad.invalid || this.imagenes.length === 0) {
       this.formularioPropiedad.markAllAsTouched();
+      this.errorImagenes = this.imagenes.length === 0;
       return;
     }
 
     const formData = new FormData();
 
-    this.imagenes.forEach(img => {
+    // Agregar imágenes
+    this.imagenes.forEach((img) => {
       formData.append('imagenes', img, img.name);
     });
 
-    formData.append('Area', this.formularioPropiedad.value.area.toString());
-    formData.append('Habitaciones', this.formularioPropiedad.value.habitaciones.toString());
-    formData.append('Ubicacion', this.formularioPropiedad.value.ubicacion);
-    formData.append('Descripcion', this.formularioPropiedad.value.descripcion);
-    formData.append('PrecioMensual', this.formularioPropiedad.value.precioMensual.toString());
-    formData.append('TipoLocacion', this.formularioPropiedad.value.tipoLocacion.toString());
-    formData.append('IDAdmin', '1'); // Ajusta según usuario autenticado
+    // Agregar datos del formulario
+    const valores = this.formularioPropiedad.value;
+    formData.append('Area', valores.area);
+    formData.append('Habitaciones', valores.habitaciones);
+    formData.append('Ubicacion', valores.ubicacion);
+    formData.append('Descripcion', valores.descripcion);
+    formData.append('PrecioMensual', valores.precioMensual);
+    formData.append('TipoLocacion', valores.tipoLocacion);
+    formData.append('IDAdmin', '17'); // Ajustar cuando tengas auth
 
     this.locacionService.crearLocacion(formData).subscribe({
       next: (res) => {
-        console.log('Locación creada:', res);
-        this.formularioPropiedad.reset();
-        this.imagenes = [];
-        this.imagenesPreview = [];
-        this.errorImagenes = false;
+        alert('✅ Locación publicada con éxito');
+        this.resetFormulario();
+        this.router.navigate(['/AdminLocaciones']);
       },
       error: (err) => {
         console.error('Error al crear locación:', err);
+        alert(`❌ Error al publicar: ${err.status} - ${err.message}`);
       }
     });
+
+  }
+
+  private resetFormulario(): void {
+    this.formularioPropiedad.reset();
+    this.imagenes = [];
+    this.imagenesPreview = [];
+    this.errorImagenes = false;
   }
 }
