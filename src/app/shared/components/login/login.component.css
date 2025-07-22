@@ -97,8 +97,15 @@ container {
 }
 
 .login-background {
-    background: url('/assets/fondo.png') no-repeat center center fixed;
-    background-size: cover;
-    min-height: 100vh;
+  background: url('/assets/fondo.png') no-repeat center center fixed;
+  background-size: cover;
+  padding-top: 70px; 
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+
+.text-center.card.container {
+  margin-top: 20px; 
 }
 
