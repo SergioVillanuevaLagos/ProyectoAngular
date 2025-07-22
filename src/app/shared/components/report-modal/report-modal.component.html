@@ -25,12 +25,18 @@
       </div>
     </div>
 
-    <!-- Campos del reporte -->
-    <div class="report-form">
+    <!-- Formulario de reporte -->
+    <form class="report-form" (ngSubmit)="onGenerate()">
       <div class="form-group">
         <label for="reportType">Tipo de Reporte:</label>
-        <select id="reportType" [(ngModel)]="reportType" class="form-control" required>
-          <option value="">Seleccione un tipo</option>
+        <select
+          id="reportType"
+          [(ngModel)]="reportType"
+          name="reportType"
+          class="form-control"
+          required
+        >
+          <option value="" disabled selected>Seleccione un tipo</option>
           <option value="informacion_erronea">Información errónea</option>
           <option value="no_disponible">No disponible</option>
           <option value="problema_imagen">Problema con imágenes</option>
@@ -43,11 +49,12 @@
         <textarea
           id="reportReason"
           [(ngModel)]="reportReason"
+          name="reportReason"
           class="form-control"
           rows="4"
           placeholder="Describa el motivo de su reporte..."
-          required>
-        </textarea>
+          required
+        ></textarea>
       </div>
 
       <div class="form-group">
@@ -56,16 +63,22 @@
           id="startDate"
           type="date"
           [(ngModel)]="startDate"
+          name="startDate"
           class="form-control"
-          required>
+          required
+        />
       </div>
-    </div>
 
-    <div class="modal-actions">
-      <button class="btn-cancel" (click)="close.emit()">Cancelar</button>
-      <button class="btn-submit" (click)="onGenerate()" [disabled]="!isFormValid()">
-        Enviar Reporte
-      </button>
-    </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-cancel" (click)="close.emit()">Cancelar</button>
+        <button
+          type="submit"
+          class="btn-submit"
+          [disabled]="!isFormValid()"
+        >
+          Enviar Reporte
+        </button>
+      </div>
+    </form>
   </div>
 </div>

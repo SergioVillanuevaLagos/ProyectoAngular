@@ -1,12 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { Locacion } from '../../../models/locacion.model';
 
 @Component({
   selector: 'app-report-modal',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
   templateUrl: './report-modal.component.html',
   styleUrls: ['./report-modal.component.css']
 })
@@ -39,7 +35,7 @@ export class ReportModalComponent {
 
   isFormValid(): boolean {
     return !!this.reportType &&
-           !!this.reportReason &&
-           !!this.startDate
+      !!this.reportReason &&
+      !!this.startDate;
   }
 }
