@@ -204,6 +204,23 @@ app.post('/login', (req, res) => {
     );
 });
 
+// --------- RUTAS VISITAS ---------
+
+// POST crear visita
+app.post('/visitas', (req, res) => {
+    const nuevaVisita = {
+        FechaVisita: req.body.FechaVisita,
+        HoraVisita: req.body.HoraVisita,
+        Nombre: req.body.Nombre,
+        ApellidoMaterno: req.body.ApellidoMaterno,
+        ApellidoPaterno: req.body.ApellidoPaterno,
+        Correo: req.body.Correo
+    };
+    mc.query('INSERT INTO visita SET ?', nuevaVisita, (err, result) => {
+        if (err) return res.status(500).json({ error: true, message: err });
+        res.status(201).json({ error: false, message: 'Visita creada', id: result.insertId });
+    });
+});
 
 // Servidor escucha puerto 3000
 app.listen(3000, () => {
