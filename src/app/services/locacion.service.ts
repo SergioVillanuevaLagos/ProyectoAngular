@@ -16,7 +16,7 @@ export class LocacionService {
     return this.http.get(`${API}/locaciones/${id}`);
   }
 
-  crearLocacion(data: any): Observable<any> {
+  crearLocacion(data: FormData): Observable<any> {
     return this.http.post(`${API}/locaciones`, data);
   }
 

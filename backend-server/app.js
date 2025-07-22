@@ -5,6 +5,10 @@ const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
+
 const app = express();
 
 app.use(cors());
@@ -50,23 +54,50 @@ app.get('/locaciones/:id', (req, res) => {
 });
 
 // POST crear locación
-app.post('/locaciones', (req, res) => {
-    const nuevaLocacion = {
-        Area: req.body.Area,
-        Habitaciones: req.body.Habitaciones,
-        Imagen: req.body.Imagen,
-        Ubicacion: req.body.Ubicacion,
-        Descripcion: req.body.Descripcion,
-        PrecioMensual: req.body.PrecioMensual,
-        IDAdmin: req.body.IDAdmin,
-        TipoLocacion: req.body.TipoLocacion,
-        Puntaje: req.body.Puntaje
-    };
-    mc.query('INSERT INTO locacion SET ?', nuevaLocacion, (err, result) => {
-        if (err) return res.status(500).json({ error: true, message: err });
-        res.status(201).json({ error: false, message: 'Locación creada', id: result.insertId });
-    });
+app.post('/locaciones', upload.array('imagenes'), (req, res) => {
+    try {
+        // Extraer datos del body
+        const {
+            Area,
+            Habitaciones,
+            Ubicacion,
+            Descripcion,
+            PrecioMensual,
+            IDAdmin,
+            TipoLocacion,
+            Puntaje
+        } = req.body;
+
+        // req.files es un array con las imágenes en memoria
+        // Aquí solo usaremos la primera imagen para el campo Imagen (puedes adaptar para varias)
+        const imagenBuffer = req.files && req.files.length > 0 ? req.files[0].buffer : null;
+
+        if (!imagenBuffer) {
+            return res.status(400).json({ error: true, message: 'Se requiere al menos una imagen' });
+        }
+
+        const nuevaLocacion = {
+            Area,
+            Habitaciones,
+            Imagen: imagenBuffer,
+            Ubicacion,
+            Descripcion,
+            PrecioMensual,
+            IDAdmin,
+            TipoLocacion,
+            Puntaje
+        };
+
+        mc.query('INSERT INTO locacion SET ?', nuevaLocacion, (err, result) => {
+            if (err) return res.status(500).json({ error: true, message: err });
+            res.status(201).json({ error: false, message: 'Locación creada', id: result.insertId });
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: true, message: 'Error interno del servidor' });
+    }
 });
+
 
 // PUT actualizar locación
 app.put('/locaciones/:id', (req, res) => {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LocacionService } from '../../../services/locacion.service';
 
 @Component({
   selector: 'app-publicacion-propiedad',
@@ -12,19 +13,25 @@ export class PublicacionPropiedadComponent implements OnInit {
   imagenesPreview: string[] = [];
   errorImagenes: boolean = false;
 
-  constructor(private fb: FormBuilder) {
+  tiposLocacion = [
+    { id: 1, nombre: 'Departamento' },
+    { id: 2, nombre: 'Casa' },
+    { id: 3, nombre: 'Oficina' },
+    { id: 4, nombre: 'Local Comercial' }
+  ];
+
+  constructor(private fb: FormBuilder, private locacionService: LocacionService) {
     this.formularioPropiedad = this.fb.group({
-      titulo: ['', Validators.required],
-      descripcion: ['', Validators.required],
-      direccion: ['', Validators.required],
-      precio: [null, [Validators.required, Validators.min(0)]],
-      contacto: ['', Validators.required],
-      reglas: ['', Validators.required],
-      servicios: ['', Validators.required]
+      area: [null, [Validators.required, Validators.min(1)]],
+      habitaciones: [null, [Validators.required, Validators.min(0)]],
+      ubicacion: ['', [Validators.required, Validators.maxLength(100)]],
+      descripcion: ['', [Validators.required, Validators.maxLength(500)]],
+      precioMensual: [null, [Validators.required, Validators.min(0)]],
+      tipoLocacion: [null, Validators.required]
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   alCambiarArchivo(evento: any): void {
     const archivos = evento.target.files;
@@ -62,7 +69,32 @@ export class PublicacionPropiedadComponent implements OnInit {
       this.formularioPropiedad.markAllAsTouched();
       return;
     }
-    // Aquí puedes manejar el envío del formulario y las imágenes
-    console.log(this.formularioPropiedad.value, this.imagenes);
+
+    const formData = new FormData();
+
+    this.imagenes.forEach(img => {
+      formData.append('imagenes', img, img.name);
+    });
+
+    formData.append('Area', this.formularioPropiedad.value.area.toString());
+    formData.append('Habitaciones', this.formularioPropiedad.value.habitaciones.toString());
+    formData.append('Ubicacion', this.formularioPropiedad.value.ubicacion);
+    formData.append('Descripcion', this.formularioPropiedad.value.descripcion);
+    formData.append('PrecioMensual', this.formularioPropiedad.value.precioMensual.toString());
+    formData.append('TipoLocacion', this.formularioPropiedad.value.tipoLocacion.toString());
+    formData.append('IDAdmin', '1'); // Ajusta según usuario autenticado
+
+    this.locacionService.crearLocacion(formData).subscribe({
+      next: (res) => {
+        console.log('Locación creada:', res);
+        this.formularioPropiedad.reset();
+        this.imagenes = [];
+        this.imagenesPreview = [];
+        this.errorImagenes = false;
+      },
+      error: (err) => {
+        console.error('Error al crear locación:', err);
+      }
+    });
   }
 }
