@@ -1,41 +1,36 @@
-<div *ngIf="user" class="profile-container" >
-
-
-
+<div *ngIf="user" class="profile-container">
   <!-- Contenido principal -->
   <div class="profile-left">
-    <h2><i class="fas fa-id-card"></i> Información del Usuario</h2>
-
-    <!-- Nombre completo -->
-    <div class="info-item">
-      <i class="fas fa-user"></i>
-      <strong>Nombre completo:</strong> {{ user.nombre }} {{ user.apellidoPaterno }} {{ user.apellidoMaterno }}
-    </div>
+    <h2>Información del Usuario</h2>
 
     <!-- Datos individuales (sin íconos) -->
+
+    <div class="info-item"><strong>RUN:</strong> {{ user.Run }}</div>
+    <div class="info-item"><strong>Nombre:</strong> {{ user.Nombre }}</div>
     <div class="info-item">
-      <strong>Nombre:</strong> {{ user.nombre }}
+      <strong>Apellido Paterno:</strong> {{ user.ApellidoPaterno }}
     </div>
     <div class="info-item">
-      <strong>Apellido paterno:</strong> {{ user.apellidoPaterno }}
-    </div>
-    <div class="info-item">
-      <strong>Apellido materno:</strong> {{ user.apellidoMaterno }}
+      <strong>Apellido Materno:</strong> {{ user.ApellidoMaterno }}
     </div>
     <div class="info-item">
       <i class="fas fa-envelope"></i>
-      <strong>Correo:</strong> {{ user.correo }}
+      <strong>Correo:</strong> {{ user.Correo }}
     </div>
     <div class="info-item">
       <i class="fas fa-user-shield"></i>
-      <strong>Rol:</strong> {{ user.rol }}
+      <strong>Rol:</strong> {{ user.IdRol }}
     </div>
   </div>
 
   <div class="profile-right">
     <!-- Propiedades -->
     <div class="box" *ngIf="user.locaciones?.length > 0">
-      <h3><i class="fas fa-house-user"></i> Propiedades Publicadas ({{ user.locaciones.length }})</h3>
+      <h3>
+        <i class="fas fa-house-user"></i> Propiedades Publicadas ({{
+          user.locaciones.length
+        }})
+      </h3>
       <ul class="property-list">
         <li *ngFor="let loc of user.locaciones">
           <div><strong>Descripción:</strong> {{ loc.descripcion }}</div>
@@ -45,21 +40,26 @@
       </ul>
     </div>
     <div class="box" *ngIf="!user.locaciones?.length">
-      <h3><i class="fas fa-exclamation-circle"></i> Sin propiedades publicadas</h3>
+      <h3>
+        <i class="fas fa-exclamation-circle"></i> Sin propiedades publicadas
+      </h3>
     </div>
-     <div class="box" *ngIf="user.favoritos?.length > 0">
-    <h3><i class="fas fa-heart"></i> Propiedades Favoritas ({{ user.favoritos.length }})</h3>
-    <ul class="property-list">
-      <li *ngFor="let fav of user.favoritos">
-        <div><strong>Descripción:</strong> {{ fav.descripcion }}</div>
-        <div><strong>Ubicación:</strong> {{ fav.ubicacion }}</div>
-        <div><strong>Precio:</strong> ${{ fav.precio }} / mes</div>
-      </li>
-    </ul>
-  </div>
-  <div class="box" *ngIf="!user.favoritos?.length">
-    <h3><i class="fas fa-heart-broken"></i> Sin propiedades favoritas</h3>
+    <div class="box" *ngIf="user.favoritos?.length > 0">
+      <h3>
+        <i class="fas fa-heart"></i> Propiedades Favoritas ({{
+          user.favoritos.length
+        }})
+      </h3>
+      <ul class="property-list">
+        <li *ngFor="let fav of user.favoritos">
+          <div><strong>Descripción:</strong> {{ fav.descripcion }}</div>
+          <div><strong>Ubicación:</strong> {{ fav.ubicacion }}</div>
+          <div><strong>Precio:</strong> ${{ fav.precio }} / mes</div>
+        </li>
+      </ul>
+    </div>
+    <div class="box" *ngIf="!user.favoritos?.length">
+      <h3><i class="fas fa-heart-broken"></i> Sin propiedades favoritas</h3>
+    </div>
   </div>
 </div>
-  </div>
-
