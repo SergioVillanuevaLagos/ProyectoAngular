@@ -33,4 +33,11 @@ export class UsuarioService {
   loginUsuario(credentials: { Correo: string; Contrasena: string }): Observable<any> {
     return this.http.post(`${API}/login`, credentials);
   }
+
+  // crear usuario
+  registerUser(data: any): Observable<any> {
+    return this.crearUsuario(data);
+  }
+
+
 }

@@ -1,7 +1,8 @@
+// src/app/auth/register/register.component.ts
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '../../../user/user.service'; // Importa el servicio
+import { UsuarioService } from '../../../services/usuario.service';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private userService: UserService // Inyecta el servicio
+    private userService: UsuarioService
   ) { }
 
   ngOnInit(): void {
@@ -25,7 +26,6 @@ export class RegisterComponent implements OnInit {
       apellidoPaterno: ['', [Validators.required]],
       apellidoMaterno: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      // Elimina telefono si no lo usas en el backend
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
@@ -37,7 +37,6 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    // Prepara los datos para el backend
     const userData = {
       Run: this.registerForm.value.run,
       Nombre: this.registerForm.value.nombre,
@@ -45,10 +44,9 @@ export class RegisterComponent implements OnInit {
       ApellidoMaterno: this.registerForm.value.apellidoMaterno,
       Correo: this.registerForm.value.email,
       Contrasena: this.registerForm.value.password,
-      IdRol:  1 // Ajusta el rol si es necesario
+      IdRol: 1 // Puedes ajustar el rol si es necesario
     };
 
-    // Llama al servicio para registrar el usuario
     this.userService.registerUser(userData).subscribe({
       next: (response) => {
         console.log('Usuario registrado:', response);
@@ -56,7 +54,6 @@ export class RegisterComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error al registrar usuario:', err);
-        // Muestra mensaje de error si quieres
       }
     });
   }
