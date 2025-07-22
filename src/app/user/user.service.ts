@@ -9,4 +9,9 @@ export class UserService {
   getUserProfile(id: number): Observable<any> {
     return this.http.get(`/api/users/${id}`);
   }
+
+  // Método para registrar usuario
+  registerUser(userData: any): Observable<any> {
+    return this.http.post('http://localhost:3000/usuarios', userData);
+  }
 }

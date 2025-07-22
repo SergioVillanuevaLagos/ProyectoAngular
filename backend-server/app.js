@@ -109,6 +109,7 @@ app.get('/usuarios/:id', (req, res) => {
 
 // POST crear usuario
 app.post('/usuarios', (req, res) => {
+    console.log('Datos recibidos para crear usuario:', req.body); 
     const nuevoUsuario = {
         Run: req.body.Run,
         Nombre: req.body.Nombre,
@@ -119,7 +120,10 @@ app.post('/usuarios', (req, res) => {
         IdRol: req.body.IdRol
     };
     mc.query('INSERT INTO usuario SET ?', nuevoUsuario, (err, result) => {
-        if (err) return res.status(500).json({ error: true, message: err });
+        if (err) {
+            console.error('Error MySQL:', err); // Log del error MySQL
+            return res.status(500).json({ error: true, message: err.sqlMessage || err });
+        }
         res.status(201).json({ error: false, message: 'Usuario creado', id: result.insertId });
     });
 });
