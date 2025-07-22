@@ -14,4 +14,9 @@ export class UserService {
   registerUser(userData: any): Observable<any> {
     return this.http.post('http://localhost:3000/usuarios', userData);
   }
+
+  // Método para login de usuario
+  loginUser(credentials: { Correo: string; Contrasena: string }): Observable<any> {
+    return this.http.post('http://localhost:3000/login', credentials);
+  }
 }

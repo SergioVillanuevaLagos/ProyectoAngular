@@ -5,32 +5,64 @@
     <div class="mt-5 mb-5">
       <img class="mb-4" src="assets/logo.png" alt="" width="72" height="57" />
       <h1 class="h3 mb-3 fw-normal">Iniciar Sesión</h1>
-      <div class="form-floating">
-        <input
-          type="text"
-          class="form-control"
-          id="floatingInput"
-          placeholder="correo@ejemplo.com"
-        />
-        <label for="floatingInput">Correo electrónico</label>
-      </div>
-      <div class="form-floating mt-1">
-        <input
-          type="password"
-          class="form-control"
-          id="floatingPassword"
-          placeholder="Contraseña"
-        />
-        <label for="floatingPassword">Contraseña</label>
-      </div>
-      <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me" /> Recuérdame
-        </label>
-      </div>
-      <button class="w-100 btn btn-lg btn-primary" type="submit">
-        Iniciar sesión
-      </button>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-floating">
+          <input
+            type="email"
+            class="form-control"
+            id="floatingInput"
+            formControlName="email"
+            placeholder="correo@ejemplo.com"
+            [ngClass]="{
+              'is-invalid': submitted && loginForm.controls['email'].errors
+            }"
+          />
+          <label for="floatingInput">Correo electrónico</label>
+          <div
+            *ngIf="submitted && loginForm.controls['email'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="loginForm.controls['email'].errors['required']">
+              Email es requerido
+            </div>
+            <div *ngIf="loginForm.controls['email'].errors['email']">
+              Debe ingresar un email válido
+            </div>
+          </div>
+        </div>
+        <div class="form-floating mt-1">
+          <input
+            type="password"
+            class="form-control"
+            id="floatingPassword"
+            formControlName="password"
+            placeholder="Contraseña"
+            [ngClass]="{
+              'is-invalid': submitted && loginForm.controls['password'].errors
+            }"
+          />
+          <label for="floatingPassword">Contraseña</label>
+          <div
+            *ngIf="submitted && loginForm.controls['password'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="loginForm.controls['password'].errors['required']">
+              Contraseña es requerida
+            </div>
+          </div>
+        </div>
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="remember-me" /> Recuérdame
+          </label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">
+          Iniciar sesión
+        </button>
+        <div *ngIf="loginError" class="alert alert-danger mt-2">
+          {{ loginError }}
+        </div>
+      </form>
       <div class="or-container">
         <div class="line-separator"></div>
         <div class="or-label">o</div>
