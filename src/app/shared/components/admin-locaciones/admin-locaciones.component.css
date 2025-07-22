@@ -1,11 +1,21 @@
 /* Contenedor principal ajustado para el sidebar */
 .tabla-locaciones-container {
-  margin-left: 250px; /* Deja espacio para el sidebar fijo */
+  margin-left: 250px; /* espacio para el sidebar */
+  margin-top: 60px; /* espacio para el navbar fijo */
   padding: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f8f9fa;
-  min-height: 100vh;
+  background-color: #f9fafb;
+  min-height: calc(100vh - 60px);
   box-sizing: border-box;
+}
+
+.main-content {
+  margin-left: 250px; /* Compensación del sidebar fijo */
+  margin-top: 60px; /* Espacio para el navbar fijo */
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #f8f9fa;
+  min-height: calc(100vh - 60px);
+  transition: margin-left 0.3s ease;
 }
 
 /* Tabla con estilo card-like */
@@ -151,10 +161,33 @@ button:nth-child(4):hover { background-color: #c0392b; }
   color: #34495e;
 }
 
-.main-content {
-  margin-left: 250px; /* Compensación del sidebar fijo */
-  padding: 20px;
-  box-sizing: border-box;
-  background-color: #f8f9fa;
-  min-height: 100vh;
+/* CONTENEDOR PRINCIPAL */
+.container {
+  max-width: 600px;
+  margin: 60px auto 40px auto; /* Margen superior para el navbar */
+  margin-left: 270px; /* 250px sidebar + 20px margen */
+  padding: 32px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', sans-serif;
+  transition: margin-left 0.3s ease;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .tabla-locaciones-container,
+  .main-content {
+    margin-left: 0;
+    margin-top: 60px; /* Mantener espacio del navbar en móvil */
+    padding: 20px 15px;
+  }
+
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 80px; /* Espacio para navbar + botón hamburguesa */
+    max-width: calc(100% - 32px);
+    padding: 20px;
+  }
 }

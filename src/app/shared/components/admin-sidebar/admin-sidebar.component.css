@@ -4,11 +4,14 @@ aside {
   background-color: #1f2937;
   color: white;
   position: fixed;
+  top: 60px; /* ← IMPORTANTE: comienza justo después del navbar */
+  left: 0;
+  z-index: 999;
 }
-
 aside nav ul {
   list-style: none;
   padding: 1rem;
+  margin: 0;
 }
 
 aside nav ul li a {
@@ -24,3 +27,5 @@ aside nav ul li a:hover,
 aside nav ul li a.active {
   background-color: #374151;
 }
+
+
