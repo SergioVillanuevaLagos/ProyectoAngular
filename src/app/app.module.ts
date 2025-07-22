@@ -46,16 +46,17 @@ registerLocaleData(localeEs);
     AdminReportesComponent,
     AdminSidebarComponent,
     AdminLocacionesComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    DetalleLocacionComponent,
+    ReportModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule,
+    CommonModule,
     FormsModule,
     GoogleMapsModule,
     ReactiveFormsModule,
-    CommonModule,
     MatDialogModule,
     OAuthModule.forRoot(),
     HttpClientModule

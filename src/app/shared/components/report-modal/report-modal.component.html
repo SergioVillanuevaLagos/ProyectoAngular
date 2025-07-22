@@ -8,7 +8,7 @@
       <div class="info-grid">
         <div>
           <span class="label">Precio:</span>
-          <span>${{ locacion.PrecioMensual | number:'1.0-0' }}</span>
+          <span>${{ locacion.PrecioMensual | number : "1.0-0" }}</span>
         </div>
         <div>
           <span class="label">Dormitorios:</span>
@@ -70,12 +70,10 @@
       </div>
 
       <div class="modal-actions">
-        <button type="button" class="btn-cancel" (click)="close.emit()">Cancelar</button>
-        <button
-          type="submit"
-          class="btn-submit"
-          [disabled]="!isFormValid()"
-        >
+        <button type="button" class="btn-cancel" (click)="close.emit()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-submit" [disabled]="!isFormValid()">
           Enviar Reporte
         </button>
       </div>

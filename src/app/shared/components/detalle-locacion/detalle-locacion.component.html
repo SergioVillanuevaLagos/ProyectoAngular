@@ -4,10 +4,10 @@
 >
   <!-- Header con título y breadcrumb -->
   <div class="property-header">
-    <h1 class="property-title">{{ locacion?.Ubicacion }}</h1>
+    <h1 class="property-title">{{ locacion.Ubicacion }}</h1>
     <div class="property-breadcrumb">
       <span>Inicio</span> &gt; <span>Locaciones</span> &gt;
-      <span>{{ locacion?.Ubicacion }}</span>
+      <span>{{ locacion.Ubicacion }}</span>
     </div>
   </div>
 
@@ -15,14 +15,14 @@
   <div class="property-gallery">
     <img
       class="main-image"
-      [src]="getImageUrl(locacion?.IDLocacion!)"
+      [src]="getImageUrl(locacion.IDLocacion)"
       alt="Imagen principal de la casa"
       (error)="onImageError($event)"
     />
     <div class="thumbnail-container">
       <div class="thumbnail" *ngFor="let _ of [1, 2, 3]">
         <img
-          [src]="getImageUrl(locacion?.IDLocacion!)"
+          [src]="getImageUrl(locacion.IDLocacion)"
           alt="Miniatura de la casa"
           (error)="onImageError($event)"
         />
@@ -34,14 +34,21 @@
   <div class="property-content">
     <div class="left-column">
       <h2 class="section-title">Descripción</h2>
-      <p class="property-description">{{ locacion?.Descripcion }}</p>
+      <p class="property-description">{{ locacion.Descripcion }}</p>
 
       <div class="amenities-section">
         <h2 class="section-title">Características</h2>
         <div class="amenities-grid">
           <div
             class="amenity"
-            *ngFor="let amenity of ['Wifi', 'Estacionamiento', 'Aire acondicionado', 'Lavadora']"
+            *ngFor="
+              let amenity of [
+                'Wifi',
+                'Estacionamiento',
+                'Aire acondicionado',
+                'Lavadora'
+              ]
+            "
           >
             <span class="amenity-icon">✓</span>
             <span class="amenity-name">{{ amenity }}</span>
@@ -55,22 +62,33 @@
       <div class="summary-card">
         <h3 class="summary-title">Resumen</h3>
         <div class="price-section">
-          <span class="price">${{ locacion?.PrecioMensual | number:'1.0-0' }}</span>
+          <span class="price"
+            >${{ locacion.PrecioMensual | number : "1.0-0" }}</span
+          >
           <span class="price-period">por mes</span>
         </div>
 
         <div class="quick-facts">
           <div class="fact">
             <span class="fact-icon">🛏️</span>
-            <span class="fact-value">{{ locacion?.Habitaciones }} dormitorios</span>
+            <span class="fact-value"
+              >{{ locacion.Habitaciones }} dormitorios</span
+            >
           </div>
           <div class="fact">
             <span class="fact-icon">🛁</span>
-            <span class="fact-value">{{ locacion?.Banos ?? 'N/A' }} baños</span>
+            <span class="fact-value"
+              >{{
+                locacion.Banos !== null && locacion.Banos !== undefined
+                  ? locacion.Banos
+                  : "N/A"
+              }}
+              baños</span
+            >
           </div>
           <div class="fact">
             <span class="fact-icon">📐</span>
-            <span class="fact-value">{{ locacion?.Area }} m²</span>
+            <span class="fact-value">{{ locacion.Area }} m²</span>
           </div>
         </div>
 
