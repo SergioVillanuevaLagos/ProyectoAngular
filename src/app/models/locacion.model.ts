@@ -13,8 +13,6 @@ export interface Locacion {
   TotalVotos: number;
   ReglasCasa: string;
   ServiciosIncluidos: string;
-
-  // Nuevas propiedades para el mapa
   lat: number;
   lng: number;
 }
