@@ -236,7 +236,10 @@ app.post('/visitas', (req, res) => {
         Correo: req.body.Correo
     };
     mc.query('INSERT INTO visita SET ?', nuevaVisita, (err, result) => {
-        if (err) return res.status(500).json({ error: true, message: err });
+        if (err) {
+            console.log('Error al guardar visita:', err); // <-- Aquí el log
+            return res.status(500).json({ error: true, message: err });
+        }
         res.status(201).json({ error: false, message: 'Visita creada', id: result.insertId });
     });
 });
