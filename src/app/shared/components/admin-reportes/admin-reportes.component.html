@@ -34,16 +34,16 @@
       </thead>
       <tbody>
         <tr *ngFor="let reporte of reportes">
-          <td>{{ reporte.id }}</td>
-          <td>{{ reporte.nombreUsuario || reporte.usuarioReportante }}</td>
-          <td>{{ reporte.nombrePropiedad || reporte.propiedadReportada }}</td>
-          <td>{{ reporte.nombreDueno || reporte.duenoReportado }}</td>
-          <td>{{ reporte.detalle }}</td>
-          <td>{{ reporte.fechaReporte | date }}</td>
+          <td>{{ reporte.IDReporte }}</td>
+          <td>{{ reporte.NombreUsuarioCompleto || reporte.NombreUsuario || reporte.usuarioReportante }}</td>
+          <td>{{ reporte.NombrePropiedad || reporte.propiedadReportada }}</td>
+          <td>{{ reporte.NombreDueno || reporte.duenoReportado }}</td>
+          <td>{{ reporte.Detalle || reporte.detalle }}</td>
+          <td>{{ reporte.FechaReporte | date }}</td>
           <td>
             <select
-              [value]="estadoSeleccionado[reporte.id]"
-              (change)="cambiarEstado($event, reporte.id)"
+              [value]="estadoSeleccionado[reporte.IDReporte]"
+              (change)="cambiarEstado($event, reporte.IDReporte)"
             >
               <option value="Pendiente">Pendiente</option>
               <option value="Advertencia enviada">Advertencia enviada</option>
@@ -63,12 +63,13 @@
       No hay reportes disponibles.
     </div>
 
+    <!-- Modal confirmación -->
     <div class="modal" *ngIf="mostrarConfirmacion">
       <div class="modal-content">
         <h3>Confirmar cambio de estado</h3>
         <p>
-          ¿Desea cambiar el estado del reporte #{{ reporteSeleccionado?.id }} a
-          "{{ estadoSeleccionado[reporteSeleccionado?.id!] }}"?
+          ¿Desea cambiar el estado del reporte #{{ reporteSeleccionado?.IDReporte }} a
+          "{{ estadoSeleccionado[reporteSeleccionado?.IDReporte!] }}"?
         </p>
         <button (click)="aplicarCambioEstado()">Confirmar</button>
         <button (click)="cerrarConfirmacion()">Cancelar</button>
@@ -76,4 +77,3 @@
     </div>
   </div>
 </div>
-

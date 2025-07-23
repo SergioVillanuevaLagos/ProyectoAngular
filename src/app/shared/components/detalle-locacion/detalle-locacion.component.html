@@ -37,12 +37,11 @@
       <div class="amenities-section">
         <h2 class="section-title">Características</h2>
         <div class="amenities-grid">
-             <div class="amenity" *ngFor="let servicio of serviciosIncluidosArray">
-             <span class="amenity-icon">✓</span>
-             <span class="amenity-name">{{ servicio }}</span>
-            </div>
+          <div class="amenity" *ngFor="let servicio of serviciosIncluidosArray">
+            <span class="amenity-icon">✓</span>
+            <span class="amenity-name">{{ servicio }}</span>
+          </div>
         </div>
-
       </div>
     </div>
 
@@ -52,7 +51,7 @@
         <h3 class="summary-title">Resumen</h3>
         <div class="price-section">
           <span class="price"
-            >${{ locacion.PrecioMensual | number : "1.0-0" }}</span
+            >${{ locacion.PrecioMensual | number : '1.0-0' }}</span
           >
           <span class="price-period">por mes</span>
         </div>
@@ -60,9 +59,7 @@
         <div class="quick-facts">
           <div class="fact">
             <span class="fact-icon">🛏️</span>
-            <span class="fact-value"
-              >{{ locacion.Habitaciones }} dormitorios</span
-            >
+            <span class="fact-value">{{ locacion.Habitaciones }} dormitorios</span>
           </div>
           <div class="fact">
             <span class="fact-icon">🛁</span>
@@ -79,12 +76,11 @@
         </button>
 
         <button class="favorite-button" (click)="toggleFavorito()">
-  <span [ngClass]="{ 'filled-heart': esFavorito }">
-    {{ esFavorito ? '❤️' : '🤍' }}
-  </span>
-  {{ esFavorito ? 'Guardado' : 'Guardar' }}
-</button>
-
+          <span [ngClass]="{ 'filled-heart': esFavorito }">
+            {{ esFavorito ? '❤️' : '🤍' }}
+          </span>
+          {{ esFavorito ? 'Guardado' : 'Guardar' }}
+        </button>
       </div>
     </div>
   </div>
@@ -102,8 +98,6 @@
         </span>
       </p>
     </div>
-
-
 
     <div class="stars-container">
       <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
@@ -129,11 +123,10 @@
   <!-- Mapa -->
   <div class="map-section">
     <h2 class="section-title">Ubicación</h2>
-    <!-- Usar coordenadas por defecto si no existen en la locación -->
-    <app-mapas 
-      [lat]="locacion.lat || -33.45694" 
-      [lng]="locacion.lng || -70.64827">
-    </app-mapas>
+    <app-mapas
+      [lat]="locacion.lat || -33.45694"
+      [lng]="locacion.lng || -70.64827"
+    ></app-mapas>
   </div>
 
   <!-- Botón de reporte -->
@@ -158,5 +151,9 @@
   <div *ngIf="isLoading" class="loading-container">
     <div class="spinner"></div>
     <p>Cargando información de la locación...</p>
+  </div>
+  <div *ngIf="hasError" class="error-container">
+    <p>Error al cargar la locación. Por favor, inténtelo de nuevo.</p>
+    <button (click)="retryLoad()">Reintentar</button>
   </div>
 </ng-template>

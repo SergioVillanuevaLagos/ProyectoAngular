@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ReportesService, Reporte } from '../../../services/reportes.service';
+import { ReporteService } from '../../../services/reportes.service';
 
 export type EstadoReporte = 'Pendiente' | 'Advertencia enviada' | 'Suspendido' | 'Resuelto';
 
@@ -9,14 +9,14 @@ export type EstadoReporte = 'Pendiente' | 'Advertencia enviada' | 'Suspendido' |
   styleUrls: ['./admin-reportes.component.css']
 })
 export class AdminReportesComponent implements OnInit {
-  reportes: Reporte[] = [];
+  reportes: any[] = []; // Lista de reportes
   estadoSeleccionado: { [key: number]: EstadoReporte } = {};
   mostrarConfirmacion = false;
-  reporteSeleccionado?: Reporte;
+  reporteSeleccionado?: any; // Reporte seleccionado para cambiar estado
   errorMessage = '';
   isLoading = false;
 
-  constructor(private reportesService: ReportesService) {}
+  constructor(private reporteService: ReporteService) { }
 
   ngOnInit(): void {
     this.cargarReportes();
@@ -25,13 +25,13 @@ export class AdminReportesComponent implements OnInit {
   cargarReportes(): void {
     this.isLoading = true;
     this.errorMessage = '';
-    
-    this.reportesService.getReportes().subscribe({
-      next: (data) => {
-        this.reportes = data;
-        console.log('Reportes cargados:', this.reportes); // Para debugging
+
+    this.reporteService.obtenerReportes().subscribe({
+      next: (res) => {
+        this.reportes = res.data;
+        console.log('Reportes cargados:', this.reportes);
         this.reportes.forEach(r => {
-          this.estadoSeleccionado[r.id] = r.estado as EstadoReporte;
+          this.estadoSeleccionado[r.IDReporte] = r.Estado as EstadoReporte;
         });
         this.isLoading = false;
       },
@@ -49,7 +49,7 @@ export class AdminReportesComponent implements OnInit {
     this.estadoSeleccionado[id] = valor;
   }
 
-  abrirConfirmacion(reporte: Reporte) {
+  abrirConfirmacion(reporte: any) {
     this.reporteSeleccionado = reporte;
     this.mostrarConfirmacion = true;
   }
@@ -62,13 +62,13 @@ export class AdminReportesComponent implements OnInit {
   aplicarCambioEstado() {
     if (!this.reporteSeleccionado) return;
 
-    const nuevoEstado = this.estadoSeleccionado[this.reporteSeleccionado.id];
-    
-    this.reportesService.actualizarEstado(this.reporteSeleccionado.id, nuevoEstado).subscribe({
+    const nuevoEstado = this.estadoSeleccionado[this.reporteSeleccionado.IDReporte];
+
+    this.reporteService.actualizarEstadoReporte(this.reporteSeleccionado.IDReporte, nuevoEstado).subscribe({
       next: () => {
-        this.reporteSeleccionado!.estado = nuevoEstado;
+        this.reporteSeleccionado!.Estado = nuevoEstado;
         this.cerrarConfirmacion();
-        alert(`Estado del reporte #${this.reporteSeleccionado!.id} actualizado a "${nuevoEstado}"`);
+        alert(`Estado del reporte #${this.reporteSeleccionado!.IDReporte} actualizado a "${nuevoEstado}"`);
       },
       error: (error) => {
         console.error('Error al actualizar el estado:', error);

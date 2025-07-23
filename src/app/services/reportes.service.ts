@@ -1,68 +1,37 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
-export interface Reporte {
-  id: number;
-  usuarioReportante: number;
-  propiedadReportada: number;
-  duenoReportado: number;
-  detalle: string;
-  estado: string;
-  fechaReporte: string;
-  // Campos adicionales para mostrar información amigable en la interfaz
-  nombreUsuario?: string;
-  nombrePropiedad?: string;
-  nombreDueno?: string;
+interface Reporte {
+  IDReporte?: number;
+  IDUsuarioReportante: number;
+  IDPropiedadReportado: number;
+  IDDueñoReportado: number;
+  Detalle: string;
+  Estado?: string;
+  FechaReporte?: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class ReportesService {
-  private apiUrl = 'http://localhost:3000';
+export class ReporteService {
+  private API = 'http://localhost:3000'; // Cambia por tu base URL si es necesario
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getReportes(): Observable<Reporte[]> {
-    // Cambiamos de /reportes a /reporte para que coincida con el backend
-    return this.http.get<{error: boolean, data: any[]}>(`${this.apiUrl}/reporte`)
-      .pipe(
-        map(response => {
-          if (response.error) {
-            throw new Error('Error al obtener reportes');
-          }
-          // Adaptar los nombres de campos del backend al formato del modelo Reporte
-          return response.data.map(item => ({
-            id: item.IDReporte,
-            usuarioReportante: item.IDUsuarioReportante,
-            propiedadReportada: item.IDPropiedadReportado,
-            duenoReportado: item.IDDueñoReportado,
-            detalle: item.Detalle,
-            estado: item.Estado,
-            fechaReporte: item.FechaReporte,
-            // Usar los campos enriched que vienen del JOIN en el backend
-            nombreUsuario: item.NombreUsuarioCompleto || item.NombreUsuario || `Usuario #${item.IDUsuarioReportante}`,
-            nombrePropiedad: item.NombrePropiedad || `Propiedad #${item.IDPropiedadReportado}`,
-            nombreDueno: item.NombreDueno || `Dueño #${item.IDDueñoReportado}`
-          } as Reporte));
-        })
-      );
+  // Crear nuevo reporte
+  crearReporte(reporte: Reporte): Observable<any> {
+    return this.http.post(`${this.API}/reporte`, reporte);
   }
 
-  actualizarEstado(id: number, nuevoEstado: string): Observable<any> {
-    return this.http.put(`${this.apiUrl}/reportes/${id}`, { Estado: nuevoEstado });
+  // Obtener todos los reportes con info completa
+  obtenerReportes(): Observable<any> {
+    return this.http.get(`${this.API}/reporte`);
   }
-  
-  crearReporte(reporteData: {
-    IDUsuarioReportante: number;
-    IDPropiedadReportado: number;
-    IDDueñoReportado: number;
-    Detalle: string;
-    Estado?: string;
-    FechaReporte?: string;
-  }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/reporte`, reporteData);
+
+  // Actualizar estado de un reporte por ID
+  actualizarEstadoReporte(id: number, estado: string): Observable<any> {
+    return this.http.put(`${this.API}/reportes/${id}`, { Estado: estado });
   }
 }

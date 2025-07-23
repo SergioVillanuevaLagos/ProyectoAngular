@@ -5,6 +5,7 @@ import { FavoritosService } from '../../../services/favoritos.service';
 import { Locacion } from '../../../models/locacion.model';
 import { switchMap, catchError, finalize } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { ReporteService } from '../../../services/reportes.service';
 
 @Component({
   selector: 'app-detalle-locacion',
@@ -19,7 +20,7 @@ export class DetalleLocacionComponent implements OnInit {
   userRating = 0;
   hoverRating = 0;
   showReportModal = false;
-  idUsuario = 17; // ← reemplaza con ID real si usas AuthService
+  idUsuario = 17; // Reemplazar por ID real si usas AuthService
   esFavorito = false;
 
   houseImages: string[] = [
@@ -33,7 +34,8 @@ export class DetalleLocacionComponent implements OnInit {
     private route: ActivatedRoute,
     private locacionesService: LocacionService,
     private favoritosService: FavoritosService,
-    private router: Router
+    private router: Router,
+    private reporteService: ReporteService
   ) { }
 
   ngOnInit(): void {
@@ -54,7 +56,7 @@ export class DetalleLocacionComponent implements OnInit {
             this.hasError = true;
             return of(null);
           }),
-          finalize(() => this.isLoading = false)
+          finalize(() => (this.isLoading = false))
         );
       })
     ).subscribe(locacion => {
@@ -62,10 +64,9 @@ export class DetalleLocacionComponent implements OnInit {
         this.locacion = locacion;
 
         // Verificar si está en favoritos
-        this.favoritosService.existeFavorito(this.idUsuario, locacion.IDLocacion)
-          .subscribe(resp => {
-            this.esFavorito = resp.existe;
-          });
+        this.favoritosService.existeFavorito(this.idUsuario, locacion.IDLocacion).subscribe(resp => {
+          this.esFavorito = resp.existe;
+        });
       } else {
         this.hasError = true;
       }
@@ -89,17 +90,28 @@ export class DetalleLocacionComponent implements OnInit {
   openReportModal(): void {
     this.showReportModal = true;
   }
-
   sendReport(reportData: any): void {
-    console.log('Reporte enviado:', {
-      locacionId: this.locacionId,
-      tipoReporte: reportData.reportType,
-      fechaInicio: reportData.startDate,
-      fechaFin: reportData.endDate
-    });
+    if (!this.locacion) return;
 
-    this.showReportModal = false;
-    alert('Reporte enviado exitosamente');
+    const nuevoReporte: Reporte = {
+      IDUsuarioReportante: this.idUsuario,
+      IDPropiedadReportado: this.locacion.IDLocacion,
+      IDDueñoReportado: this.locacion.IDAdmin || 0, // Ajusta si es necesario
+      Detalle: reportData.reason,
+      Estado: 'Pendiente',
+      FechaReporte: reportData.start
+    };
+
+    this.reporteService.crearReporte(nuevoReporte).subscribe({
+      next: (res) => {
+        alert('Reporte enviado exitosamente');
+        this.showReportModal = false;
+      },
+      error: (err) => {
+        console.error('Error al enviar reporte:', err);
+        alert('Error al enviar el reporte, inténtalo de nuevo');
+      }
+    });
   }
 
   getHouseImage(index: number): string {
@@ -125,7 +137,11 @@ export class DetalleLocacionComponent implements OnInit {
           if (res && res.data) {
             this.locacion!.Puntaje = res.data.Puntaje;
             this.locacion!.TotalVotos = res.data.TotalVotos;
-            alert(`Gracias por calificar. Nuevo promedio: ${res.data.Puntaje.toFixed(2)}⭐ basado en ${res.data.TotalVotos} voto(s)`);
+            alert(
+              `Gracias por calificar. Nuevo promedio: ${res.data.Puntaje.toFixed(
+                2
+              )}⭐ basado en ${res.data.TotalVotos} voto(s)`
+            );
           }
         },
         error: (err) => {
@@ -146,6 +162,6 @@ export class DetalleLocacionComponent implements OnInit {
 
   get serviciosIncluidosArray(): string[] {
     if (!this.locacion || !this.locacion.ServiciosIncluidos) return [];
-    return this.locacion.ServiciosIncluidos.split(',').map(s => s.trim());
+    return this.locacion.ServiciosIncluidos.split(',').map((s) => s.trim());
   }
 }
