@@ -37,7 +37,7 @@ export class UserProfileComponent implements OnInit {
         });
       }
 
-      // Carga de favoritos usando el servicio correcto y método correcto
+      // Use the actual user ID from localStorage
       this.favoritosService.getFavoritosByUsuario(this.user.IDUsuario).subscribe({
         next: (favoritos) => {
           this.user.favoritos = favoritos.data || favoritos;

@@ -21,7 +21,7 @@ export class DetalleLocacionComponent implements OnInit {
   userRating = 0;
   hoverRating = 0;
   showReportModal = false;
-  idUsuario = 17;
+  idUsuario: number = 0; // Remove hardcoded value
   esFavorito = false;
 
   houseImages: string[] = [
@@ -40,6 +40,13 @@ export class DetalleLocacionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // Get user ID from localStorage
+    const user = localStorage.getItem('user');
+    if (user) {
+      const userData = JSON.parse(user);
+      this.idUsuario = userData.IDUsuario;
+    }
+    
     this.loadLocacionData();
   }
 

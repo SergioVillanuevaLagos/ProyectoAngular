@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit {
       if (logged) {
         const user = JSON.parse(localStorage.getItem('user')!);
         console.log('Usuario logueado:', user);
-        this.esAdmin = user?.IdRol === 1;
+        this.esAdmin = user?.IdRol === 2;
         console.log('¿Es admin?', this.esAdmin);
       } else {
         this.esAdmin = false;

@@ -5,8 +5,12 @@
 
     <div class="info-item"><strong>RUN:</strong> {{ user.Run }}</div>
     <div class="info-item"><strong>Nombre:</strong> {{ user.Nombre }}</div>
-    <div class="info-item"><strong>Apellido Paterno:</strong> {{ user.ApellidoPaterno }}</div>
-    <div class="info-item"><strong>Apellido Materno:</strong> {{ user.ApellidoMaterno }}</div>
+    <div class="info-item">
+      <strong>Apellido Paterno:</strong> {{ user.ApellidoPaterno }}
+    </div>
+    <div class="info-item">
+      <strong>Apellido Materno:</strong> {{ user.ApellidoMaterno }}
+    </div>
     <div class="info-item"><strong>Correo:</strong> {{ user.Correo }}</div>
     <div class="info-item"><strong>Rol:</strong> {{ user.IdRol }}</div>
   </div>
@@ -15,7 +19,9 @@
     <!-- Tabla de Locaciones Publicadas -->
     <div class="box" *ngIf="user.locaciones?.length > 0">
       <h3>
-        <i class="fas fa-house-user"></i> Propiedades Publicadas ({{ user.locaciones.length }})
+        <i class="fas fa-house-user"></i> Propiedades Publicadas ({{
+          user.locaciones.length
+        }})
       </h3>
 
       <div class="table-responsive">
@@ -36,7 +42,11 @@
             <tr *ngFor="let loc of user.locaciones">
               <td>
                 <img
-                  [src]="'http://localhost:3000/locaciones/' + loc.IDLocacion + '/imagen'"
+                  [src]="
+                    'http://localhost:3000/locaciones/' +
+                    loc.IDLocacion +
+                    '/imagen'
+                  "
                   alt="Imagen de la propiedad"
                   class="locacion-img"
                 />
@@ -47,7 +57,7 @@
               <td>{{ loc.Banos }}</td>
               <td>{{ loc.Area }}</td>
               <td>${{ loc.PrecioMensual }}</td>
-              <td>{{ loc.Puntaje | number: '1.1-2' }}</td>
+              <td>{{ loc.Puntaje | number : "1.1-2" }}</td>
             </tr>
           </tbody>
         </table>
@@ -55,13 +65,17 @@
     </div>
 
     <div class="box" *ngIf="!user.locaciones?.length">
-      <h3><i class="fas fa-exclamation-circle"></i> Sin propiedades publicadas</h3>
+      <h3>
+        <i class="fas fa-exclamation-circle"></i> Sin propiedades publicadas
+      </h3>
     </div>
 
     <!-- Tabla de Favoritos -->
     <div class="box" *ngIf="user.favoritos?.length > 0">
       <h3>
-        <i class="fas fa-heart"></i> Propiedades Favoritas ({{ user.favoritos.length }})
+        <i class="fas fa-heart"></i> Propiedades Favoritas ({{
+          user.favoritos.length
+        }})
       </h3>
 
       <div class="table-responsive">
@@ -80,7 +94,9 @@
               <td>{{ fav.Descripcion }}</td>
               <td>${{ fav.PrecioMensual }}</td>
               <td>
-                <button (click)="verDetalle(fav.IdLocacion)">Ver detalle</button>
+                <button (click)="verDetalle(fav.IdLocacion)">
+                  Ver detalle
+                </button>
               </td>
             </tr>
           </tbody>
