@@ -11,11 +11,16 @@ export class AgendaVisitaComponent {
   form: FormGroup;
 
   constructor(private fb: FormBuilder, private agendarVisitaService: AgendarVisitaService) {
+    const user = localStorage.getItem('user');
+    let userData: any = {};
+    if (user) {
+      userData = JSON.parse(user);
+    }
     this.form = this.fb.group({
-      nombre: ['', Validators.required],
-      apellidoPaterno: ['', Validators.required],
-      apellidoMaterno: ['', Validators.required],
-      correo: ['', [Validators.required, Validators.email]],
+      nombre: [userData.Nombre || '', Validators.required],
+      apellidoPaterno: [userData.ApellidoPaterno || '', Validators.required],
+      apellidoMaterno: [userData.ApellidoMaterno || '', Validators.required],
+      correo: [userData.Correo || '', [Validators.required, Validators.email]],
       fecha: ['', Validators.required],
       hora: ['', Validators.required]
     });
