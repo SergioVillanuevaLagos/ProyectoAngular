@@ -3,6 +3,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { LocacionService } from '../../../services/locacion.service';
 import { FavoritosService } from '../../../services/favoritos.service';
 import { Locacion } from '../../../models/locacion.model';
+import { Reporte } from '../../../models/Reporte';
 import { switchMap, catchError, finalize } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ReporteService } from '../../../services/reportes.service';
