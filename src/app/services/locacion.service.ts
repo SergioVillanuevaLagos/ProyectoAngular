@@ -32,4 +32,7 @@ export class LocacionService {
   eliminarLocacion(id: number): Observable<any> {
     return this.http.delete(`${API}/locaciones/${id}`);
   }
+  calificarLocacion(id: number, Puntaje: number): Observable<any> {
+    return this.http.post(`${API}/locaciones/${id}/calificar`, { Puntaje }); // minúscula
+  }
 }
