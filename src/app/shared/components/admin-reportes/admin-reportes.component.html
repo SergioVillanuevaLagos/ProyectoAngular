@@ -12,8 +12,7 @@
           <th>Usuario Reportante</th>
           <th>Propiedad Reportada</th>
           <th>Dueño Reportado</th>
-          <th>Detalle</th>
-          <th>Motivo</th>
+          <th>Detalles/Motivos</th>
           <th>Fecha</th>
           <th>Estado</th>
           <th>Acciones</th>
@@ -23,6 +22,8 @@
         <tr *ngFor="let reporte of reportes">
           <td>{{ reporte.id }}</td>
           <td>{{ reporte.usuario }}</td>
+          <td>{{ reporte.propiedad || 'N/A' }}</td>
+          <td>{{ reporte.propietario || 'N/A' }}</td>
           <td>{{ reporte.motivo }}</td>
           <td>{{ reporte.fecha }}</td>
           <td>
@@ -55,4 +56,5 @@
       </div>
     </div>
   </div>
+</div>
 
