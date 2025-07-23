@@ -103,13 +103,21 @@ export class DetalleLocacionComponent implements OnInit {
 
   submitRating(): void {
     if (this.userRating > 0 && this.locacion) {
-      console.log(`Calificación ${this.userRating} para locación ${this.locacion.IDLocacion}`);
-
-      if (this.locacion) {
-        this.locacion.Puntaje = this.userRating;
-      }
-
+      this.locacion.Puntaje = this.userRating;
       alert(`Gracias por calificar con ${this.userRating} estrella(s)`);
+      this.locacionesService.calificarLocacion(this.locacion.IDLocacion, this.userRating).subscribe({
+        next: (res) => {
+          if (res && res.data) {
+            this.locacion!.Puntaje = res.data.Puntaje;
+            this.locacion!.TotalVotos = res.data.TotalVotos;
+            alert(`Gracias por calificar. Nuevo promedio: ${res.data.Puntaje.toFixed(2)}⭐ basado en ${res.data.TotalVotos} voto(s)`);
+          }
+        },
+        error: (err) => {
+          console.error('Error al enviar calificación:', err);
+          alert('Error al enviar la calificación.');
+        }
+      });
     }
   }
 

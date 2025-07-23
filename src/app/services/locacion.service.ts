@@ -35,4 +35,5 @@ export class LocacionService {
   calificarLocacion(id: number, Puntaje: number): Observable<any> {
     return this.http.post(`${API}/locaciones/${id}/calificar`, { Puntaje }); // minúscula
   }
+  
 }

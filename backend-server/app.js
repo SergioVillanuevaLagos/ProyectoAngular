@@ -140,6 +140,8 @@ app.get('/locaciones/:id/imagen', (req, res) => {
         res.send(results[0].Imagen);
     });
 });
+
+
 app.post('/locaciones/:id/calificar', (req, res) => {
     const id = req.params.id;
     const { Puntaje } = req.body; // nota que en frontend envías {Puntaje: valor}
@@ -187,54 +189,7 @@ app.post('/locaciones/:id/calificar', (req, res) => {
         );
     });
 });
-app.post('/locaciones/:id/calificar', (req, res) => {
-    const id = req.params.id;
-    const { Puntaje } = req.body; // nota que en frontend envías {Puntaje: valor}
 
-    if (!Puntaje || isNaN(Puntaje)) {
-        return res.status(400).json({ error: 'Puntaje inválido' });
-    }
-
-    // Primero obtener la locación actual y sus valores de Puntaje y TotalVotos
-    mc.query('SELECT Puntaje, TotalVotos FROM locacion WHERE IDLocacion = ?', [id], (err, results) => {
-        if (err) {
-            console.error('Error al obtener locación para calificar:', err);
-            return res.status(500).json({ error: 'Error interno del servidor' });
-        }
-        if (results.length === 0) {
-            return res.status(404).json({ error: 'Locación no encontrada' });
-        }
-
-        const locacion = results[0];
-        const totalVotos = locacion.TotalVotos || 0;
-        const puntajeActual = locacion.Puntaje || 0;
-
-        // Calcular nuevo promedio
-        const nuevoTotalVotos = totalVotos + 1;
-        const nuevoPromedio = (puntajeActual * totalVotos + Puntaje) / nuevoTotalVotos;
-
-        // Actualizar la base de datos con el nuevo puntaje y total de votos
-        mc.query(
-            'UPDATE locacion SET Puntaje = ?, TotalVotos = ? WHERE IDLocacion = ?',
-            [nuevoPromedio, nuevoTotalVotos, id],
-            (err2) => {
-                if (err2) {
-                    console.error('Error al actualizar la calificación:', err2);
-                    return res.status(500).json({ error: 'Error interno del servidor' });
-                }
-
-                // Responder con el nuevo promedio y total de votos
-                res.json({
-                    data: {
-                        Puntaje: nuevoPromedio,
-                        TotalVotos: nuevoTotalVotos
-                    }
-                });
-            }
-        );
-    });
-});
-4
 
 // --------- RUTAS USUARIOS ---------
 

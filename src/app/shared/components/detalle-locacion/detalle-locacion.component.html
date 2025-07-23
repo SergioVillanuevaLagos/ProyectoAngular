@@ -95,6 +95,19 @@
   <!-- Sección de calificación -->
   <div class="rating-section">
     <h2 class="section-title">Califica esta propiedad</h2>
+
+    <div class="current-rating">
+      <p>
+        Promedio actual:
+        <strong>{{ locacion.Puntaje | number: '1.1-2' }}</strong> ⭐
+        <span *ngIf="locacion.TotalVotos">
+          ({{ locacion.TotalVotos }} voto{{ locacion.TotalVotos === 1 ? '' : 's' }})
+        </span>
+      </p>
+    </div>
+
+
+
     <div class="stars-container">
       <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
         <span
