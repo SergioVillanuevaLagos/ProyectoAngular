@@ -5,21 +5,24 @@
   <!-- Contenido principal -->
   <div class="admin-reportes-container">
     <h1>Gestión de Reportes</h1>
-    
+
     <!-- Indicador de carga -->
     <div *ngIf="isLoading" class="loading-spinner">
       <div class="spinner"></div>
       <p>Cargando reportes...</p>
     </div>
-    
+
     <!-- Mensaje de error -->
     <div *ngIf="errorMessage" class="error-message">
       {{ errorMessage }}
       <button (click)="cargarReportes()">Reintentar</button>
     </div>
-    
+
     <!-- Tabla de reportes -->
-    <table class="reportes-table" *ngIf="!isLoading && !errorMessage && reportes.length > 0">
+    <table
+      class="reportes-table"
+      *ngIf="!isLoading && !errorMessage && reportes.length > 0"
+    >
       <thead>
         <tr>
           <th>ID</th>
@@ -35,7 +38,13 @@
       <tbody>
         <tr *ngFor="let reporte of reportes">
           <td>{{ reporte.IDReporte }}</td>
-          <td>{{ reporte.NombreUsuarioCompleto || reporte.NombreUsuario || reporte.usuarioReportante }}</td>
+          <td>
+            {{
+              reporte.NombreUsuarioCompleto ||
+                reporte.NombreUsuario ||
+                reporte.usuarioReportante
+            }}
+          </td>
           <td>{{ reporte.NombrePropiedad || reporte.propiedadReportada }}</td>
           <td>{{ reporte.NombreDueno || reporte.duenoReportado }}</td>
           <td>{{ reporte.Detalle || reporte.detalle }}</td>
@@ -57,9 +66,12 @@
         </tr>
       </tbody>
     </table>
-    
+
     <!-- Mensaje cuando no hay reportes -->
-    <div *ngIf="!isLoading && !errorMessage && reportes.length === 0" class="no-data">
+    <div
+      *ngIf="!isLoading && !errorMessage && reportes.length === 0"
+      class="no-data"
+    >
       No hay reportes disponibles.
     </div>
 
@@ -68,8 +80,10 @@
       <div class="modal-content">
         <h3>Confirmar cambio de estado</h3>
         <p>
-          ¿Desea cambiar el estado del reporte #{{ reporteSeleccionado?.IDReporte }} a
-          "{{ estadoSeleccionado[reporteSeleccionado?.IDReporte!] }}"?
+          ¿Desea cambiar el estado del reporte #{{
+            reporteSeleccionado?.IDReporte
+          }}
+          a "{{ estadoSeleccionado[reporteSeleccionado?.IDReporte!] }}"?
         </p>
         <button (click)="aplicarCambioEstado()">Confirmar</button>
         <button (click)="cerrarConfirmacion()">Cancelar</button>

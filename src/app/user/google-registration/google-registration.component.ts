@@ -66,9 +66,12 @@ export class GoogleRegistrationComponent implements OnInit {
       next: (response) => {
         localStorage.removeItem('googleUserData');
         
+        // Buscar al usuario recién creado y loguearlo automáticamente
         this.userService.findUserByEmail(userData.Correo).subscribe({
           next: (user) => {
             if (!user.error && user.data) {
+              // Guardar usuario en localStorage
+              localStorage.setItem('user', JSON.stringify(user.data));
               this.authService.login(user.data);
               this.router.navigate(['/']);
             } else {

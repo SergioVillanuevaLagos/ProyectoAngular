@@ -17,7 +17,7 @@ export class UserProfileComponent implements OnInit {
     private userService: UserService,
     private locacionService: LocacionService,
     private router: Router,
-    private favoritosServie: FavoritosService
+    private favoritosService: FavoritosService
   ) { }
 
   ngOnInit(): void {
@@ -38,7 +38,7 @@ export class UserProfileComponent implements OnInit {
       }
 
       // Carga de favoritos usando el servicio correcto y método correcto
-      this.favoritosServie.getFavoritosByUsuario(this.user.IDUsuario).subscribe({
+      this.favoritosService.getFavoritosByUsuario(this.user.IDUsuario).subscribe({
         next: (favoritos) => {
           this.user.favoritos = favoritos.data || favoritos;
         },
