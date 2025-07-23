@@ -9,10 +9,10 @@ export type EstadoReporte = 'Pendiente' | 'Advertencia enviada' | 'Suspendido' |
   styleUrls: ['./admin-reportes.component.css']
 })
 export class AdminReportesComponent implements OnInit {
-  reportes: any[] = []; // Lista de reportes
+  reportes: any[] = []; 
   estadoSeleccionado: { [key: number]: EstadoReporte } = {};
   mostrarConfirmacion = false;
-  reporteSeleccionado?: any; // Reporte seleccionado para cambiar estado
+  reporteSeleccionado?: any; 
   errorMessage = '';
   isLoading = false;
 

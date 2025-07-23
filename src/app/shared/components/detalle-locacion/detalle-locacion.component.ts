@@ -20,7 +20,7 @@ export class DetalleLocacionComponent implements OnInit {
   userRating = 0;
   hoverRating = 0;
   showReportModal = false;
-  idUsuario = 17; // Reemplazar por ID real si usas AuthService
+  idUsuario = 17;
   esFavorito = false;
 
   houseImages: string[] = [
@@ -96,7 +96,7 @@ export class DetalleLocacionComponent implements OnInit {
     const nuevoReporte: Reporte = {
       IDUsuarioReportante: this.idUsuario,
       IDPropiedadReportado: this.locacion.IDLocacion,
-      IDDueñoReportado: this.locacion.IDAdmin || 0, // Ajusta si es necesario
+      IDDueñoReportado: this.locacion.IDAdmin || 0, 
       Detalle: reportData.reason,
       Estado: 'Pendiente',
       FechaReporte: reportData.start

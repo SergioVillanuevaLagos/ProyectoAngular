@@ -13,9 +13,8 @@ export class LocacionesService {
 
   constructor(private http: HttpClient) {}
 
-  /**
-   * Obtiene todas las locaciones desde la API
-   */
+  
+  //  Obtiene todas las locaciones desde la API
   getLocaciones(): Observable<Locacion[]> {
     return this.http.get<{error: boolean, data: Locacion[]}>(`${this.apiUrl}/locaciones`)
       .pipe(
@@ -28,9 +27,9 @@ export class LocacionesService {
       );
   }
 
-  /**
-   * Obtiene una locación por su ID
-   */
+  
+   //Obtiene una locación por su ID
+   
   getLocacionById(id: number): Observable<Locacion> {
     return this.http.get<{error: boolean, data: Locacion}>(`${this.apiUrl}/locaciones/${id}`)
       .pipe(
@@ -43,30 +42,30 @@ export class LocacionesService {
       );
   }
 
-  /**
-   * Crea una nueva locación
-   */
+  
+   //Crea una nueva locación
+   
   crearLocacion(formData: FormData): Observable<any> {
     return this.http.post(`${this.apiUrl}/locaciones`, formData);
   }
 
-  /**
-   * Actualiza una locación existente
-   */
+  
+  //Actualiza una locación existente
+  
   actualizarLocacion(id: number, locacion: Partial<Locacion>): Observable<any> {
     return this.http.put(`${this.apiUrl}/locaciones/${id}`, locacion);
   }
 
-  /**
-   * Elimina una locación por su ID
-   */
+  
+   // Elimina una locación por su ID
+  
   eliminarLocacion(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/locaciones/${id}`);
   }
   
-  /**
-   * Califica una locación
-   */
+  
+  // Califica una locación
+   
   calificarLocacion(id: number, puntaje: number): Observable<any> {
     return this.http.post(`${this.apiUrl}/locaciones/${id}/calificar`, { Puntaje: puntaje });
   }

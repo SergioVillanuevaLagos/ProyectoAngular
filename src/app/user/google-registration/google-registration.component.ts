@@ -39,7 +39,7 @@ export class GoogleRegistrationComponent implements OnInit {
       apellidoPaterno: [this.googleData.ApellidoPaterno, [Validators.required]],
       apellidoMaterno: ['', [Validators.required]],
       email: [{ value: this.googleData.Correo, disabled: true }, [Validators.required, Validators.email]],
-      idRol: [1] // Rol por defecto
+      idRol: [1] 
     });
   }
 
@@ -57,18 +57,15 @@ export class GoogleRegistrationComponent implements OnInit {
       Nombre: this.registrationForm.value.nombre,
       ApellidoPaterno: this.registrationForm.value.apellidoPaterno,
       ApellidoMaterno: this.registrationForm.value.apellidoMaterno,
-      Correo: this.googleData.Correo, // Usar el email de Google
+      Correo: this.googleData.Correo, 
       IdRol: this.registrationForm.value.idRol,
-      // Para usuarios de Google, podemos generar una contraseña aleatoria
       Contrasena: Math.random().toString(36).substring(2, 15)
     };
 
     this.userService.registerUser(userData).subscribe({
       next: (response) => {
-        // Limpiar datos temporales
         localStorage.removeItem('googleUserData');
         
-        // Hacer login con el nuevo usuario
         this.userService.findUserByEmail(userData.Correo).subscribe({
           next: (user) => {
             if (!user.error && user.data) {

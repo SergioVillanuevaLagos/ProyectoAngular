@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 70px; /* Espacio para el navbar fijo (60px altura + 10px extra) */
+  padding-top: 70px; 
   box-sizing: border-box;
 }
 

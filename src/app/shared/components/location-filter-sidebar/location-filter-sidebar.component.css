@@ -56,7 +56,6 @@
   flex: 1;
 }
 
-/* Responsive para pantallas pequeñas */
 @media (max-width: 480px) {
   .sidebar {
     max-width: 100%;

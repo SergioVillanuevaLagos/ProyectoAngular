@@ -16,7 +16,7 @@ interface Reporte {
   providedIn: 'root'
 })
 export class ReporteService {
-  private API = 'http://localhost:3000'; // Cambia por tu base URL si es necesario
+  private API = 'http://localhost:3000'; 
 
   constructor(private http: HttpClient) { }
 

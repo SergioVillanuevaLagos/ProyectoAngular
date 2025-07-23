@@ -36,7 +36,6 @@ export class NavbarComponent implements OnInit {
   cerrarSesion() {
     // Cierra sesión en Google y en la aplicación
     this.googleAuthService.logout();
-    // No es necesario llamar a authService.logout() ya que googleAuthService.logout() ya lo hace
     this.router.navigate(['/login']);
   }
 }

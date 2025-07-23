@@ -22,7 +22,7 @@ export class UserService {
     return this.http.post(`${this.baseUrl}/login`, credentials);
   }
   
-  // Método para buscar usuario por correo (para autenticación con Google)
+  // Método para buscar usuario por correo 
   findUserByEmail(email: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/usuarios/email/${email}`);
   }

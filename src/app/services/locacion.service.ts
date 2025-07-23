@@ -17,7 +17,7 @@ export class LocacionService {
 
   getLocacionById(id: number): Observable<Locacion> {
     return this.http.get<{ error: boolean; data: Locacion }>(`${API}/locaciones/${id}`).pipe(
-      map(response => response.data) // 👈 extraer solo el objeto locacion
+      map(response => response.data)
     );
   }
 
@@ -33,12 +33,12 @@ export class LocacionService {
     return this.http.delete(`${API}/locaciones/${id}`);
   }
   calificarLocacion(id: number, Puntaje: number): Observable<any> {
-    return this.http.post(`${API}/locaciones/${id}/calificar`, { Puntaje }); // minúscula
+    return this.http.post(`${API}/locaciones/${id}/calificar`, { Puntaje }); 
   }
   
   getLocacionesByAdmin(idAdmin: number): Observable<Locacion[]> {
     return this.http.get<{ error: boolean; data: Locacion[] }>(`${API}/locaciones/admin/${idAdmin}`)
-      .pipe(map(response => response.data)); // Extrae solo el array de locaciones
+      .pipe(map(response => response.data)); 
   }
   
 }

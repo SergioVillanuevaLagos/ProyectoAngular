@@ -4,34 +4,34 @@ aside {
   background-color: #1f2937;
   color: white;
   position: fixed;
-  top: 60px; /* ← IMPORTANTE: comienza justo después del navbar */
+  top: 60px; 
   left: 0;
   z-index: 999;
 }
 
 aside nav ul {
   list-style: none;
-  padding: 0.6rem; /* Reducido de 0.8rem para dar más espacio al texto */
+  padding: 0.6rem;
   margin: 0;
 }
 
 aside nav ul li {
-  margin-bottom: 8px; /* Espacio entre elementos del menú */
+  margin-bottom: 8px; 
 }
 
 aside nav ul li a {
   display: block;
-  padding: 10px 10px; /* Cambiado de 0.5rem 1rem a valores más precisos */
+  padding: 10px 10px; 
   border-radius: 4px;
   text-decoration: none;
   color: white;
   transition: background-color 0.2s ease;
   
   /* Propiedades de texto */
-  font-size: 0.9rem; /* Tamaño de texto ajustable */
-  font-weight: 500; /* Peso de fuente medio */
-  line-height: 1.2; /* Altura de línea para mejor legibilidad */
-  text-align: left; /* Alineación a la izquierda */
+  font-size: 0.9rem; 
+  font-weight: 500; 
+  line-height: 1.2; 
+  text-align: left;
   
   /* Manejo del texto largo */
   overflow-wrap: break-word;
@@ -47,10 +47,10 @@ aside nav ul li a {
 /* Estilo para los iconos en el menú */
 aside nav ul li a i, 
 aside nav ul li a span:first-child {
-  margin-right: 8px; /* Espacio entre icono y texto */
-  font-size: 1.1rem; /* Tamaño del icono */
-  min-width: 20px; /* Ancho mínimo para alinear textos */
-  text-align: center; /* Centrado de iconos */
+  margin-right: 8px; 
+  font-size: 1.1rem;
+  min-width: 20px;
+  text-align: center; 
 }
 
 aside nav ul li a:hover,

@@ -18,7 +18,7 @@ export class AdminLocacionesComponent {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private locacionesService: LocacionService // Inyecta el servicio aquí
+    private locacionesService: LocacionService 
   ) {}
 
   ngOnInit(): void {
@@ -73,7 +73,6 @@ export class AdminLocacionesComponent {
     if (confirm('¿Estás seguro de que deseas eliminar esta locación?')) {
       this.locacionesService.eliminarLocacion(id).subscribe({
         next: () => {
-          // Vuelve a consultar la lista tras eliminar
           this.obtenerLocaciones();
           alert('Locación eliminada correctamente');
         },

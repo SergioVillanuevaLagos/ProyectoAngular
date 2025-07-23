@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
       ApellidoMaterno: this.registerForm.value.apellidoMaterno,
       Correo: this.registerForm.value.email,
       Contrasena: this.registerForm.value.password,
-      IdRol: 1 // Puedes ajustar el rol si es necesario
+      IdRol: 1 
     };
 
     this.userService.registerUser(userData).subscribe({

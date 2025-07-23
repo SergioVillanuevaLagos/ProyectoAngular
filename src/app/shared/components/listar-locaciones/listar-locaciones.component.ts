@@ -51,6 +51,6 @@ export class ListarLocacionesComponent implements OnInit {
 
   onImageError(event: Event): void {
     const target = event.target as HTMLImageElement;
-    target.src = 'assets/imagen-fallback.jpg'; // Imagen por defecto
+    target.src = 'assets/imagen-fallback.jpg'; 
   }
 }

@@ -1,32 +1,32 @@
-# Build stage
+# Etapa de construcción
 FROM node:20-alpine AS build
 
-# Set working directory
+# Establece el directorio de trabajo
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copia package.json y package-lock.json
 COPY package*.json ./
 
-# Install dependencies
+# Instala las dependencias
 RUN npm install
 
-# Copy the rest of the application
+# Copia el resto de la aplicación
 COPY . .
 
-# Build the application
+# Construye la aplicación
 RUN npm run build
 
-# Production stage
+# Etapa de producción
 FROM nginx:alpine
 
-# Copy the build output to replace the default nginx contents
+# Copia el resultado de la construcción para reemplazar el contenido por defecto de nginx
 COPY --from=build /app/dist/proyecto-angular/browser /usr/share/nginx/html
 
-# Copy custom nginx config if needed
+# Copia configuración personalizada de nginx si es necesario
 # COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Expose port 80
+# Expone el puerto 80
 EXPOSE 80
 
-# Start nginx server aaa
+# Inicia el servidor nginx
 CMD ["nginx", "-g", "daemon off;"]

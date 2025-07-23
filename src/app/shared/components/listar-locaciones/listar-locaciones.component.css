@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  padding-top: 80px; /* 60px navbar + 20px extra */
+  padding-top: 80px; 
   padding-left: 20px;
   padding-right: 20px;
   padding-bottom: 20px;
@@ -25,15 +25,15 @@
 
 /* Imagen */
 .card-rect-image-wrapper {
-  display: flex; /* ✅ Para centrar imagen vertical y horizontalmente */
-  align-items: center; /* ✅ Centrado vertical */
-  justify-content: center; /* ✅ Centrado horizontal (opcional) */
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
   flex-shrink: 0;
   width: 200px;
   height: 140px;
   overflow: hidden;
   background-color: #f0f0f0;
-  border-radius: 12px 0 0 12px; /* Bordes redondeados solo en la izquierda */
+  border-radius: 12px 0 0 12px; 
 }
 
 .card-rect-image {

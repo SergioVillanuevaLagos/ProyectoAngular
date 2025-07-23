@@ -2,7 +2,6 @@
   class="detalle-locacion-container"
   *ngIf="locacion && !isLoading; else loadingOrError"
 >
-  <!-- Header con título y breadcrumb -->
   <div class="property-header">
     <h1 class="property-title">{{ locacion.Ubicacion }}</h1>
     <div class="property-breadcrumb">
@@ -46,7 +45,6 @@
     </div>
 
     <div class="right-column">
-      <!-- Tarjeta de resumen -->
       <div class="summary-card">
         <h3 class="summary-title">Resumen</h3>
         <div class="price-section">

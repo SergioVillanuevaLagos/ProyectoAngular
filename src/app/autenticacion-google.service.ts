@@ -45,7 +45,7 @@ export class AutenticacionGoogleService {
 
   logout() {
     this.oAuthService.logOut();
-    this.authService.logout(); // Clear local authentication state
+    this.authService.logout(); 
   }
 
   getProfile() {
@@ -53,7 +53,6 @@ export class AutenticacionGoogleService {
   }
 
   processGoogleLogin(userInfo: any) {
-    // Buscar si el usuario existe por correo electrónico
     this.userService.findUserByEmail(userInfo.email).subscribe({
       next: (response) => {
         if (response.data) {

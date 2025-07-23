@@ -1,7 +1,7 @@
 /* Contenedor principal ajustado para el sidebar */
 .tabla-locaciones-container {
-  margin-left: 200px; /* espacio para el sidebar */
-  margin-top: 60px; /* espacio para el navbar fijo */
+  margin-left: 200px;
+  margin-top: 60px; 
   padding: 20px;
   background-color: #f9fafb;
   min-height: calc(100vh - 60px);
@@ -9,8 +9,8 @@
 }
 
 .main-content {
-  margin-left: 200px; /* Compensación del sidebar fijo */
-  margin-top: 60px; /* Espacio para el navbar fijo */
+  margin-left: 200px; 
+  margin-top: 60px; 
   padding: 20px;
   box-sizing: border-box;
   background-color: #f8f9fa;
@@ -18,7 +18,7 @@
   transition: margin-left 0.3s ease;
 }
 
-/* Tabla con estilo card-like */
+
 .tabla-locaciones {
   width: 100%;
   border-collapse: separate;
@@ -55,54 +55,49 @@
   padding: 14px 20px;
   vertical-align: middle;
   border: none;
-  word-wrap: break-word; /* Permite que el texto haga salto de línea */
-  max-width: 150px; /* Establece un ancho máximo para las celdas */
+  word-wrap: break-word; 
+  max-width: 150px; 
   font-size: 0.85rem;
 }
 
-/* Específicamente para la columna de ubicación (segunda columna) */
 .tabla-locaciones tbody td:nth-child(2) {
-  max-width: 110px; /* Ancho específico para la columna de ubicación */
-  white-space: normal; /* Permite saltos de línea */
+  max-width: 110px; 
+  white-space: normal;
 }
 
-/* Específicamente para la columna de acciones (última columna) */
 .tabla-locaciones tbody td:last-child {
-  max-width: 340px; /* Aumentado de 300px a 340px para dar más espacio */
-  white-space: normal; /* Permite saltos de línea */
-  padding: 10px 15px; /* Reducido el padding para ajustar mejor los botones */
+  max-width: 340px; 
+  white-space: normal; 
+  padding: 10px 15px; 
 }
 
-/* Específicamente para la columna de Servicios Incluidos (octava columna) */
 .tabla-locaciones tbody td:nth-child(8) {
-  max-width: 70px; /* Ancho específico para la columna de servicios incluidos */
-  white-space: normal; /* Permite saltos de línea */
-  word-wrap: break-word; /* Asegura que las palabras largas se corten */
-  font-size: 0.8rem; /* Texto ligeramente más pequeño para esta columna */
+  max-width: 70px; 
+  white-space: normal; 
+  word-wrap: break-word; 
+  font-size: 0.8rem; 
 }
 
-/* Botones estilizados más compactos para la tabla */
 button {
   cursor: pointer;
   border: none;
-  border-radius: 4px; /* Reducido de 6px a 4px */
-  padding: 6px 8px; /* Reducido de 8px 12px a 6px 8px */
-  margin-right: 4px; /* Reducido de 6px a 4px */
-  margin-bottom: 3px; /* Reducido de 4px a 3px */
-  font-weight: 500; /* Reducido de 600 a 500 */
-  font-size: 0.75rem; /* Reducido de 0.85rem a 0.75rem */
+  border-radius: 4px;
+  padding: 6px 8px; 
+  margin-right: 4px; 
+  margin-bottom: 3px; 
+  font-weight: 500; 
+  font-size: 0.75rem; 
   transition: background-color 0.2s ease;
   color: #fff;
-  box-shadow: 0 1px 3px rgba(44, 62, 80, 0.12); /* Sombra más sutil */
+  box-shadow: 0 1px 3px rgba(44, 62, 80, 0.12);
   width: auto;
-  min-width: 45px; /* Reducido de 60px a 45px */
+  min-width: 45px; 
   height: auto;
   display: inline-block;
-  text-align: center; /* Centrar texto */
-  white-space: nowrap; /* Evitar que el texto salte de línea */
+  text-align: center; 
+  white-space: nowrap;
 }
 
-/* Colores para cada acción */
 button:nth-child(1) { background-color: #3498db; }
 button:nth-child(1):hover { background-color: #2980b9; }
 
@@ -115,7 +110,6 @@ button:nth-child(3):hover { background-color: #d68910; }
 button:nth-child(4) { background-color: #e74c3c; }
 button:nth-child(4):hover { background-color: #c0392b; }
 
-/* Modal elegante */
 .modal {
   position: fixed;
   top: 0;
@@ -164,7 +158,6 @@ button:nth-child(4):hover { background-color: #c0392b; }
   background-color: #2c3e50;
 }
 
-/* Spinner centrado y moderno */
 .spinner-container {
   display: flex;
   flex-direction: column;
@@ -193,11 +186,10 @@ button:nth-child(4):hover { background-color: #c0392b; }
   color: #34495e;
 }
 
-/* CONTENEDOR PRINCIPAL */
 .container {
   max-width: 600px;
-  margin: 60px auto 40px auto; /* Margen superior para el navbar */
-  margin-left: 270px; /* 250px sidebar + 20px margen */
+  margin: 60px auto 40px auto; 
+  margin-left: 270px; 
   padding: 32px;
   background: #ffffff;
   border-radius: 16px;
@@ -206,19 +198,18 @@ button:nth-child(4):hover { background-color: #c0392b; }
   transition: margin-left 0.3s ease;
 }
 
-/* Responsive para móviles */
 @media (max-width: 768px) {
   .tabla-locaciones-container,
   .main-content {
     margin-left: 0;
-    margin-top: 60px; /* Mantener espacio del navbar en móvil */
+    margin-top: 60px; 
     padding: 20px 15px;
   }
 
   .container {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 80px; /* Espacio para navbar + botón hamburguesa */
+    margin-top: 80px;
     max-width: calc(100% - 32px);
     padding: 20px;
   }

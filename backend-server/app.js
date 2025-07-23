@@ -58,7 +58,6 @@ app.get('/locaciones/:id', (req, res) => {
 // POST crear locación
 app.post('/locaciones', upload.array('imagenes'), (req, res) => {
     try {
-        // Extraer datos del body
         const {
             Area,
             Habitaciones,
@@ -72,7 +71,6 @@ app.post('/locaciones', upload.array('imagenes'), (req, res) => {
             ServiciosIncluidos    
         } = req.body;
 
-        // req.files es un array con las imágenes en memoria
         const imagenBuffer = req.files && req.files.length > 0 ? req.files[0].buffer : null;
 
         if (!imagenBuffer) {
@@ -144,7 +142,7 @@ app.get('/locaciones/:id/imagen', (req, res) => {
 // actualizar calificaciones 
 app.post('/locaciones/:id/calificar', (req, res) => {
     const id = req.params.id;
-    const { Puntaje } = req.body; // nota que en frontend envías {Puntaje: valor}
+    const { Puntaje } = req.body; 
 
     if (!Puntaje || isNaN(Puntaje)) {
         return res.status(400).json({ error: 'Puntaje inválido' });
