@@ -22,8 +22,8 @@ FROM nginx:alpine
 # Copia el resultado de la construcción para reemplazar el contenido por defecto de nginx
 COPY --from=build /app/dist/proyecto-angular/browser /usr/share/nginx/html
 
-# Copia configuración personalizada de nginx si es necesario
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copia configuración personalizada de nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expone el puerto 80
 EXPOSE 80
