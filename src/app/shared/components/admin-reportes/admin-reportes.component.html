@@ -9,7 +9,10 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th>Usuario</th>
+          <th>Usuario Reportante</th>
+          <th>Propiedad Reportada</th>
+          <th>Dueño Reportado</th>
+          <th>Detalle</th>
           <th>Motivo</th>
           <th>Fecha</th>
           <th>Estado</th>
@@ -44,8 +47,7 @@
       <div class="modal-content">
         <h3>Confirmar cambio de estado</h3>
         <p>
-          ¿Desea cambiar el estado del reporte
-          #{{ reporteSeleccionado?.id }} a
+          ¿Desea cambiar el estado del reporte #{{ reporteSeleccionado?.id }} a
           "{{ estadoSeleccionado[reporteSeleccionado?.id!] }}"?
         </p>
         <button (click)="aplicarCambioEstado()">Confirmar</button>
@@ -53,4 +55,4 @@
       </div>
     </div>
   </div>
-</div>
+

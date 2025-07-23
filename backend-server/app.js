@@ -241,6 +241,16 @@ app.post('/visitas', (req, res) => {
     });
 });
 
+// --------- RUTAS REPORTES ---------
+
+// GET todos los reportes
+app.get('/reportes', (req, res) => {
+    mc.query('SELECT * FROM reporte', (err, results) => {
+        if (err) return res.status(500).json({ error: true, message: err });
+        res.json({ error: false, data: results });
+    });
+});
+
 // Servidor escucha puerto 3000
 app.listen(3000, () => {
     console.log('Servidor corriendo en puerto 3000');
