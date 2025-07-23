@@ -141,7 +141,7 @@ app.get('/locaciones/:id/imagen', (req, res) => {
     });
 });
 
-
+// actualizar calificaciones 
 app.post('/locaciones/:id/calificar', (req, res) => {
     const id = req.params.id;
     const { Puntaje } = req.body; // nota que en frontend envías {Puntaje: valor}
@@ -188,6 +188,20 @@ app.post('/locaciones/:id/calificar', (req, res) => {
             }
         );
     });
+});
+
+// GET locaciones por IDAdmin
+app.get('/locaciones/admin/:idAdmin', (req, res) => {
+    const idAdmin = req.params.idAdmin;
+
+    mc.query(
+        'SELECT IDLocacion, Area, Habitaciones, Ubicacion, Banos, Descripcion, PrecioMensual, IDAdmin, TipoLocacion, Puntaje, ReglasCasa, ServiciosIncluidos FROM locacion WHERE IDAdmin = ?',
+        [idAdmin],
+        (err, results) => {
+            if (err) return res.status(500).json({ error: true, message: err });
+            res.json({ error: false, data: results });
+        }
+    );
 });
 
 

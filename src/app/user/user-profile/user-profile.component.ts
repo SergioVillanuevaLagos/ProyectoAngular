@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
+import { LocacionService } from '../../services/locacion.service'; // Asegúrate de importar correctamente
+import { Locacion } from '../../models/locacion.model'; // Asegúrate de tener este modelo o usa tipo any
 
 @Component({
   selector: 'app-user-profile',
@@ -10,17 +12,27 @@ export class UserProfileComponent implements OnInit {
   user: any;
   sidebarOpen = true;
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private locacionService: LocacionService
+  ) { }
 
   ngOnInit(): void {
     const user = localStorage.getItem('user');
     if (user) {
       this.user = JSON.parse(user);
-      // Si quieres obtener datos actualizados desde el backend:
-      // this.userService.getUserProfile(this.user.IDUsuario).subscribe({
-      //   next: data => this.user = data,
-      //   error: err => console.error('Error al cargar perfil', err)
-      // });
+
+      if (this.user?.IdRol === 1) {
+        this.locacionService.getLocacionesByAdmin(this.user.IDUsuario).subscribe({
+          next: (locaciones) => {
+            this.user.locaciones = locaciones; // ← se las inyectas al objeto `user`
+          },
+          error: (err) => {
+            console.error('Error al obtener locaciones del admin:', err);
+            this.user.locaciones = [];
+          }
+        });
+      }
     }
   }
 }

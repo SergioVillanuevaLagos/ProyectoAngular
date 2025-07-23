@@ -7,9 +7,10 @@
   background-color: #fff;
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   max-width: 1100px;
-  margin: 100px auto 2rem auto; /* 60px navbar + 40px extra */
+  margin: 100px auto 2rem auto;
+  /* 60px navbar + 40px extra */
   font-family: 'Poppins', sans-serif;
   font-size: 1.05rem;
   color: #1f2d3d;
@@ -40,6 +41,9 @@ h2 {
   color: #0078d4;
   font-size: 1.3rem;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 /* Texto informativo */
@@ -90,7 +94,7 @@ h2 {
   border-radius: 10px;
   margin-bottom: 1rem;
   border: 1px solid #dde2e7;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 .box:not(:first-child) {
@@ -138,10 +142,60 @@ h2 {
   background-color: #107c10;
 }
 
+/* Tabla de locaciones */
+.table-responsive {
+  overflow-x: auto;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.locaciones-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  color: #1f2d3d;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  table-layout: fixed;
+}
+
+.locaciones-table th,
+.locaciones-table td {
+  border: 1px solid #e0e0e0;
+  padding: 10px 8px;
+  text-align: center;
+  vertical-align: middle;
+  word-wrap: break-word;
+}
+
+.locaciones-table th {
+  background-color: #f1f6fb;
+  font-weight: 600;
+  color: #0078d4;
+}
+
+.locaciones-table tr:nth-child(even) {
+  background-color: #f9fbfd;
+}
+
+.locaciones-table th:nth-child(1),
+.locaciones-table td:nth-child(1) {
+  width: 110px;
+}
+
+.locacion-img {
+  width: 100px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 6px;
+  display: block;
+  margin: 0 auto;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .profile-container {
-    margin-top: 80px; /* 60px navbar + 20px extra para móvil */
+    margin-top: 80px;
     padding: 1.5rem;
     flex-direction: column;
   }
@@ -169,11 +223,20 @@ h2 {
   .info-item {
     font-size: 0.9rem;
   }
+
+  .locaciones-table {
+    font-size: 0.85rem;
+  }
+
+  .locacion-img {
+    width: 80px;
+    height: 60px;
+  }
 }
 
 @media (max-width: 480px) {
   .profile-container {
-    margin-top: 70px; /* Menos espacio en pantallas muy pequeñas */
+    margin-top: 70px;
     padding: 1rem;
   }
 
@@ -185,5 +248,3 @@ h2 {
     padding: 1rem;
   }
 }
-
-

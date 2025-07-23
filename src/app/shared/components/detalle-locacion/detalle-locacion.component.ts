@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { LocacionesService } from '../../../services/locaciones.service';
+import { LocacionService } from '../../../services/locacion.service';
 import { Locacion } from '../../../models/locacion.model';
 import { switchMap, catchError, finalize } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -12,16 +12,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./detalle-locacion.component.css']
 })
 export class DetalleLocacionComponent implements OnInit {
-  isLoading: boolean = true;
-  hasError: boolean = false;
-  locacionId: number = 0;
+  isLoading = true;
+  hasError = false;
+  locacionId = 0;
   locacion: Locacion | null = null;
-  userRating: number = 0;
-  hoverRating: number = 0;
-  showReportModal: boolean = false;
-  reportType: string = '';
-  startDate: string = '';
-  endDate: string = '';
+  userRating = 0;
+  hoverRating = 0;
+  showReportModal = false;
+  reportType = '';
+  startDate = '';
+  endDate = '';
 
   houseImages: string[] = [
     'https://img10.naventcdn.com/avisos/resize/9/01/46/64/67/30/1200x1200/1536967291.jpg',
@@ -32,9 +32,9 @@ export class DetalleLocacionComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private locacionesService: LocacionesService,
+    private locacionesService: LocacionService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadLocacionData();
@@ -46,28 +46,27 @@ export class DetalleLocacionComponent implements OnInit {
 
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
-        this.locacionId = Number(params.get('id'));
-        return this.locacionesService.getLocaciones().pipe(
+        const id = Number(params.get('id'));
+        this.locacionId = id;
+
+        // Aquí pedimos solo la locación específica
+        return this.locacionesService.getLocacionById(id).pipe(
           catchError(() => {
             this.hasError = true;
-            return of([]); // Retorna un array vacío en caso de error
+            return of(null); // Retorna null en caso de error
           }),
           finalize(() => this.isLoading = false)
         );
       })
-    ).subscribe({
-      next: (locaciones) => {
-        this.locacion = locaciones.find(l => l.IDLocacion === this.locacionId) || null;
-        if (!this.locacion) {
-          this.hasError = true;
-        }
-      },
-      error: () => {
+    ).subscribe(locacion => {
+      if (locacion) {
+        this.locacion = locacion;
+      } else {
         this.hasError = true;
-        this.locacion = null;
       }
     });
   }
+
 
   openReportModal(): void {
     this.showReportModal = true;
@@ -125,11 +124,16 @@ export class DetalleLocacionComponent implements OnInit {
     this.loadLocacionData();
   }
 
-  irAAgendarVisita() {
+  irAAgendarVisita(): void {
     this.router.navigate(['/agendar-visita']);
   }
 
   getHouseImage(index: number): string {
     return this.houseImages[index % this.houseImages.length];
+  }
+
+  get serviciosIncluidosArray(): string[] {
+    if (!this.locacion || !this.locacion.ServiciosIncluidos) return [];
+    return this.locacion.ServiciosIncluidos.split(',').map(s => s.trim());
   }
 }

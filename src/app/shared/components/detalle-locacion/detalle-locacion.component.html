@@ -37,21 +37,12 @@
       <div class="amenities-section">
         <h2 class="section-title">Características</h2>
         <div class="amenities-grid">
-          <div
-            class="amenity"
-            *ngFor="
-              let amenity of [
-                'Wifi',
-                'Estacionamiento',
-                'Aire acondicionado',
-                'Lavadora'
-              ]
-            "
-          >
-            <span class="amenity-icon">✓</span>
-            <span class="amenity-name">{{ amenity }}</span>
-          </div>
+             <div class="amenity" *ngFor="let servicio of serviciosIncluidosArray">
+             <span class="amenity-icon">✓</span>
+             <span class="amenity-name">{{ servicio }}</span>
+            </div>
         </div>
+
       </div>
     </div>
 

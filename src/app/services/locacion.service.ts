@@ -36,4 +36,9 @@ export class LocacionService {
     return this.http.post(`${API}/locaciones/${id}/calificar`, { Puntaje }); // minúscula
   }
   
+  getLocacionesByAdmin(idAdmin: number): Observable<Locacion[]> {
+    return this.http.get<{ error: boolean; data: Locacion[] }>(`${API}/locaciones/admin/${idAdmin}`)
+      .pipe(map(response => response.data)); // Extrae solo el array de locaciones
+  }
+  
 }
