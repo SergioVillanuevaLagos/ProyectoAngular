@@ -59,7 +59,7 @@ export class AdminLocacionesComponent {
   }
 
   getImageUrl(imagenId: number): string {
-    return `https://picsum.photos/seed/${imagenId}/500/350`;
+    return `http://localhost:3000/locaciones/${imagenId}/imagen`;
   }
 
   verDetalle(id: number): void {

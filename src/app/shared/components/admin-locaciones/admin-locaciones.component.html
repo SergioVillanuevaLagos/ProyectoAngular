@@ -23,7 +23,7 @@
           <td>{{ locacion.Area }}</td>
           <td>{{ locacion.PrecioMensual | currency : "USD" }}</td>
           <td>
-            <button (click)="verImagen(locacion.Imagen)">Ver Imagen</button>
+            <button (click)="verImagen(locacion.IDLocacion)">Ver Imagen</button>
             <button (click)="verDetalle(locacion.IDLocacion)">Ver</button>
             <button (click)="editarLocacion(locacion.IDLocacion)">
               Editar
