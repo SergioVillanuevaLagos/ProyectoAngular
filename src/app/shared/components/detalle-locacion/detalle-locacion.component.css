@@ -1,17 +1,8 @@
 /* Estilos generales */
-.detalle-locacion-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 80px 20px 20px 20px; /* 60px navbar + 20px extra */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #333;
-  box-sizing: border-box;
-}
-
 .property-detail-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 80px 20px 20px 20px; /* 60px navbar + 20px extra */
+  padding: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
 }

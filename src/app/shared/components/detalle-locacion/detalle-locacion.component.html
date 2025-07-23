@@ -2,7 +2,7 @@
   class="detalle-locacion-container"
   *ngIf="locacion && !isLoading; else loadingOrError"
 >
-  <!-- Header -->
+  <!-- Header con título y breadcrumb -->
   <div class="property-header">
     <h1 class="property-title">{{ locacion.Ubicacion }}</h1>
     <div class="property-breadcrumb">
@@ -11,26 +11,24 @@
     </div>
   </div>
 
-  <!-- Galería -->
+  <!-- Galería de imágenes -->
   <div class="property-gallery">
     <img
       class="main-image"
-      [src]="getImageUrl(locacion.IDLocacion)"
-      alt="Imagen principal"
-      (error)="onImageError($event)"
+      [src]="getHouseImage(0)"
+      alt="Imagen principal de la casa"
     />
     <div class="thumbnail-container">
-      <div class="thumbnail" *ngFor="let _ of [1, 2, 3]">
-        <img
-          [src]="getImageUrl(locacion.IDLocacion)"
-          alt="Miniatura"
-          (error)="onImageError($event)"
-        />
+      <div
+        class="thumbnail"
+        *ngFor="let img of houseImages.slice(1); let i = index"
+      >
+        <img [src]="img" alt="Miniatura {{ i + 1 }}" />
       </div>
     </div>
   </div>
 
-  <!-- Descripción -->
+  <!-- Descripción y características principales -->
   <div class="property-content">
     <div class="left-column">
       <h2 class="section-title">Descripción</h2>
@@ -41,7 +39,14 @@
         <div class="amenities-grid">
           <div
             class="amenity"
-            *ngFor="let amenity of ['Wifi', 'Estacionamiento', 'Aire acondicionado', 'Lavadora']"
+            *ngFor="
+              let amenity of [
+                'Wifi',
+                'Estacionamiento',
+                'Aire acondicionado',
+                'Lavadora'
+              ]
+            "
           >
             <span class="amenity-icon">✓</span>
             <span class="amenity-name">{{ amenity }}</span>
@@ -51,25 +56,26 @@
     </div>
 
     <div class="right-column">
+      <!-- Tarjeta de resumen -->
       <div class="summary-card">
         <h3 class="summary-title">Resumen</h3>
         <div class="price-section">
-          <span class="price">
-            ${{ locacion.PrecioMensual | number: '1.0-0' }}
-          </span>
+          <span class="price"
+            >${{ locacion.PrecioMensual | number : "1.0-0" }}</span
+          >
           <span class="price-period">por mes</span>
         </div>
 
         <div class="quick-facts">
           <div class="fact">
             <span class="fact-icon">🛏️</span>
-            <span class="fact-value">{{ locacion.Habitaciones }} dormitorios</span>
+            <span class="fact-value"
+              >{{ locacion.Habitaciones }} dormitorios</span
+            >
           </div>
           <div class="fact">
             <span class="fact-icon">🛁</span>
-            <span class="fact-value">
-              {{ locacion.Banos !== null && locacion.Banos !== undefined ? locacion.Banos : 'N/A' }} baños
-            </span>
+            <span class="fact-value">{{ locacion.Banos }} baños</span>
           </div>
           <div class="fact">
             <span class="fact-icon">📐</span>
@@ -77,26 +83,18 @@
           </div>
         </div>
 
-        <button class="contact-button" (click)="irAAgendarVisita()">Contactar</button>
+        <button class="contact-button" (click)="irAAgendarVisita()">
+          Contactar
+        </button>
+
         <button class="favorite-button">❤ Guardar</button>
       </div>
     </div>
   </div>
 
-  <!-- Calificación -->
+  <!-- Sección de calificación -->
   <div class="rating-section">
     <h2 class="section-title">Califica esta propiedad</h2>
-
-    <div class="current-rating">
-      <p>
-        Promedio actual:
-        <strong>{{ locacion.Puntaje | number: '1.1-2' }}</strong> ⭐
-        <span *ngIf="locacion.TotalVotos">
-          ({{ locacion.TotalVotos }} voto{{ locacion.TotalVotos === 1 ? '' : 's' }})
-        </span>
-      </p>
-    </div>
-
     <div class="stars-container">
       <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
         <span
@@ -105,10 +103,10 @@
           (click)="setUserRating(star)"
           (mouseenter)="setHoverRating(star)"
           (mouseleave)="clearHoverRating()"
-        >★</span>
+          >★</span
+        >
       </ng-container>
     </div>
-
     <button
       class="submit-rating"
       (click)="submitRating()"
@@ -118,32 +116,37 @@
     </button>
   </div>
 
-  <!-- Botón reporte -->
+  <!-- Mapa -->
+  <div class="map-section">
+    <h2 class="section-title">Ubicación</h2>
+    <!-- Usar coordenadas por defecto si no existen en la locación -->
+    <app-mapas 
+      [lat]="locacion.lat || -33.45694" 
+      [lng]="locacion.lng || -70.64827">
+    </app-mapas>
+  </div>
+
+  <!-- Botón de reporte -->
   <div class="report-section">
     <button class="report-button" (click)="openReportModal()">
       <i class="report-icon">⚠</i> Reportar propiedad
     </button>
   </div>
 
-  <!-- Modal reporte -->
+  <!-- Modal de reporte -->
   <app-report-modal
-    *ngIf="showReportModal && locacion"
+    *ngIf="showReportModal"
     [locacion]="locacion"
     (close)="showReportModal = false"
     (generate)="sendReport($event)"
-  ></app-report-modal>
+  >
+  </app-report-modal>
 </div>
 
-<!-- Estado de carga / error -->
+<!-- Estado de carga o error -->
 <ng-template #loadingOrError>
   <div *ngIf="isLoading" class="loading-container">
     <div class="spinner"></div>
     <p>Cargando información de la locación...</p>
-  </div>
-  <div *ngIf="!isLoading && hasError" class="error-container">
-    <p>
-      Error cargando la locación.
-      <button (click)="retryLoad()">Reintentar</button>
-    </p>
   </div>
 </ng-template>

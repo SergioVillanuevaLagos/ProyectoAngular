@@ -26,6 +26,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AdminSidebarComponent } from './shared/components/admin-sidebar/admin-sidebar.component';
 import { AdminLocacionesComponent } from './shared/components/admin-locaciones/admin-locaciones.component';
 import { UserProfileComponent } from './user/user-profile/user-profile.component';
+import { MapasComponent } from './shared/components/mapas/mapas.component';
 
 
 registerLocaleData(localeEs);
@@ -48,7 +49,8 @@ registerLocaleData(localeEs);
     AdminLocacionesComponent,
     UserProfileComponent,
     DetalleLocacionComponent,
-    ReportModalComponent
+    ReportModalComponent,
+    MapasComponent
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { LocacionService } from '../../../services/locacion.service';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { LocacionesService } from '../../../services/locaciones.service';
 import { Locacion } from '../../../models/locacion.model';
 import { switchMap, catchError, finalize } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-detalle-locacion',
@@ -11,19 +12,29 @@ import { of } from 'rxjs';
   styleUrls: ['./detalle-locacion.component.css']
 })
 export class DetalleLocacionComponent implements OnInit {
-  isLoading = true;
-  hasError = false;
-  locacionId = 0;
+  isLoading: boolean = true;
+  hasError: boolean = false;
+  locacionId: number = 0;
   locacion: Locacion | null = null;
-  userRating = 0;
-  hoverRating = 0;
-  showReportModal = false;
+  userRating: number = 0;
+  hoverRating: number = 0;
+  showReportModal: boolean = false;
+  reportType: string = '';
+  startDate: string = '';
+  endDate: string = '';
+
+  houseImages: string[] = [
+    'https://img10.naventcdn.com/avisos/resize/9/01/46/64/67/30/1200x1200/1536967291.jpg',
+    'https://img10.naventcdn.com/avisos/resize/9/01/46/64/67/30/1200x1200/1536967278.jpg',
+    'https://img10.naventcdn.com/avisos/resize/9/01/46/64/67/30/1200x1200/1536967284.jpg',
+    'https://img10.naventcdn.com/avisos/resize/9/01/46/64/67/30/1200x1200/1536967286.jpg'
+  ];
 
   constructor(
     private route: ActivatedRoute,
-    private locacionesService: LocacionService,
+    private locacionesService: LocacionesService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.loadLocacionData();
@@ -33,50 +44,49 @@ export class DetalleLocacionComponent implements OnInit {
     this.isLoading = true;
     this.hasError = false;
 
-    this.route.paramMap
-      .pipe(
-        switchMap((params: ParamMap) => {
-          const idParam = params.get('id');
-          this.locacionId = idParam ? Number(idParam) : 0;
-
-          if (!this.locacionId) {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        this.locacionId = Number(params.get('id'));
+        return this.locacionesService.getLocaciones().pipe(
+          catchError(() => {
             this.hasError = true;
-            return of(null);
-          }
-
-          return this.locacionesService.getLocacionById(this.locacionId).pipe(
-            catchError((err) => {
-              console.error('Error al obtener la locación:', err);
-              this.hasError = true;
-              return of(null);
-            }),
-            finalize(() => {
-              this.isLoading = false;
-            })
-          );
-        })
-      )
-      .subscribe({
-        next: (locacion) => {
-          if (locacion) {
-            this.locacion = locacion;
-          } else {
-            this.hasError = true;
-          }
-        },
-        error: () => {
+            return of([]); // Retorna un array vacío en caso de error
+          }),
+          finalize(() => this.isLoading = false)
+        );
+      })
+    ).subscribe({
+      next: (locaciones) => {
+        this.locacion = locaciones.find(l => l.IDLocacion === this.locacionId) || null;
+        if (!this.locacion) {
           this.hasError = true;
-          this.locacion = null;
         }
-      });
+      },
+      error: () => {
+        this.hasError = true;
+        this.locacion = null;
+      }
+    });
   }
 
-  getImageUrl(id: number): string {
-    return `http://localhost:3000/locaciones/${id}/imagen`;
+  openReportModal(): void {
+    this.showReportModal = true;
   }
 
-  onImageError(event: any): void {
-    event.target.src = 'assets/imagen-fallback.jpg';
+  sendReport(reportData: any): void {
+    console.log('Reporte enviado:', {
+      locacionId: this.locacionId,
+      tipoReporte: reportData.reportType,
+      fechaInicio: reportData.startDate,
+      fechaFin: reportData.endDate
+    });
+
+    this.showReportModal = false;
+    alert('Reporte enviado exitosamente');
+  }
+
+  getImageUrl(imagenId: number): string {
+    return `https://picsum.photos/seed/${imagenId}/600/400`;
   }
 
   setUserRating(rating: number): void {
@@ -93,42 +103,25 @@ export class DetalleLocacionComponent implements OnInit {
 
   submitRating(): void {
     if (this.userRating > 0 && this.locacion) {
-      this.locacionesService.calificarLocacion(this.locacion.IDLocacion, this.userRating).subscribe({
-        next: (res) => {
-          if (res && res.data) {
-            this.locacion!.Puntaje = res.data.Puntaje;
-            this.locacion!.TotalVotos = res.data.TotalVotos;
-            alert(`Gracias por calificar. Nuevo promedio: ${res.data.Puntaje.toFixed(2)}⭐ basado en ${res.data.TotalVotos} voto(s)`);
-          }
-        },
-        error: (err) => {
-          console.error('Error al enviar calificación:', err);
-          alert('Error al enviar la calificación.');
-        }
-      });
+      console.log(`Calificación ${this.userRating} para locación ${this.locacion.IDLocacion}`);
+
+      if (this.locacion) {
+        this.locacion.Puntaje = this.userRating;
+      }
+
+      alert(`Gracias por calificar con ${this.userRating} estrella(s)`);
     }
-  }
-
-  openReportModal(): void {
-    this.showReportModal = true;
-  }
-
-  sendReport(reportData: any): void {
-    console.log('Reporte enviado:', {
-      locacionId: this.locacionId,
-      tipoReporte: reportData.type,
-      motivoReporte: reportData.reason,
-      fechaInicio: reportData.start
-    });
-    this.showReportModal = false;
-    alert('Reporte enviado exitosamente');
   }
 
   retryLoad(): void {
     this.loadLocacionData();
   }
 
-  irAAgendarVisita(): void {
+  irAAgendarVisita() {
     this.router.navigate(['/agendar-visita']);
+  }
+
+  getHouseImage(index: number): string {
+    return this.houseImages[index % this.houseImages.length];
   }
 }
