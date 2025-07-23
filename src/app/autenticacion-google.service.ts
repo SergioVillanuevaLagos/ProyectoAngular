@@ -3,6 +3,7 @@ import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
 import { Router } from '@angular/router';
 import { UserService } from './user/user.service';
 import { AuthService } from './services/auth-service.service';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -22,10 +23,12 @@ export class AutenticacionGoogleService {
     const config: AuthConfig = {
       issuer: 'https://accounts.google.com',
       strictDiscoveryDocumentValidation: false,
-      clientId: '176637695859-bjmoc0gsne359tjtbo70p6g40c2ti4pk.apps.googleusercontent.com',
-      redirectUri: window.location.origin + '/main',
+      clientId: environment.googleOAuthConfig.clientId,
+      redirectUri: environment.googleOAuthConfig.redirectUri,
       scope: 'openid profile email',
     }
+
+    console.log('OAuth Config:', config); // Para debugging
 
     this.oAuthService.configure(config);
     this.oAuthService.setupAutomaticSilentRefresh();
