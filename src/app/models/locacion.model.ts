@@ -11,6 +11,9 @@ export interface Locacion {
   Puntaje: number;
   Banos: number;
   TotalVotos: number;
+  ReglasCasa: string;
+  ServiciosIncluidos: string;
+
   // Nuevas propiedades para el mapa
   lat: number;
   lng: number;
