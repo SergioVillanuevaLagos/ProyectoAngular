@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { LocacionesService } from '../../../services/locaciones.service';
+import { LocacionService } from '../../../services/locacion.service';
 import { Locacion } from '../../../models/locacion.model';
 import { switchMap, catchError, finalize } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -21,7 +21,7 @@ export class DetalleLocacionComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private locacionesService: LocacionesService,
+    private locacionesService: LocacionService,
     private router: Router
   ) { }
 
@@ -33,29 +33,42 @@ export class DetalleLocacionComponent implements OnInit {
     this.isLoading = true;
     this.hasError = false;
 
-    this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => {
-        this.locacionId = Number(params.get('id'));
-        return this.locacionesService.getLocaciones().pipe(
-          catchError(() => {
+    this.route.paramMap
+      .pipe(
+        switchMap((params: ParamMap) => {
+          const idParam = params.get('id');
+          this.locacionId = idParam ? Number(idParam) : 0;
+
+          if (!this.locacionId) {
             this.hasError = true;
-            return of([]); // En caso de error retorna array vacío
-          }),
-          finalize(() => (this.isLoading = false))
-        );
-      })
-    ).subscribe({
-      next: (locaciones) => {
-        this.locacion = locaciones.find(l => l.IDLocacion === this.locacionId) || null;
-        if (!this.locacion) {
+            return of(null);
+          }
+
+          return this.locacionesService.getLocacionById(this.locacionId).pipe(
+            catchError((err) => {
+              console.error('Error al obtener la locación:', err);
+              this.hasError = true;
+              return of(null);
+            }),
+            finalize(() => {
+              this.isLoading = false;
+            })
+          );
+        })
+      )
+      .subscribe({
+        next: (locacion) => {
+          if (locacion) {
+            this.locacion = locacion;
+          } else {
+            this.hasError = true;
+          }
+        },
+        error: () => {
           this.hasError = true;
+          this.locacion = null;
         }
-      },
-      error: () => {
-        this.hasError = true;
-        this.locacion = null;
-      }
-    });
+      });
   }
 
   getImageUrl(id: number): string {
@@ -63,7 +76,7 @@ export class DetalleLocacionComponent implements OnInit {
   }
 
   onImageError(event: any): void {
-    event.target.src = 'assets/imagen-fallback.jpg'; // Imagen por defecto si falla
+    event.target.src = 'assets/imagen-fallback.jpg';
   }
 
   setUserRating(rating: number): void {
@@ -80,7 +93,6 @@ export class DetalleLocacionComponent implements OnInit {
 
   submitRating(): void {
     if (this.userRating > 0 && this.locacion) {
-      // Aquí podrías enviar la calificación al backend si quieres
       this.locacion.Puntaje = this.userRating;
       alert(`Gracias por calificar con ${this.userRating} estrella(s)`);
     }
