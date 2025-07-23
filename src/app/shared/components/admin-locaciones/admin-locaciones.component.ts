@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-
-import { LocacionesService } from '../../../services/locaciones.service';
+import { LocacionService } from '../../../services/locacion.service';
 import { Locacion } from '../../../models/locacion.model';
 
 @Component({
@@ -19,7 +18,7 @@ export class AdminLocacionesComponent {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private locacionesService: LocacionesService // Inyecta el servicio aquí
+    private locacionesService: LocacionService // Inyecta el servicio aquí
   ) {}
 
   ngOnInit(): void {
@@ -72,7 +71,7 @@ export class AdminLocacionesComponent {
 
   eliminarLocacion(id: number): void {
     if (confirm('¿Estás seguro de que deseas eliminar esta locación?')) {
-      this.locacionesService.deleteById(id).subscribe({
+      this.locacionesService.eliminarLocacion(id).subscribe({
         next: () => {
           // Vuelve a consultar la lista tras eliminar
           this.obtenerLocaciones();
