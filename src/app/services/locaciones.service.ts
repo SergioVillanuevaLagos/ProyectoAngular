@@ -22,7 +22,9 @@ export class LocacionesService {
       Puntaje: 4.5,
       lat: -33.4378,
       lng: -70.6505,
-      Banos: 2
+      Banos: 2,
+      ReglasCasa: 'No fumar, no mascotas',
+      ServiciosIncluidos: 'Agua, Luz, Internet'
     },
     {
       IDLocacion: 2,
@@ -37,7 +39,9 @@ export class LocacionesService {
       Puntaje: 4.2,
       lat: -33.4569,
       lng: -70.6100,
-      Banos: 3
+      Banos: 3,
+      ReglasCasa: 'No fiestas',
+      ServiciosIncluidos: 'Agua, Luz'
     },
     {
       IDLocacion: 3,
@@ -52,7 +56,9 @@ export class LocacionesService {
       Puntaje: 4.8,
       lat: -33.4175,
       lng: -70.5836,
-      Banos: 7
+      Banos: 7,
+      ReglasCasa: 'No mascotas',
+      ServiciosIncluidos: 'Agua, Luz, Gas'
     },
     {
       IDLocacion: 4,
@@ -67,7 +73,9 @@ export class LocacionesService {
       Puntaje: 5,
       lat: -36.6064,
       lng: -72.1034,
-      Banos: 3
+      Banos: 3,
+      ReglasCasa: 'No fumar',
+      ServiciosIncluidos: 'Internet'
     },
   ];
 

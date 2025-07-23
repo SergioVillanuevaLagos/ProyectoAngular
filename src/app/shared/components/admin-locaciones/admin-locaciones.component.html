@@ -11,6 +11,10 @@
           <th>Baños</th>
           <th>Área (m²)</th>
           <th>Precio mensual</th>
+          <th>Reglas de la Casa</th>
+          <!-- Nuevo -->
+          <th>Servicios Incluidos</th>
+          <!-- Nuevo -->
           <th>Acciones</th>
         </tr>
       </thead>
@@ -22,6 +26,9 @@
           <td>{{ locacion.Banos }}</td>
           <td>{{ locacion.Area }}</td>
           <td>{{ locacion.PrecioMensual | currency : "USD" }}</td>
+          <td>{{ locacion.ReglasCasa }}</td>
+          <td>{{ locacion.ServiciosIncluidos }}</td>
+
           <td>
             <button (click)="verImagen(locacion.IDLocacion)">Ver Imagen</button>
             <button (click)="verDetalle(locacion.IDLocacion)">Ver</button>
