@@ -9,112 +9,79 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  backdrop-filter: blur(2px);
 }
 
 .modal {
   background: white;
-  min-width: 320px;
+  min-width: 400px;
   max-width: 90vw;
-  min-height: 220px;
-  padding: 28px 20px;
-  border-radius: 12px;
+  min-height: 350px;
+  padding: 32px 24px;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: stretch;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  align-items: center;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
   position: relative;
-  transition: box-shadow 0.2s, transform 0.2s;
-}
-
-.modal:hover {
-  box-shadow: 0 12px 40px rgba(0,0,0,0.22);
-  transform: scale(1.01);
 }
 
 .locacion-info {
-  background: #f8f8fa;
-  padding: 18px;
-  border-radius: 10px;
-  margin-bottom: 18px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  background: #f5f5f5;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
 }
 
 .info-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 10px;
   margin-top: 10px;
 }
 
 .label {
-  font-weight: 600;
+  font-weight: bold;
   margin-right: 8px;
-  color: #333;
 }
 
 .form-group {
-  margin-bottom: 14px;
+  margin-bottom: 15px;
 }
 
 .form-control {
   width: 100%;
-  padding: 8px 10px;
-  border: 1px solid #d0d0d0;
-  border-radius: 5px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
   margin-top: 5px;
-  font-size: 1rem;
-  background: #fafbfc;
-  transition: border-color 0.2s;
-}
-
-.form-control:focus {
-  border-color: #e74c3c;
-  outline: none;
 }
 
 .modal-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 12px;
-  margin-top: 22px;
+  gap: 10px;
+  margin-top: 20px;
 }
 
 .btn-cancel {
-  padding: 8px 18px;
-  background: #f7f7f7;
-  border: 1px solid #e0e0e0;
-  border-radius: 5px;
+  padding: 8px 16px;
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
   cursor: pointer;
-  color: #444;
-  font-weight: 500;
-  transition: background 0.2s, border-color 0.2s;
-}
-
-.btn-cancel:hover {
-  background: #ececec;
-  border-color: #bbb;
 }
 
 .btn-submit {
-  padding: 8px 18px;
+  padding: 8px 16px;
   background-color: #e74c3c;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
-  font-weight: 600;
-  box-shadow: 0 2px 8px rgba(231,76,60,0.08);
-  transition: background 0.2s;
-}
-
-.btn-submit:hover:not(:disabled) {
-  background-color: #c0392b;
 }
 
 .btn-submit:disabled {
   background-color: #ccc;
   cursor: not-allowed;
-  color: #888;
 }
