@@ -21,6 +21,11 @@ export class PublicacionPropiedadComponent implements OnInit {
     { id: 4, nombre: 'Local Comercial' }
   ];
 
+  formData: any = {
+    ReglasCasa: '',
+    ServiciosIncluidos: ''
+  };
+
   constructor(
     private fb: FormBuilder,
     private locacionService: LocacionService,
@@ -39,7 +44,9 @@ export class PublicacionPropiedadComponent implements OnInit {
       ubicacion: ['', [Validators.required, Validators.maxLength(100)]],
       descripcion: ['', [Validators.required, Validators.maxLength(500)]],
       precioMensual: [null, [Validators.required, Validators.min(0)]],
-      tipoLocacion: [null, Validators.required]
+      tipoLocacion: [null, Validators.required],
+      reglasCasa: ['', [Validators.required, Validators.maxLength(500)]], 
+      serviciosIncluidos: ['', [Validators.required, Validators.maxLength(500)]]
     });
   }
 
@@ -89,22 +96,24 @@ export class PublicacionPropiedadComponent implements OnInit {
     const valores = this.formularioPropiedad.value;
     formData.append('Area', valores.area);
     formData.append('Habitaciones', valores.habitaciones);
-    formData.append('Banos', valores.banos); // <-- NUEVO CAMPO
+    formData.append('Banos', valores.banos);
     formData.append('Ubicacion', valores.ubicacion);
     formData.append('Descripcion', valores.descripcion);
     formData.append('PrecioMensual', valores.precioMensual);
     formData.append('TipoLocacion', valores.tipoLocacion);
-    formData.append('IDAdmin', '17'); // Ajustar cuando tengas auth
+    formData.append('IDAdmin', '17');
+    formData.append('ReglasCasa', valores.reglasCasa); 
+    formData.append('ServiciosIncluidos', valores.serviciosIncluidos); 
 
     this.locacionService.crearLocacion(formData).subscribe({
       next: (res) => {
-        alert('✅ Locación publicada con éxito');
+        alert(' Locación publicada con éxito');
         this.resetFormulario();
         this.router.navigate(['/AdminLocaciones']);
       },
       error: (err) => {
         console.error('Error al crear locación:', err);
-        alert(`❌ Error al publicar: ${err.status} - ${err.message}`);
+        alert(` Error al publicar: ${err.status} - ${err.message}`);
       }
     });
 

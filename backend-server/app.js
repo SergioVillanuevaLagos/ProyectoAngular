@@ -67,11 +67,12 @@ app.post('/locaciones', upload.array('imagenes'), (req, res) => {
             PrecioMensual,
             IDAdmin,
             TipoLocacion,
-            Banos
+            Banos,
+            ReglasCasa,           // <-- nuevo campo
+            ServiciosIncluidos    // <-- nuevo campo
         } = req.body;
 
         // req.files es un array con las imágenes en memoria
-        // Aquí solo usaremos la primera imagen para el campo Imagen (puedes adaptar para varias)
         const imagenBuffer = req.files && req.files.length > 0 ? req.files[0].buffer : null;
 
         if (!imagenBuffer) {
@@ -87,7 +88,9 @@ app.post('/locaciones', upload.array('imagenes'), (req, res) => {
             PrecioMensual,
             IDAdmin,
             TipoLocacion,
-            Banos
+            Banos,
+            ReglasCasa,           // <-- nuevo campo
+            ServiciosIncluidos    // <-- nuevo campo
         };
 
         mc.query('INSERT INTO locacion SET ?', nuevaLocacion, (err, result) => {
