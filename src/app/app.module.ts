@@ -27,6 +27,7 @@ import { AdminSidebarComponent } from './shared/components/admin-sidebar/admin-s
 import { AdminLocacionesComponent } from './shared/components/admin-locaciones/admin-locaciones.component';
 import { UserProfileComponent } from './user/user-profile/user-profile.component';
 import { MapasComponent } from './shared/components/mapas/mapas.component';
+import { GoogleRegistrationComponent } from './user/google-registration/google-registration.component';
 
 
 registerLocaleData(localeEs);
@@ -50,7 +51,8 @@ registerLocaleData(localeEs);
     UserProfileComponent,
     DetalleLocacionComponent,
     ReportModalComponent,
-    MapasComponent
+    MapasComponent,
+    GoogleRegistrationComponent
   ],
   imports: [
     BrowserModule,

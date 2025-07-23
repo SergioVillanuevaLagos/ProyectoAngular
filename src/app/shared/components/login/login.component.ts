@@ -20,7 +20,7 @@ export class LoginComponent {
     private userService: UserService,
     private router: Router,
     private autenticacionGoogleService: AutenticacionGoogleService,
-    private authService: AuthService // <--- agrega esto
+    private authService: AuthService
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -28,7 +28,7 @@ export class LoginComponent {
     });
   }
 
-  // Login con Google (si tienes implementada la API de Google)
+  // Login con Google
   login() {
     this.autenticacionGoogleService.login();
   }
@@ -53,7 +53,7 @@ export class LoginComponent {
     this.userService.loginUser(credentials).subscribe({
       next: (res) => {
         if (!res.error) {
-          this.authService.login(res.data); // <--- usa el servicio
+          this.authService.login(res.data);
           this.router.navigate(['/']);
         } else {
           this.loginError = res.message || 'Credenciales incorrectas';

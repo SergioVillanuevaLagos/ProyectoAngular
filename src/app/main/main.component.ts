@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router'; 
 import { AutenticacionGoogleService } from '../autenticacion-google.service';
+import { AuthService } from '../services/auth-service.service';
 
 @Component({
   selector: 'app-main',
@@ -11,6 +12,7 @@ export class MainComponent {
 
   constructor(
     private autenticacionGoogleService: AutenticacionGoogleService,
+    private authService: AuthService,
     private router: Router
   ) { 
   }
@@ -23,6 +25,5 @@ export class MainComponent {
   logOut() {
     this.autenticacionGoogleService.logout();
     this.router.navigate(['login']);
- 
   }
 }

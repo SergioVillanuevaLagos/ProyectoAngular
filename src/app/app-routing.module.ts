@@ -13,6 +13,7 @@ import { PublicacionPropiedadComponent } from './shared/components/publicacion-p
 import { DetalleProductoComponent } from './views/detalle-producto/detalle-producto.component';
 import { AdminLocacionesComponent } from './shared/components/admin-locaciones/admin-locaciones.component';
 import { UserProfileComponent } from './user/user-profile/user-profile.component';
+import { GoogleRegistrationComponent } from './user/google-registration/google-registration.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -28,7 +29,8 @@ const routes: Routes = [
   { path: 'publicar-propiedad', component: PublicacionPropiedadComponent },
   { path: 'reportes', component: AdminReportesComponent },
   { path: 'AdminLocaciones', component: AdminLocacionesComponent },
-  { path: 'Perfil', component: UserProfileComponent }
+  { path: 'Perfil', component: UserProfileComponent },
+  { path: 'complete-registration', component: GoogleRegistrationComponent }
 ];
 
 @NgModule({

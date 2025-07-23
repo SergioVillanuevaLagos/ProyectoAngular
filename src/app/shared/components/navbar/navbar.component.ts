@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth-service.service';
+import { AutenticacionGoogleService } from '../../../autenticacion-google.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +12,11 @@ export class NavbarComponent implements OnInit {
   usuarioLogueado = false;
   esAdmin = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private googleAuthService: AutenticacionGoogleService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.authService.isLoggedIn$.subscribe((logged: boolean) => {
@@ -27,10 +33,10 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-
-
   cerrarSesion() {
-    this.authService.logout();
-    window.location.href = '/login';
+    // Cierra sesión en Google y en la aplicación
+    this.googleAuthService.logout();
+    // No es necesario llamar a authService.logout() ya que googleAuthService.logout() ya lo hace
+    this.router.navigate(['/login']);
   }
 }

@@ -277,6 +277,43 @@ app.post('/login', (req, res) => {
     );
 });
 
+// GET usuario por correo electrónico (para validar login con Google)
+app.get('/usuarios/email/:email', (req, res) => {
+    const email = req.params.email;
+    mc.query('SELECT * FROM usuario WHERE Correo = ?', [email], (err, results) => {
+        if (err) return res.status(500).json({ error: true, message: err });
+        
+        if (results.length === 0) {
+            return res.json({ error: false, data: null });
+        }
+        
+        const usuario = { ...results[0] };
+        delete usuario.Contrasena;
+        res.json({ error: false, data: usuario });
+    });
+});
+
+// POST registro específico para usuarios de Google
+app.post('/usuarios/google-register', (req, res) => {
+    console.log('Datos recibidos para crear usuario con Google:', req.body);
+    const nuevoUsuario = {
+        Run: req.body.Run,
+        Nombre: req.body.Nombre,
+        ApellidoPaterno: req.body.ApellidoPaterno,
+        ApellidoMaterno: req.body.ApellidoMaterno,
+        Correo: req.body.Correo,
+        Contrasena: req.body.Contrasena || Math.random().toString(36).substring(2, 15),
+        IdRol: req.body.IdRol || 1
+    };
+    mc.query('INSERT INTO usuario SET ?', nuevoUsuario, (err, result) => {
+        if (err) {
+            console.error('Error MySQL:', err); 
+            return res.status(500).json({ error: true, message: err.sqlMessage || err });
+        }
+        res.status(201).json({ error: false, message: 'Usuario de Google creado', id: result.insertId });
+    });
+});
+
 // --------- RUTAS VISITAS ---------
 
 // POST crear visita
