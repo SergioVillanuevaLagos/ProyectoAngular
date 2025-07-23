@@ -13,75 +13,118 @@
 
 .modal {
   background: white;
-  min-width: 400px;
-  max-width: 90vw;
-  min-height: 350px;
-  padding: 32px 24px;
+  width: 350px;          /* Reducido de 400px a 350px */
+  max-width: 80vw;       /* Mantener el max-width relativo */
+  max-height: 85vh;      /* Limitar la altura máxima */
+  padding: 15px;         /* Mantener el padding actual */
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   box-shadow: 0 8px 32px rgba(0,0,0,0.2);
   position: relative;
+  text-align: center;
+  overflow-y: auto;      /* Permitir scroll si el contenido es muy alto */
+  margin: auto;          /* Centrar en ambos ejes */
+}
+
+.modal h2 {
+  margin-top: 0;
+  margin-bottom: 8px;    /* Reducido de 10px a 8px */
+  font-size: 1.2rem;     /* Reducido de 1.3rem a 1.2rem */
 }
 
 .locacion-info {
   background: #f5f5f5;
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 8px;    /* Reducido de 10px a 8px */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.locacion-info h3 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 6px;    /* Reducido de 8px a 6px */
+  font-size: 1rem;       /* Reducido el tamaño de fuente */
 }
 
 .info-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  margin-top: 10px;
+  gap: 4px;              /* Reducido de 5px a 4px */
+  margin-top: 4px;       /* Reducido de 5px a 4px */
+  text-align: left;
+  font-size: 0.8rem;     /* Añadido un tamaño de fuente más pequeño */
 }
 
 .label {
   font-weight: bold;
-  margin-right: 8px;
+  margin-right: 4px;     /* Reducido de 5px a 4px */
+  font-size: 0.8rem;     /* Reducido de 0.85rem a 0.8rem */
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 6px;    /* Reducido de 8px a 6px */
+  width: 100%;
+  text-align: left;
 }
 
 .form-control {
   width: 100%;
-  padding: 8px;
+  padding: 5px;          /* Reducido de 6px a 5px */
   border: 1px solid #ddd;
   border-radius: 4px;
-  margin-top: 5px;
+  margin-top: 2px;       /* Reducido de 3px a 2px */
+  box-sizing: border-box;
+  font-size: 0.85rem;    /* Reducido de 0.9rem a 0.85rem */
+}
+
+textarea.form-control {
+  height: 60px;          /* Reducido de 70px a 60px */
+  resize: vertical;
 }
 
 .modal-actions {
   display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 20px;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;       /* Reducido de 10px a 8px */
+  width: 100%;
+}
+
+.btn-cancel, .btn-submit {
+  padding: 5px 12px;     /* Reducido de 6px 14px a 5px 12px */
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;    /* Reducido de 0.9rem a 0.85rem */
 }
 
 .btn-cancel {
-  padding: 8px 16px;
   background: #f0f0f0;
   border: 1px solid #ddd;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
 .btn-submit {
-  padding: 8px 16px;
   background-color: #e74c3c;
   color: white;
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
 .btn-submit:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+/* Agregado estilo para hacer responsive */
+@media (max-width: 480px) {
+  .modal {
+    width: 90vw;
+    padding: 15px;
+  }
+  
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
 }
