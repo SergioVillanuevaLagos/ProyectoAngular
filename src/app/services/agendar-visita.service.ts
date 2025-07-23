@@ -10,7 +10,7 @@ export class AgendarVisitaService {
   constructor(private http: HttpClient) { }
 
   agendarVisita(data: any): Observable<any> {
-    // Ajusta los nombres de los campos según lo que espera el backend
+    
     const body = {
       FechaVisita: data.fecha,
       HoraVisita: data.hora,

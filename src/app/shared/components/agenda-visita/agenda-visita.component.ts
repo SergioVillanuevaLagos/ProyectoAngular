@@ -28,7 +28,6 @@ export class AgendaVisitaComponent {
 
   onSubmit() {
     if (this.form.valid) {
-      // Formatear hora para agregar los segundos ":00" si no están presentes
       let hora = this.form.value.hora;
       if (/^\d{2}:\d{2}$/.test(hora)) {
         hora = hora + ':00';
