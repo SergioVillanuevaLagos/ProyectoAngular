@@ -1,6 +1,6 @@
 /* Contenedor principal ajustado para el sidebar */
 .tabla-locaciones-container {
-  margin-left: 250px; /* espacio para el sidebar */
+  margin-left: 200px; /* espacio para el sidebar */
   margin-top: 60px; /* espacio para el navbar fijo */
   padding: 20px;
   background-color: #f9fafb;
@@ -9,7 +9,7 @@
 }
 
 .main-content {
-  margin-left: 250px; /* Compensación del sidebar fijo */
+  margin-left: 200px; /* Compensación del sidebar fijo */
   margin-top: 60px; /* Espacio para el navbar fijo */
   padding: 20px;
   box-sizing: border-box;
@@ -32,6 +32,7 @@
   text-align: left;
   font-weight: 600;
   border-radius: 8px;
+  font-size: 0.90rem;
 }
 
 .tabla-locaciones thead th {
@@ -56,6 +57,7 @@
   border: none;
   word-wrap: break-word; /* Permite que el texto haga salto de línea */
   max-width: 150px; /* Establece un ancho máximo para las celdas */
+  font-size: 0.85rem;
 }
 
 /* Específicamente para la columna de ubicación (segunda columna) */
@@ -63,23 +65,41 @@
   max-width: 110px; /* Ancho específico para la columna de ubicación */
   white-space: normal; /* Permite saltos de línea */
 }
+
+/* Específicamente para la columna de acciones (última columna) */
 .tabla-locaciones tbody td:last-child {
-  max-width: 300px; /* Ancho específico para la columna de acciones */
+  max-width: 340px; /* Aumentado de 300px a 340px para dar más espacio */
   white-space: normal; /* Permite saltos de línea */
+  padding: 10px 15px; /* Reducido el padding para ajustar mejor los botones */
 }
 
-/* Botones estilizados */
+/* Específicamente para la columna de Servicios Incluidos (octava columna) */
+.tabla-locaciones tbody td:nth-child(8) {
+  max-width: 70px; /* Ancho específico para la columna de servicios incluidos */
+  white-space: normal; /* Permite saltos de línea */
+  word-wrap: break-word; /* Asegura que las palabras largas se corten */
+  font-size: 0.8rem; /* Texto ligeramente más pequeño para esta columna */
+}
+
+/* Botones estilizados más compactos para la tabla */
 button {
   cursor: pointer;
   border: none;
-  border-radius: 6px;
-  padding: 8px 14px;
-  margin-right: 6px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  transition: background-color 0.3s ease;
+  border-radius: 4px; /* Reducido de 6px a 4px */
+  padding: 6px 8px; /* Reducido de 8px 12px a 6px 8px */
+  margin-right: 4px; /* Reducido de 6px a 4px */
+  margin-bottom: 3px; /* Reducido de 4px a 3px */
+  font-weight: 500; /* Reducido de 600 a 500 */
+  font-size: 0.75rem; /* Reducido de 0.85rem a 0.75rem */
+  transition: background-color 0.2s ease;
   color: #fff;
-  box-shadow: 0 2px 5px rgba(44, 62, 80, 0.15);
+  box-shadow: 0 1px 3px rgba(44, 62, 80, 0.12); /* Sombra más sutil */
+  width: auto;
+  min-width: 45px; /* Reducido de 60px a 45px */
+  height: auto;
+  display: inline-block;
+  text-align: center; /* Centrar texto */
+  white-space: nowrap; /* Evitar que el texto salte de línea */
 }
 
 /* Colores para cada acción */
