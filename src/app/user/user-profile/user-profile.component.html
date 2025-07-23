@@ -12,7 +12,7 @@
   </div>
 
   <div class="profile-right">
-    <!-- Locaciones del admin -->
+    <!-- Tabla de Locaciones Publicadas -->
     <div class="box" *ngIf="user.locaciones?.length > 0">
       <h3>
         <i class="fas fa-house-user"></i> Propiedades Publicadas ({{ user.locaciones.length }})
@@ -58,18 +58,34 @@
       <h3><i class="fas fa-exclamation-circle"></i> Sin propiedades publicadas</h3>
     </div>
 
-    <!-- Favoritos del usuario -->
+    <!-- Tabla de Favoritos -->
     <div class="box" *ngIf="user.favoritos?.length > 0">
       <h3>
         <i class="fas fa-heart"></i> Propiedades Favoritas ({{ user.favoritos.length }})
       </h3>
-      <ul class="property-list">
-        <li *ngFor="let fav of user.favoritos">
-          <div><strong>Descripción:</strong> {{ fav.descripcion }}</div>
-          <div><strong>Ubicación:</strong> {{ fav.ubicacion }}</div>
-          <div><strong>Precio:</strong> ${{ fav.precio }} / mes</div>
-        </li>
-      </ul>
+
+      <div class="table-responsive">
+        <table class="locaciones-table">
+          <thead>
+            <tr>
+              <th>Ubicación</th>
+              <th>Descripción</th>
+              <th>Precio</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let fav of user.favoritos">
+              <td>{{ fav.Ubicacion }}</td>
+              <td>{{ fav.Descripcion }}</td>
+              <td>${{ fav.PrecioMensual }}</td>
+              <td>
+                <button (click)="verDetalle(fav.IdLocacion)">Ver detalle</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <div class="box" *ngIf="!user.favoritos?.length">

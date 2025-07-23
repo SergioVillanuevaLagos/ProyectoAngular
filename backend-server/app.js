@@ -408,6 +408,70 @@ app.get('/reporte', (req, res) => {
     });
 });
 
+
+// --------- RUTAS FAVORITOS ---------
+app.post('/favoritos', (req, res) => {
+    const { IdLocacion, IdUsuario } = req.body;
+
+    if (!IdLocacion || !IdUsuario) {
+        return res.status(400).json({ error: true, message: 'Faltan datos' });
+    }
+
+    const nuevoFavorito = { IdLocacion, IdUsuario };
+
+    mc.query('INSERT INTO favoritos SET ?', nuevoFavorito, (err, result) => {
+        if (err) return res.status(500).json({ error: true, message: err });
+        res.status(201).json({ error: false, message: 'Favorito agregado', id: result.insertId });
+    });
+});
+
+app.delete('/favoritos', (req, res) => {
+    const { IdLocacion, IdUsuario } = req.body;
+
+    if (!IdLocacion || !IdUsuario) {
+        return res.status(400).json({ error: true, message: 'Faltan datos' });
+    }
+
+    mc.query('DELETE FROM favoritos WHERE IdLocacion = ? AND IdUsuario = ?', [IdLocacion, IdUsuario], (err, result) => {
+        if (err) return res.status(500).json({ error: true, message: err });
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: true, message: 'Favorito no encontrado' });
+        }
+
+        res.json({ error: false, message: 'Favorito eliminado' });
+    });
+});
+
+app.get('/favoritos/:idUsuario', (req, res) => {
+    const idUsuario = req.params.idUsuario;
+
+    mc.query(`
+        SELECT f.IDFavoritos, f.IdLocacion, l.Ubicacion, l.Descripcion, l.PrecioMensual, l.Imagen
+        FROM favoritos f
+        JOIN locacion l ON f.IdLocacion = l.IDLocacion
+        WHERE f.IdUsuario = ?
+    `, [idUsuario], (err, results) => {
+        if (err) return res.status(500).json({ error: true, message: err });
+        res.json({ error: false, data: results });
+    });
+});
+
+app.get('/favoritos/existe/:idUsuario/:idLocacion', (req, res) => {
+    const { idUsuario, idLocacion } = req.params;
+
+    mc.query(
+        'SELECT * FROM favoritos WHERE IdUsuario = ? AND IdLocacion = ?',
+        [idUsuario, idLocacion],
+        (err, results) => {
+            if (err) return res.status(500).json({ error: true, message: err });
+            res.json({ error: false, existe: results.length > 0 });
+        }
+    );
+});
+
+
+
 // Servidor escucha puerto 3000
 app.listen(3000, () => {
     console.log('Servidor corriendo en puerto 3000');

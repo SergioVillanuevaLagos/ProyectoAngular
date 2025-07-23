@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
-import { LocacionService } from '../../services/locacion.service'; // Asegúrate de importar correctamente
-import { Locacion } from '../../models/locacion.model'; // Asegúrate de tener este modelo o usa tipo any
+import { LocacionService } from '../../services/locacion.service';
+import { Router } from '@angular/router';
+import { FavoritosService } from '../../services/favoritos.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -14,7 +15,9 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private locacionService: LocacionService
+    private locacionService: LocacionService,
+    private router: Router,
+    private favoritosServie: FavoritosService
   ) { }
 
   ngOnInit(): void {
@@ -25,7 +28,7 @@ export class UserProfileComponent implements OnInit {
       if (this.user?.IdRol === 1) {
         this.locacionService.getLocacionesByAdmin(this.user.IDUsuario).subscribe({
           next: (locaciones) => {
-            this.user.locaciones = locaciones; // ← se las inyectas al objeto `user`
+            this.user.locaciones = locaciones;
           },
           error: (err) => {
             console.error('Error al obtener locaciones del admin:', err);
@@ -33,6 +36,21 @@ export class UserProfileComponent implements OnInit {
           }
         });
       }
+
+      // Carga de favoritos usando el servicio correcto y método correcto
+      this.favoritosServie.getFavoritosByUsuario(this.user.IDUsuario).subscribe({
+        next: (favoritos) => {
+          this.user.favoritos = favoritos.data || favoritos;
+        },
+        error: (err) => {
+          console.error('Error al obtener favoritos:', err);
+          this.user.favoritos = [];
+        }
+      });
     }
+  }
+
+  verDetalle(id: number): void {
+    this.router.navigate(['/detalle-locacion', id]);
   }
 }

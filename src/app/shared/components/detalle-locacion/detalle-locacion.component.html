@@ -78,7 +78,13 @@
           Contactar
         </button>
 
-        <button class="favorite-button">❤ Guardar</button>
+        <button class="favorite-button" (click)="toggleFavorito()">
+  <span [ngClass]="{ 'filled-heart': esFavorito }">
+    {{ esFavorito ? '❤️' : '🤍' }}
+  </span>
+  {{ esFavorito ? 'Guardado' : 'Guardar' }}
+</button>
+
       </div>
     </div>
   </div>

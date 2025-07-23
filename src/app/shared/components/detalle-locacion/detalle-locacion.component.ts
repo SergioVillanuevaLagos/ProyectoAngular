@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { LocacionService } from '../../../services/locacion.service';
+import { FavoritosService } from '../../../services/favoritos.service';
 import { Locacion } from '../../../models/locacion.model';
 import { switchMap, catchError, finalize } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-detalle-locacion',
@@ -19,9 +19,8 @@ export class DetalleLocacionComponent implements OnInit {
   userRating = 0;
   hoverRating = 0;
   showReportModal = false;
-  reportType = '';
-  startDate = '';
-  endDate = '';
+  idUsuario = 17; // ← reemplaza con ID real si usas AuthService
+  esFavorito = false;
 
   houseImages: string[] = [
     'https://img10.naventcdn.com/avisos/resize/9/01/46/64/67/30/1200x1200/1536967291.jpg',
@@ -33,6 +32,7 @@ export class DetalleLocacionComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private locacionesService: LocacionService,
+    private favoritosService: FavoritosService,
     private router: Router
   ) { }
 
@@ -49,11 +49,10 @@ export class DetalleLocacionComponent implements OnInit {
         const id = Number(params.get('id'));
         this.locacionId = id;
 
-        // Aquí pedimos solo la locación específica
         return this.locacionesService.getLocacionById(id).pipe(
           catchError(() => {
             this.hasError = true;
-            return of(null); // Retorna null en caso de error
+            return of(null);
           }),
           finalize(() => this.isLoading = false)
         );
@@ -61,12 +60,31 @@ export class DetalleLocacionComponent implements OnInit {
     ).subscribe(locacion => {
       if (locacion) {
         this.locacion = locacion;
+
+        // Verificar si está en favoritos
+        this.favoritosService.existeFavorito(this.idUsuario, locacion.IDLocacion)
+          .subscribe(resp => {
+            this.esFavorito = resp.existe;
+          });
       } else {
         this.hasError = true;
       }
     });
   }
 
+  toggleFavorito(): void {
+    if (!this.locacion) return;
+
+    if (this.esFavorito) {
+      this.favoritosService.eliminarFavorito(this.idUsuario, this.locacion.IDLocacion).subscribe(() => {
+        this.esFavorito = false;
+      });
+    } else {
+      this.favoritosService.agregarFavorito(this.idUsuario, this.locacion.IDLocacion).subscribe(() => {
+        this.esFavorito = true;
+      });
+    }
+  }
 
   openReportModal(): void {
     this.showReportModal = true;
@@ -84,8 +102,8 @@ export class DetalleLocacionComponent implements OnInit {
     alert('Reporte enviado exitosamente');
   }
 
-  getImageUrl(imagenId: number): string {
-    return `https://picsum.photos/seed/${imagenId}/600/400`;
+  getHouseImage(index: number): string {
+    return this.houseImages[index % this.houseImages.length];
   }
 
   setUserRating(rating: number): void {
@@ -102,8 +120,6 @@ export class DetalleLocacionComponent implements OnInit {
 
   submitRating(): void {
     if (this.userRating > 0 && this.locacion) {
-      this.locacion.Puntaje = this.userRating;
-      alert(`Gracias por calificar con ${this.userRating} estrella(s)`);
       this.locacionesService.calificarLocacion(this.locacion.IDLocacion, this.userRating).subscribe({
         next: (res) => {
           if (res && res.data) {
@@ -126,10 +142,6 @@ export class DetalleLocacionComponent implements OnInit {
 
   irAAgendarVisita(): void {
     this.router.navigate(['/agendar-visita']);
-  }
-
-  getHouseImage(index: number): string {
-    return this.houseImages[index % this.houseImages.length];
   }
 
   get serviciosIncluidosArray(): string[] {
