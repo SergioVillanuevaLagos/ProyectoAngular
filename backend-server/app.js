@@ -346,7 +346,7 @@ app.post('/visitas', (req, res) => {
 // --------- RUTAS REPORTES ---------
 
 // PUT actualizar estado de reporte
-app.put('/reporte/:id', (req, res) => {
+app.put('/reportes/:id', (req, res) => {
     const id = req.params.id;
     const { Estado } = req.body;
     
@@ -377,6 +377,28 @@ app.post('/reporte', (req, res) => {
     mc.query('INSERT INTO reporte SET ?', nuevoReporte, (err, result) => {
         if (err) return res.status(500).json({ error: true, message: err });
         res.status(201).json({ error: false, message: 'Reporte creado', id: result.insertId });
+    });
+});
+
+// GET todos los reportes con información completa
+app.get('/reporte', (req, res) => {
+    mc.query(`
+        SELECT 
+            r.*,
+            u.Nombre AS NombreUsuario,
+            CONCAT(u.Nombre, ' ', u.ApellidoPaterno) AS NombreUsuarioCompleto,
+            l.Ubicacion AS NombrePropiedad,
+            CONCAT(up.Nombre, ' ', up.ApellidoPaterno) AS NombreDueno
+        FROM reporte r
+        LEFT JOIN usuario u ON r.IDUsuarioReportante = u.IDUsuario
+        LEFT JOIN locacion l ON r.IDPropiedadReportado = l.IDLocacion
+        LEFT JOIN usuario up ON r.IDDueñoReportado = up.IDUsuario
+    `, (err, results) => {
+        if (err) {
+            console.error('Error en /reporte:', err);
+            return res.status(500).json({ error: true, message: err.message });
+        }
+        res.json({ error: false, data: results });
     });
 });
 
