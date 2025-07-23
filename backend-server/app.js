@@ -38,7 +38,7 @@ mc.connect(err => {
 // GET todas las locaciones sin las imágenes
 app.get('/locaciones', (req, res) => {
     // Seleccionamos los campos incluyendo Banos
-    mc.query('SELECT IDLocacion, Area, Habitaciones, Ubicacion, Banos, Descripcion, PrecioMensual, IDAdmin, TipoLocacion, Puntaje FROM locacion', (err, results) => {
+    mc.query('SELECT IDLocacion, Area, Habitaciones, Ubicacion, Banos, Descripcion, PrecioMensual, IDAdmin, TipoLocacion, Puntaje, ReglasCasa, ServiciosIncluidos FROM locacion', (err, results) => {
         if (err) return res.status(500).json({ error: true, message: err });
         res.json({ error: false, data: results });
     });
@@ -68,8 +68,8 @@ app.post('/locaciones', upload.array('imagenes'), (req, res) => {
             IDAdmin,
             TipoLocacion,
             Banos,
-            ReglasCasa,           // <-- nuevo campo
-            ServiciosIncluidos    // <-- nuevo campo
+            ReglasCasa,          
+            ServiciosIncluidos    
         } = req.body;
 
         // req.files es un array con las imágenes en memoria
@@ -89,9 +89,10 @@ app.post('/locaciones', upload.array('imagenes'), (req, res) => {
             IDAdmin,
             TipoLocacion,
             Banos,
-            ReglasCasa,           // <-- nuevo campo
-            ServiciosIncluidos    // <-- nuevo campo
+            ReglasCasa,          
+            ServiciosIncluidos    
         };
+
 
         mc.query('INSERT INTO locacion SET ?', nuevaLocacion, (err, result) => {
             if (err) return res.status(500).json({ error: true, message: err });
@@ -135,7 +136,7 @@ app.get('/locaciones/:id/imagen', (req, res) => {
             return res.status(404).send('Imagen no encontrada');
         }
 
-        res.setHeader('Content-Type', 'image/jpeg'); // Ajusta si usas otro formato
+        res.setHeader('Content-Type', 'image/jpeg'); 
         res.send(results[0].Imagen);
     });
 });
@@ -269,7 +270,7 @@ app.post('/usuarios', (req, res) => {
     };
     mc.query('INSERT INTO usuario SET ?', nuevoUsuario, (err, result) => {
         if (err) {
-            console.error('Error MySQL:', err); // Log del error MySQL
+            console.error('Error MySQL:', err); 
             return res.status(500).json({ error: true, message: err.sqlMessage || err });
         }
         res.status(201).json({ error: false, message: 'Usuario creado', id: result.insertId });
@@ -335,7 +336,7 @@ app.post('/visitas', (req, res) => {
     };
     mc.query('INSERT INTO visita SET ?', nuevaVisita, (err, result) => {
         if (err) {
-            console.log('Error al guardar visita:', err); // <-- Aquí el log
+            console.log('Error al guardar visita:', err); 
             return res.status(500).json({ error: true, message: err });
         }
         res.status(201).json({ error: false, message: 'Visita creada', id: result.insertId });
