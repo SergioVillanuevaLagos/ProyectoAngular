@@ -5,6 +5,8 @@ export type EstadoReporte = 'Pendiente' | 'Advertencia enviada' | 'Suspendido' |
 interface Reporte {
   id: number;
   usuario: string;
+  propiedad?: string;
+  propietario?: string;
   motivo: string;
   fecha: string;
   estado: EstadoReporte;
@@ -17,9 +19,33 @@ interface Reporte {
 })
 export class AdminReportesComponent {
   reportes: Reporte[] = [
-    { id: 1, usuario: 'Juan Pérez', motivo: 'Ruido excesivo', fecha: '2025-06-10', estado: 'Pendiente' },
-    { id: 2, usuario: 'María López', motivo: 'Pago atrasado', fecha: '2025-06-11', estado: 'Advertencia enviada' },
-    { id: 3, usuario: 'Carlos Ruiz', motivo: 'Daño a propiedad', fecha: '2025-06-12', estado: 'Suspendido' },
+    { 
+      id: 1, 
+      usuario: 'Juan Pérez', 
+      propiedad: 'Departamento Central #103', 
+      propietario: 'Carlos González', 
+      motivo: 'Ruido excesivo', 
+      fecha: '2025-06-10', 
+      estado: 'Pendiente' 
+    },
+    { 
+      id: 2, 
+      usuario: 'María López', 
+      propiedad: 'Casa Los Alamos #245', 
+      propietario: 'Ana Rodríguez', 
+      motivo: 'Pago atrasado', 
+      fecha: '2025-06-11', 
+      estado: 'Advertencia enviada' 
+    },
+    { 
+      id: 3, 
+      usuario: 'Carlos Ruiz', 
+      propiedad: 'Oficina Centro #56', 
+      propietario: 'José Martínez', 
+      motivo: 'Daño a propiedad', 
+      fecha: '2025-06-12', 
+      estado: 'Suspendido' 
+    },
   ];
 
   estadoSeleccionado: { [key: number]: EstadoReporte } = {};
