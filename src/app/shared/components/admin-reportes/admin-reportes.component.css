@@ -111,6 +111,58 @@ button:hover {
   width: 100px;
 }
 
+/* Estilos para el indicador de carga */
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40px 0;
+}
+
+.spinner {
+  border: 6px solid #f0f0f0;
+  border-top: 6px solid #3498db;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  animation: girar 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes girar {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-spinner p {
+  font-size: 1rem;
+  color: #34495e;
+}
+
+/* Mensaje de error */
+.error-message {
+  padding: 15px;
+  background-color: #ffebee;
+  border: 1px solid #ffcdd2;
+  border-radius: 8px;
+  color: #c62828;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.error-message button {
+  margin-top: 10px;
+  background-color: #c62828;
+}
+
+/* Mensaje de no datos */
+.no-data {
+  text-align: center;
+  padding: 40px 0;
+  color: #7f8c8d;
+  font-size: 1.1rem;
+}
+
 /* Responsive para móviles */
 @media (max-width: 768px) {
   .admin-reportes-container {

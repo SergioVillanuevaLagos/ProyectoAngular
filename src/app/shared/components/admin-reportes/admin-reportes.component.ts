@@ -1,60 +1,45 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ReportesService, Reporte } from '../../../services/reportes.service';
 
 export type EstadoReporte = 'Pendiente' | 'Advertencia enviada' | 'Suspendido' | 'Resuelto';
-
-interface Reporte {
-  id: number;
-  usuario: string;
-  propiedad?: string;
-  propietario?: string;
-  motivo: string;
-  fecha: string;
-  estado: EstadoReporte;
-}
 
 @Component({
   selector: 'app-admin-reportes',
   templateUrl: './admin-reportes.component.html',
   styleUrls: ['./admin-reportes.component.css']
 })
-export class AdminReportesComponent {
-  reportes: Reporte[] = [
-    { 
-      id: 1, 
-      usuario: 'Juan Pérez', 
-      propiedad: 'Departamento Central #103', 
-      propietario: 'Carlos González', 
-      motivo: 'Ruido excesivo', 
-      fecha: '2025-06-10', 
-      estado: 'Pendiente' 
-    },
-    { 
-      id: 2, 
-      usuario: 'María López', 
-      propiedad: 'Casa Los Alamos #245', 
-      propietario: 'Ana Rodríguez', 
-      motivo: 'Pago atrasado', 
-      fecha: '2025-06-11', 
-      estado: 'Advertencia enviada' 
-    },
-    { 
-      id: 3, 
-      usuario: 'Carlos Ruiz', 
-      propiedad: 'Oficina Centro #56', 
-      propietario: 'José Martínez', 
-      motivo: 'Daño a propiedad', 
-      fecha: '2025-06-12', 
-      estado: 'Suspendido' 
-    },
-  ];
-
+export class AdminReportesComponent implements OnInit {
+  reportes: Reporte[] = [];
   estadoSeleccionado: { [key: number]: EstadoReporte } = {};
   mostrarConfirmacion = false;
   reporteSeleccionado?: Reporte;
+  errorMessage = '';
+  isLoading = false;
 
-  constructor() {
-    this.reportes.forEach(r => {
-      this.estadoSeleccionado[r.id] = r.estado;
+  constructor(private reportesService: ReportesService) {}
+
+  ngOnInit(): void {
+    this.cargarReportes();
+  }
+
+  cargarReportes(): void {
+    this.isLoading = true;
+    this.errorMessage = '';
+    
+    this.reportesService.getReportes().subscribe({
+      next: (data) => {
+        this.reportes = data;
+        console.log('Reportes cargados:', this.reportes); // Para debugging
+        this.reportes.forEach(r => {
+          this.estadoSeleccionado[r.id] = r.estado as EstadoReporte;
+        });
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error al cargar reportes:', error);
+        this.errorMessage = 'Error al cargar los reportes. Por favor, intente nuevamente.';
+        this.isLoading = false;
+      }
     });
   }
 
@@ -78,10 +63,17 @@ export class AdminReportesComponent {
     if (!this.reporteSeleccionado) return;
 
     const nuevoEstado = this.estadoSeleccionado[this.reporteSeleccionado.id];
-    this.reporteSeleccionado.estado = nuevoEstado;
-
-    this.cerrarConfirmacion();
-
-    alert(`Estado del reporte #${this.reporteSeleccionado.id} actualizado a "${nuevoEstado}"`);
+    
+    this.reportesService.actualizarEstado(this.reporteSeleccionado.id, nuevoEstado).subscribe({
+      next: () => {
+        this.reporteSeleccionado!.estado = nuevoEstado;
+        this.cerrarConfirmacion();
+        alert(`Estado del reporte #${this.reporteSeleccionado!.id} actualizado a "${nuevoEstado}"`);
+      },
+      error: (error) => {
+        console.error('Error al actualizar el estado:', error);
+        alert('Error al actualizar el estado del reporte. Por favor, intente nuevamente.');
+      }
+    });
   }
 }

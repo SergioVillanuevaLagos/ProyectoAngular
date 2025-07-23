@@ -345,11 +345,38 @@ app.post('/visitas', (req, res) => {
 
 // --------- RUTAS REPORTES ---------
 
-// GET todos los reportes
-app.get('/reportes', (req, res) => {
-    mc.query('SELECT * FROM reporte', (err, results) => {
+// PUT actualizar estado de reporte
+app.put('/reporte/:id', (req, res) => {
+    const id = req.params.id;
+    const { Estado } = req.body;
+    
+    if (!Estado) {
+        return res.status(400).json({ error: true, message: 'El campo Estado es requerido' });
+    }
+    
+    mc.query('UPDATE reporte SET Estado = ? WHERE IDReporte = ?', [Estado, id], (err, result) => {
         if (err) return res.status(500).json({ error: true, message: err });
-        res.json({ error: false, data: results });
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: true, message: 'Reporte no encontrado' });
+        }
+        res.json({ error: false, message: 'Estado del reporte actualizado' });
+    });
+});
+
+// POST crear reporte
+app.post('/reporte', (req, res) => {
+    const nuevoReporte = {
+        IDUsuarioReportante: req.body.IDUsuarioReportante,
+        IDPropiedadReportado: req.body.IDPropiedadReportado,
+        IDDueñoReportado: req.body.IDDueñoReportado,
+        Detalle: req.body.Detalle,
+        Estado: req.body.Estado || 'Pendiente',
+        FechaReporte: req.body.FechaReporte || new Date().toISOString().slice(0, 10)
+    };
+    
+    mc.query('INSERT INTO reporte SET ?', nuevoReporte, (err, result) => {
+        if (err) return res.status(500).json({ error: true, message: err });
+        res.status(201).json({ error: false, message: 'Reporte creado', id: result.insertId });
     });
 });
 

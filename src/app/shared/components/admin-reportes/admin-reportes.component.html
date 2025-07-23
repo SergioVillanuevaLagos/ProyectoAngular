@@ -5,7 +5,21 @@
   <!-- Contenido principal -->
   <div class="admin-reportes-container">
     <h1>Gestión de Reportes</h1>
-    <table class="reportes-table">
+    
+    <!-- Indicador de carga -->
+    <div *ngIf="isLoading" class="loading-spinner">
+      <div class="spinner"></div>
+      <p>Cargando reportes...</p>
+    </div>
+    
+    <!-- Mensaje de error -->
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+      <button (click)="cargarReportes()">Reintentar</button>
+    </div>
+    
+    <!-- Tabla de reportes -->
+    <table class="reportes-table" *ngIf="!isLoading && !errorMessage && reportes.length > 0">
       <thead>
         <tr>
           <th>ID</th>
@@ -21,11 +35,11 @@
       <tbody>
         <tr *ngFor="let reporte of reportes">
           <td>{{ reporte.id }}</td>
-          <td>{{ reporte.usuario }}</td>
-          <td>{{ reporte.propiedad || 'N/A' }}</td>
-          <td>{{ reporte.propietario || 'N/A' }}</td>
-          <td>{{ reporte.motivo }}</td>
-          <td>{{ reporte.fecha }}</td>
+          <td>{{ reporte.nombreUsuario || reporte.usuarioReportante }}</td>
+          <td>{{ reporte.nombrePropiedad || reporte.propiedadReportada }}</td>
+          <td>{{ reporte.nombreDueno || reporte.duenoReportado }}</td>
+          <td>{{ reporte.detalle }}</td>
+          <td>{{ reporte.fechaReporte | date }}</td>
           <td>
             <select
               [value]="estadoSeleccionado[reporte.id]"
@@ -43,6 +57,11 @@
         </tr>
       </tbody>
     </table>
+    
+    <!-- Mensaje cuando no hay reportes -->
+    <div *ngIf="!isLoading && !errorMessage && reportes.length === 0" class="no-data">
+      No hay reportes disponibles.
+    </div>
 
     <div class="modal" *ngIf="mostrarConfirmacion">
       <div class="modal-content">
